@@ -71,5 +71,13 @@ namespace Doctor_assistant.Forms
         {
 
         }
+
+        private void nextpagebtn_Click(object sender, EventArgs e)
+        {
+            Addpatients newForm = new Addpatients();  
+            this.Hide();    
+            newForm.ShowDialog();    
+            this.Close();    
+        }
     }
 }

@@ -40,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.login_button = new Bunifu.Framework.UI.BunifuThinButton2();
             this.registration_button = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.nextpagebtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -47,6 +48,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel1.Controls.Add(this.nextpagebtn);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -94,9 +96,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(172, 61);
+            this.pictureBox1.Location = new System.Drawing.Point(143, 61);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(107, 107);
+            this.pictureBox1.Size = new System.Drawing.Size(144, 115);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -196,6 +198,16 @@
             this.registration_button.TabIndex = 8;
             this.registration_button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // nextpagebtn
+            // 
+            this.nextpagebtn.Location = new System.Drawing.Point(82, 347);
+            this.nextpagebtn.Name = "nextpagebtn";
+            this.nextpagebtn.Size = new System.Drawing.Size(75, 23);
+            this.nextpagebtn.TabIndex = 9;
+            this.nextpagebtn.Text = "nextpage";
+            this.nextpagebtn.UseVisualStyleBackColor = true;
+            this.nextpagebtn.Click += new System.EventHandler(this.nextpagebtn_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,5 +248,6 @@
         private Bunifu.Framework.UI.BunifuThinButton2 registration_button;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button nextpagebtn;
     }
 }
