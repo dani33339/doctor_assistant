@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.nextpagebtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,9 +39,8 @@
             this.password_textbox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.login_button = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.registration_button = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.nextpagebtn = new System.Windows.Forms.Button();
+            this.login_btn = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.signup_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -54,8 +54,18 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(425, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(224, 402);
+            this.panel1.Size = new System.Drawing.Size(224, 420);
             this.panel1.TabIndex = 0;
+            // 
+            // nextpagebtn
+            // 
+            this.nextpagebtn.Location = new System.Drawing.Point(82, 347);
+            this.nextpagebtn.Name = "nextpagebtn";
+            this.nextpagebtn.Size = new System.Drawing.Size(75, 23);
+            this.nextpagebtn.TabIndex = 9;
+            this.nextpagebtn.Text = "nextpage";
+            this.nextpagebtn.UseVisualStyleBackColor = true;
+            this.nextpagebtn.Click += new System.EventHandler(this.nextpagebtn_Click);
             // 
             // label5
             // 
@@ -96,7 +106,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(143, 61);
+            this.pictureBox1.Location = new System.Drawing.Point(172, 61);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(144, 115);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -147,75 +157,66 @@
             this.label3.Text = "סיסמה";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // login_button
+            // login_btn
             // 
-            this.login_button.ActiveBorderThickness = 1;
-            this.login_button.ActiveCornerRadius = 20;
-            this.login_button.ActiveFillColor = System.Drawing.Color.SlateGray;
-            this.login_button.ActiveForecolor = System.Drawing.Color.White;
-            this.login_button.ActiveLineColor = System.Drawing.Color.DarkSlateGray;
-            this.login_button.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.login_button.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("login_button.BackgroundImage")));
-            this.login_button.ButtonText = "כניסה";
-            this.login_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.login_button.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.login_button.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.login_button.IdleBorderThickness = 1;
-            this.login_button.IdleCornerRadius = 20;
-            this.login_button.IdleFillColor = System.Drawing.Color.LightSkyBlue;
-            this.login_button.IdleForecolor = System.Drawing.Color.DarkSlateGray;
-            this.login_button.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.login_button.Location = new System.Drawing.Point(143, 279);
-            this.login_button.Margin = new System.Windows.Forms.Padding(6);
-            this.login_button.Name = "login_button";
-            this.login_button.Size = new System.Drawing.Size(157, 51);
-            this.login_button.TabIndex = 7;
-            this.login_button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.login_button.Click += new System.EventHandler(this.login_button_Click);
+            this.login_btn.ActiveBorderThickness = 1;
+            this.login_btn.ActiveCornerRadius = 20;
+            this.login_btn.ActiveFillColor = System.Drawing.Color.SlateGray;
+            this.login_btn.ActiveForecolor = System.Drawing.Color.White;
+            this.login_btn.ActiveLineColor = System.Drawing.Color.DarkSlateGray;
+            this.login_btn.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.login_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("login_btn.BackgroundImage")));
+            this.login_btn.ButtonText = "התחבר";
+            this.login_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.login_btn.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.login_btn.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.login_btn.IdleBorderThickness = 1;
+            this.login_btn.IdleCornerRadius = 20;
+            this.login_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
+            this.login_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
+            this.login_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
+            this.login_btn.Location = new System.Drawing.Point(143, 284);
+            this.login_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.login_btn.Name = "login_btn";
+            this.login_btn.Size = new System.Drawing.Size(157, 51);
+            this.login_btn.TabIndex = 17;
+            this.login_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.login_btn.Click += new System.EventHandler(this.login_button_Click_1);
             // 
-            // registration_button
+            // signup_btn
             // 
-            this.registration_button.ActiveBorderThickness = 1;
-            this.registration_button.ActiveCornerRadius = 20;
-            this.registration_button.ActiveFillColor = System.Drawing.Color.SlateGray;
-            this.registration_button.ActiveForecolor = System.Drawing.Color.White;
-            this.registration_button.ActiveLineColor = System.Drawing.Color.DarkSlateGray;
-            this.registration_button.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.registration_button.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("registration_button.BackgroundImage")));
-            this.registration_button.ButtonText = "משתמש חדש";
-            this.registration_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.registration_button.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registration_button.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.registration_button.IdleBorderThickness = 1;
-            this.registration_button.IdleCornerRadius = 20;
-            this.registration_button.IdleFillColor = System.Drawing.Color.Transparent;
-            this.registration_button.IdleForecolor = System.Drawing.Color.DarkSlateGray;
-            this.registration_button.IdleLineColor = System.Drawing.Color.Transparent;
-            this.registration_button.Location = new System.Drawing.Point(143, 336);
-            this.registration_button.Margin = new System.Windows.Forms.Padding(6);
-            this.registration_button.Name = "registration_button";
-            this.registration_button.Size = new System.Drawing.Size(157, 51);
-            this.registration_button.TabIndex = 8;
-            this.registration_button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nextpagebtn
-            // 
-            this.nextpagebtn.Location = new System.Drawing.Point(82, 347);
-            this.nextpagebtn.Name = "nextpagebtn";
-            this.nextpagebtn.Size = new System.Drawing.Size(75, 23);
-            this.nextpagebtn.TabIndex = 9;
-            this.nextpagebtn.Text = "nextpage";
-            this.nextpagebtn.UseVisualStyleBackColor = true;
-            this.nextpagebtn.Click += new System.EventHandler(this.nextpagebtn_Click);
+            this.signup_btn.ActiveBorderThickness = 1;
+            this.signup_btn.ActiveCornerRadius = 20;
+            this.signup_btn.ActiveFillColor = System.Drawing.Color.SlateGray;
+            this.signup_btn.ActiveForecolor = System.Drawing.Color.White;
+            this.signup_btn.ActiveLineColor = System.Drawing.Color.DarkSlateGray;
+            this.signup_btn.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.signup_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("signup_btn.BackgroundImage")));
+            this.signup_btn.ButtonText = "צור משתמש חדש";
+            this.signup_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.signup_btn.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signup_btn.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.signup_btn.IdleBorderThickness = 1;
+            this.signup_btn.IdleCornerRadius = 20;
+            this.signup_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
+            this.signup_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
+            this.signup_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
+            this.signup_btn.Location = new System.Drawing.Point(143, 354);
+            this.signup_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.signup_btn.Name = "signup_btn";
+            this.signup_btn.Size = new System.Drawing.Size(157, 51);
+            this.signup_btn.TabIndex = 18;
+            this.signup_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.signup_btn.Click += new System.EventHandler(this.signup_btn_Click);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(649, 402);
-            this.Controls.Add(this.registration_button);
-            this.Controls.Add(this.login_button);
+            this.ClientSize = new System.Drawing.Size(649, 420);
+            this.Controls.Add(this.signup_btn);
+            this.Controls.Add(this.login_btn);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.password_textbox);
@@ -244,10 +245,10 @@
         private System.Windows.Forms.TextBox password_textbox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private Bunifu.Framework.UI.BunifuThinButton2 login_button;
-        private Bunifu.Framework.UI.BunifuThinButton2 registration_button;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button nextpagebtn;
+        private Bunifu.Framework.UI.BunifuThinButton2 login_btn;
+        private Bunifu.Framework.UI.BunifuThinButton2 signup_btn;
     }
 }
