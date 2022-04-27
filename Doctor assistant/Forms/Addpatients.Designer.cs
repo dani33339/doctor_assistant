@@ -30,8 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Addpatients));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.patient_picturebox = new System.Windows.Forms.PictureBox();
+            this.docname_label = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.addpatient_picturebox = new System.Windows.Forms.PictureBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.addlabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.name_textbox = new System.Windows.Forms.TextBox();
@@ -51,10 +59,14 @@
             this.label10 = new System.Windows.Forms.Label();
             this.city_textbox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.street_text = new System.Windows.Forms.TextBox();
+            this.street_textbox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.apartment_textbox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addpatient_picturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -62,34 +74,119 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.patient_picturebox);
+            this.panel1.Controls.Add(this.docname_label);
+            this.panel1.Controls.Add(this.pictureBox5);
+            this.panel1.Controls.Add(this.pictureBox4);
+            this.panel1.Controls.Add(this.addpatient_picturebox);
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.addlabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(1003, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(293, 875);
             this.panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // patient_picturebox
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(138, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(121, 100);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.patient_picturebox.Image = ((System.Drawing.Image)(resources.GetObject("patient_picturebox.Image")));
+            this.patient_picturebox.Location = new System.Drawing.Point(183, 275);
+            this.patient_picturebox.Name = "patient_picturebox";
+            this.patient_picturebox.Size = new System.Drawing.Size(100, 50);
+            this.patient_picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.patient_picturebox.TabIndex = 10;
+            this.patient_picturebox.TabStop = false;
+            // 
+            // docname_label
+            // 
+            this.docname_label.AutoSize = true;
+            this.docname_label.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.docname_label.Location = new System.Drawing.Point(60, 216);
+            this.docname_label.Name = "docname_label";
+            this.docname_label.Size = new System.Drawing.Size(199, 33);
+            this.docname_label.TabIndex = 9;
+            this.docname_label.Text = "שלום דוקטור אנטון";
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Location = new System.Drawing.Point(183, 561);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox5.TabIndex = 8;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Location = new System.Drawing.Point(183, 467);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox4.TabIndex = 7;
+            this.pictureBox4.TabStop = false;
+            // 
+            // addpatient_picturebox
+            // 
+            this.addpatient_picturebox.Image = ((System.Drawing.Image)(resources.GetObject("addpatient_picturebox.Image")));
+            this.addpatient_picturebox.Location = new System.Drawing.Point(183, 371);
+            this.addpatient_picturebox.Name = "addpatient_picturebox";
+            this.addpatient_picturebox.Size = new System.Drawing.Size(100, 50);
+            this.addpatient_picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.addpatient_picturebox.TabIndex = 6;
+            this.addpatient_picturebox.TabStop = false;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(3, 561);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(179, 33);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "הוספת מטופלים";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(5, 467);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(179, 33);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "הוספת מטופלים";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(80, 124);
+            this.label1.Location = new System.Drawing.Point(15, 275);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 33);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "הוספת מטופלים";
+            this.label1.Size = new System.Drawing.Size(162, 33);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "המטופלים שלי";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(53, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(206, 181);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // addlabel
+            // 
+            this.addlabel.AutoSize = true;
+            this.addlabel.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addlabel.Location = new System.Drawing.Point(5, 371);
+            this.addlabel.Name = "addlabel";
+            this.addlabel.Size = new System.Drawing.Size(179, 33);
+            this.addlabel.TabIndex = 1;
+            this.addlabel.Text = "הוספת מטופלים";
             // 
             // panel2
             // 
@@ -304,14 +401,14 @@
             this.label11.TabIndex = 22;
             this.label11.Text = "רחוב";
             // 
-            // street_text
+            // street_textbox
             // 
-            this.street_text.BackColor = System.Drawing.Color.SkyBlue;
-            this.street_text.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.street_text.Location = new System.Drawing.Point(87, 124);
-            this.street_text.Name = "street_text";
-            this.street_text.Size = new System.Drawing.Size(137, 27);
-            this.street_text.TabIndex = 21;
+            this.street_textbox.BackColor = System.Drawing.Color.SkyBlue;
+            this.street_textbox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.street_textbox.Location = new System.Drawing.Point(87, 124);
+            this.street_textbox.Name = "street_textbox";
+            this.street_textbox.Size = new System.Drawing.Size(137, 27);
+            this.street_textbox.TabIndex = 21;
             // 
             // label12
             // 
@@ -324,14 +421,14 @@
             this.label12.TabIndex = 24;
             this.label12.Text = "מס בית/דירה";
             // 
-            // textBox3
+            // apartment_textbox
             // 
-            this.textBox3.BackColor = System.Drawing.Color.SkyBlue;
-            this.textBox3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(280, 221);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(137, 27);
-            this.textBox3.TabIndex = 23;
+            this.apartment_textbox.BackColor = System.Drawing.Color.SkyBlue;
+            this.apartment_textbox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apartment_textbox.Location = new System.Drawing.Point(280, 221);
+            this.apartment_textbox.Name = "apartment_textbox";
+            this.apartment_textbox.Size = new System.Drawing.Size(137, 27);
+            this.apartment_textbox.TabIndex = 23;
             // 
             // Addpatients
             // 
@@ -339,9 +436,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 875);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.apartment_textbox);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.street_text);
+            this.Controls.Add(this.street_textbox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.city_textbox);
             this.Controls.Add(this.gender_combobox);
@@ -365,6 +462,10 @@
             this.Text = "Addpatients";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.addpatient_picturebox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -376,7 +477,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label addlabel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
@@ -397,8 +498,16 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox city_textbox;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox street_text;
+        private System.Windows.Forms.TextBox street_textbox;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox apartment_textbox;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox addpatient_picturebox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox patient_picturebox;
+        private System.Windows.Forms.Label docname_label;
     }
 }

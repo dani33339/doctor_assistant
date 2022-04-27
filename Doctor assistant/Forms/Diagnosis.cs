@@ -16,5 +16,10 @@ namespace Doctor_assistant.Forms
         {
             InitializeComponent();
         }
+
+        private void search_btn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
