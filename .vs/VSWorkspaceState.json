@@ -4,6 +4,11 @@
     "\\Doctor assistant",
     "\\Doctor assistant\\Forms"
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\Doctor assistant.sln",
   "PreviewInSolutionExplorer": true
+=======
+  "SelectedNode": "\\packages",
+  "PreviewInSolutionExplorer": false
+>>>>>>> master
 }
