@@ -43,7 +43,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.name_textbox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.phone_textbox = new System.Windows.Forms.TextBox();
+            this.id_textbox = new System.Windows.Forms.TextBox();
             this.repassword_textbox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -210,19 +210,19 @@
             this.label7.ForeColor = System.Drawing.SystemColors.WindowText;
             this.label7.Location = new System.Drawing.Point(304, 425);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 22);
+            this.label7.Size = new System.Drawing.Size(92, 22);
             this.label7.TabIndex = 19;
-            this.label7.Text = "מספר טלפון";
+            this.label7.Text = "תעודת זהות";
             // 
-            // phone_textbox
+            // id_textbox
             // 
-            this.phone_textbox.BackColor = System.Drawing.Color.SkyBlue;
-            this.phone_textbox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.phone_textbox.Location = new System.Drawing.Point(37, 425);
-            this.phone_textbox.Name = "phone_textbox";
-            this.phone_textbox.Size = new System.Drawing.Size(225, 27);
-            this.phone_textbox.TabIndex = 20;
-            this.phone_textbox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.id_textbox.BackColor = System.Drawing.Color.SkyBlue;
+            this.id_textbox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.id_textbox.Location = new System.Drawing.Point(37, 425);
+            this.id_textbox.Name = "id_textbox";
+            this.id_textbox.Size = new System.Drawing.Size(225, 27);
+            this.id_textbox.TabIndex = 20;
+            this.id_textbox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // repassword_textbox
             // 
@@ -252,7 +252,7 @@
             this.ClientSize = new System.Drawing.Size(649, 527);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.repassword_textbox);
-            this.Controls.Add(this.phone_textbox);
+            this.Controls.Add(this.id_textbox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.name_textbox);
             this.Controls.Add(this.label6);
@@ -295,7 +295,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox name_textbox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox phone_textbox;
+        private System.Windows.Forms.TextBox id_textbox;
         private System.Windows.Forms.TextBox repassword_textbox;
         private System.Windows.Forms.Label label8;
     }
