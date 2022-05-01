@@ -274,3 +274,4 @@ D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\obj\Debug\Doc
 D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\obj\Debug\Doctor_assistant.Forms.Diagnosis.resources
 D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\obj\Debug\Doctor_assistant.Forms.Patients.resources
 D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\obj\Debug\Doctor_assistant.Forms.Signup.resources
+D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\obj\Debug\Doctor assistant.csproj.ResolveComReference.cache

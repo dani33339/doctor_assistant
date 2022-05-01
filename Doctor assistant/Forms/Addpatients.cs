@@ -54,7 +54,20 @@ namespace Doctor_assistant.Forms
 
         private void label1_Click(object sender, EventArgs e)
         {
+            GoToappointment();
+        }
 
+        private void GoToappointment()
+        {
+            Patients newForm = new Patients();
+            this.Hide();
+            newForm.ShowDialog();
+            this.Close();
+        }
+
+        private void patient_picturebox_Click(object sender, EventArgs e)
+        {
+            GoToappointment();
         }
     }
 }

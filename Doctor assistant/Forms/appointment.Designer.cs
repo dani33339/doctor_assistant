@@ -149,6 +149,7 @@
             this.imortfile_btn.Size = new System.Drawing.Size(371, 46);
             this.imortfile_btn.TabIndex = 35;
             this.imortfile_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.imortfile_btn.Click += new System.EventHandler(this.imortfile_btn_Click);
             // 
             // pantientid_label
             // 

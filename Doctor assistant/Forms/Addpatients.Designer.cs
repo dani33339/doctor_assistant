@@ -99,6 +99,7 @@
             this.patient_picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.patient_picturebox.TabIndex = 10;
             this.patient_picturebox.TabStop = false;
+            this.patient_picturebox.Click += new System.EventHandler(this.patient_picturebox_Click);
             // 
             // docname_label
             // 

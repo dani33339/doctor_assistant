@@ -123,5 +123,13 @@ namespace Doctor_assistant.Forms
             newForm.ShowDialog();
             this.Close();
         }
+
+        private void appointmetbtn_Click(object sender, EventArgs e)
+        {
+            appointment newForm = new appointment();
+            this.Hide();
+            newForm.ShowDialog();
+            this.Close();
+        }
     }
 }

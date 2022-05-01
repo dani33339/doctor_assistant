@@ -41,6 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.login_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.signup_btn = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.appointmetbtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -48,6 +49,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel1.Controls.Add(this.appointmetbtn);
             this.panel1.Controls.Add(this.nextpagebtn);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
@@ -209,6 +211,16 @@
             this.signup_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.signup_btn.Click += new System.EventHandler(this.signup_btn_Click);
             // 
+            // appointmetbtn
+            // 
+            this.appointmetbtn.Location = new System.Drawing.Point(82, 385);
+            this.appointmetbtn.Name = "appointmetbtn";
+            this.appointmetbtn.Size = new System.Drawing.Size(75, 23);
+            this.appointmetbtn.TabIndex = 10;
+            this.appointmetbtn.Text = "nextpage";
+            this.appointmetbtn.UseVisualStyleBackColor = true;
+            this.appointmetbtn.Click += new System.EventHandler(this.appointmetbtn_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -250,5 +262,6 @@
         private System.Windows.Forms.Button nextpagebtn;
         private Bunifu.Framework.UI.BunifuThinButton2 login_btn;
         private Bunifu.Framework.UI.BunifuThinButton2 signup_btn;
+        private System.Windows.Forms.Button appointmetbtn;
     }
 }
