@@ -134,6 +134,7 @@
             this.username_textbox.Name = "username_textbox";
             this.username_textbox.Size = new System.Drawing.Size(225, 27);
             this.username_textbox.TabIndex = 12;
+            this.username_textbox.TextChanged += new System.EventHandler(this.username_textbox_TextChanged);
             // 
             // pictureBox1
             // 

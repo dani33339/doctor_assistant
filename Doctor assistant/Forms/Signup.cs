@@ -8,19 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace Doctor_assistant.Forms
 {
     public partial class Signup : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dani\Documents\DBdoctor.mdf;Integrated Security = True; Connect Timeout = 30");
-        SqlCommand cm = new SqlCommand();
+        MongoClient m_Client;
+        IMongoDatabase m_Database;
+        IMongoCollection<DoctorInfo> m_Collection;
 
         public Signup()
         {
 
             InitializeComponent();
+
+            m_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            m_Database = m_Client.GetDatabase("Doctor");
+            m_Collection = m_Database.GetCollection<DoctorInfo>("Account");
+
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -64,14 +72,14 @@ namespace Doctor_assistant.Forms
                 return;
             }
 
-            cm = new SqlCommand("INSERT INTO tbUser(username,fullname,password,id)VALUES(@username,@fullname,@password,@id)", con);
-            cm.Parameters.AddWithValue("@username", username_textbox.Text);
-            cm.Parameters.AddWithValue("@fullname", name_textbox.Text);
-            cm.Parameters.AddWithValue("@password", password_textbox.Text);
-            cm.Parameters.AddWithValue("@id", id_textbox.Text);
-            con.Open();
-            cm.ExecuteNonQuery();
-            con.Close();
+            DoctorInfo NewUser = new DoctorInfo();
+            NewUser.UserName = username_textbox.Text;
+            NewUser.FullName = name_textbox.Text;
+            NewUser.Password = password_textbox.Text;
+            NewUser.Id_unic =  id_textbox.Text;
+
+            m_Collection.InsertOne(NewUser);
+
             MessageBox.Show("User has been successfully saved.");
             Clear();
             GoToPatients();
@@ -103,7 +111,7 @@ namespace Doctor_assistant.Forms
         /*return's true if password name is valid*/
         public bool CheckPassword(string password)
         {
-            if (password.Length < 6 || password.Length > 8)
+            if (password.Length < 8 || password.Length > 10)
                 return false;
             string digits = new String(password.Where(Char.IsDigit).ToArray());
             string letters = new String(password.Where(Char.IsLetter).ToArray());
@@ -126,6 +134,11 @@ namespace Doctor_assistant.Forms
             this.Hide();
             newForm.ShowDialog();
             this.Close();
+        }
+
+        private void username_textbox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

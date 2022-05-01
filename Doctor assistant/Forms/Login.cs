@@ -8,18 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace Doctor_assistant.Forms
 {
     public partial class Login : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\dani\Documents\DBdoctor.mdf;Integrated Security = True; Connect Timeout = 30");
-        SqlCommand cm = new SqlCommand();
-        SqlDataReader dr;
+        MongoClient m_Client;
+        IMongoDatabase m_Database;
+        IMongoCollection<DoctorInfo> m_Collection;
         public Login()
         {
             InitializeComponent();
+
+            m_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            m_Database = m_Client.GetDatabase("Doctor");
+            m_Collection = m_Database.GetCollection<DoctorInfo>("Account");
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -89,15 +94,24 @@ namespace Doctor_assistant.Forms
         {
             try
             {
-                cm = new SqlCommand("SELECT * FROM tbUser WHERE username=@username AND password=@password", con);
-                cm.Parameters.AddWithValue("@username", username_textbox.Text);
-                cm.Parameters.AddWithValue("@password", password_textbox.Text);
-                con.Open();
-                dr = cm.ExecuteReader();
-                dr.Read();
-                if (dr.HasRows)
+                String User = username_textbox.Text;
+                String Password = password_textbox.Text;
+
+                var filter = Builders<DoctorInfo>.Filter;
+
+                var userfilter = filter.Eq(x => x.UserName, User);
+
+                var Passwordfilter = filter.Eq(x => x.Password, Password);
+
+                var finalfilter = filter.And(userfilter, Passwordfilter);
+
+                var enteruser = m_Collection.Find<DoctorInfo>(finalfilter).FirstOrDefault();
+
+
+                
+                if (enteruser != null)
                 {
-                    MessageBox.Show("שלום דוקטור " + dr["fullname"].ToString() + "  ", "ניתנה גישה", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("שלום דוקטור " + enteruser.FullName + "  ", "ניתנה גישה", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Addpatients newForm = new Addpatients();
                     this.Hide();
                     newForm.ShowDialog();
@@ -108,7 +122,7 @@ namespace Doctor_assistant.Forms
                 {
                     MessageBox.Show("סיסמא או שם משתמש לא נכונים", "גישה נדחתה", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                con.Close();
+                
             }
             catch (Exception ex)
             {
