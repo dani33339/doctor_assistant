@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Signup));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.nextpagebtn = new System.Windows.Forms.Button();
+            this.exit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel1.Controls.Add(this.nextpagebtn);
+            this.panel1.Controls.Add(this.exit);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -62,14 +62,15 @@
             this.panel1.Size = new System.Drawing.Size(224, 527);
             this.panel1.TabIndex = 9;
             // 
-            // nextpagebtn
+            // exit
             // 
-            this.nextpagebtn.Location = new System.Drawing.Point(82, 347);
-            this.nextpagebtn.Name = "nextpagebtn";
-            this.nextpagebtn.Size = new System.Drawing.Size(75, 23);
-            this.nextpagebtn.TabIndex = 9;
-            this.nextpagebtn.Text = "nextpage";
-            this.nextpagebtn.UseVisualStyleBackColor = true;
+            this.exit.Location = new System.Drawing.Point(136, 481);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(76, 31);
+            this.exit.TabIndex = 11;
+            this.exit.Text = "יצאה";
+            this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // label5
             // 
@@ -139,7 +140,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(134, 61);
+            this.pictureBox1.Location = new System.Drawing.Point(118, 61);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(144, 115);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -175,10 +176,10 @@
             this.login_button.IdleFillColor = System.Drawing.Color.LightSkyBlue;
             this.login_button.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.login_button.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.login_button.Location = new System.Drawing.Point(134, 461);
+            this.login_button.Location = new System.Drawing.Point(118, 461);
             this.login_button.Margin = new System.Windows.Forms.Padding(6);
             this.login_button.Name = "login_button";
-            this.login_button.Size = new System.Drawing.Size(157, 51);
+            this.login_button.Size = new System.Drawing.Size(144, 51);
             this.login_button.TabIndex = 16;
             this.login_button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.login_button.Click += new System.EventHandler(this.login_button_Click);
@@ -283,7 +284,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button nextpagebtn;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -299,5 +299,6 @@
         private System.Windows.Forms.TextBox id_textbox;
         private System.Windows.Forms.TextBox repassword_textbox;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button exit;
     }
 }

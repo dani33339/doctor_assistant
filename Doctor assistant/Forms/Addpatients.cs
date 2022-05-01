@@ -12,9 +12,13 @@ namespace Doctor_assistant.Forms
 {
     public partial class Addpatients : Form
     {
+        public static Addpatients instance;
+        public Label tb1;
         public Addpatients()
         {
             InitializeComponent();
+            instance = this;
+            tb1 = docname_label;
         }
 
         private void bunifuPaginate1_OnPageChange(object sender, int page)
@@ -64,10 +68,36 @@ namespace Doctor_assistant.Forms
             newForm.ShowDialog();
             this.Close();
         }
+        
 
         private void patient_picturebox_Click(object sender, EventArgs e)
         {
             GoToappointment();
+        }
+
+        public void docname_label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void MyPatients_btn_Click(object sender, EventArgs e)
+        {
+            GoToappointment();
+        }
+
+        private void AddPatients_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -112,11 +112,14 @@ namespace Doctor_assistant.Forms
                 if (enteruser != null)
                 {
                     MessageBox.Show("שלום דוקטור " + enteruser.FullName + "  ", "ניתנה גישה", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     Addpatients newForm = new Addpatients();
+                    //appointment.instance.tb1.Text = enteruser.FullName + "שלום דוקטור";
+                    //Patients.instance.tb1.Text = enteruser.FullName + "שלום דוקטור";
+                    Addpatients.instance.tb1.Text = "hello dr" + " " + enteruser.FullName;
                     this.Hide();
                     newForm.ShowDialog();
                     this.Close();
-
                 }
                 else
                 {
@@ -140,10 +143,12 @@ namespace Doctor_assistant.Forms
 
         private void appointmetbtn_Click(object sender, EventArgs e)
         {
-            appointment newForm = new appointment();
-            this.Hide();
-            newForm.ShowDialog();
-            this.Close();
+          this.Close();
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

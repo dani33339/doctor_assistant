@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.nextpagebtn = new System.Windows.Forms.Button();
+            this.exit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,7 +41,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.login_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.signup_btn = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.appointmetbtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -49,8 +48,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel1.Controls.Add(this.appointmetbtn);
-            this.panel1.Controls.Add(this.nextpagebtn);
+            this.panel1.Controls.Add(this.exit);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -59,15 +57,15 @@
             this.panel1.Size = new System.Drawing.Size(224, 420);
             this.panel1.TabIndex = 0;
             // 
-            // nextpagebtn
+            // exit
             // 
-            this.nextpagebtn.Location = new System.Drawing.Point(82, 347);
-            this.nextpagebtn.Name = "nextpagebtn";
-            this.nextpagebtn.Size = new System.Drawing.Size(75, 23);
-            this.nextpagebtn.TabIndex = 9;
-            this.nextpagebtn.Text = "nextpage";
-            this.nextpagebtn.UseVisualStyleBackColor = true;
-            this.nextpagebtn.Click += new System.EventHandler(this.nextpagebtn_Click);
+            this.exit.Location = new System.Drawing.Point(137, 385);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(75, 23);
+            this.exit.TabIndex = 10;
+            this.exit.Text = "יצאה";
+            this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.appointmetbtn_Click);
             // 
             // label5
             // 
@@ -108,12 +106,13 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(172, 61);
+            this.pictureBox1.Location = new System.Drawing.Point(156, 61);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(144, 115);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
             // 
             // username_textbox
             // 
@@ -203,26 +202,17 @@
             this.signup_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
             this.signup_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.signup_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.signup_btn.Location = new System.Drawing.Point(143, 354);
+            this.signup_btn.Location = new System.Drawing.Point(143, 347);
             this.signup_btn.Margin = new System.Windows.Forms.Padding(6);
             this.signup_btn.Name = "signup_btn";
-            this.signup_btn.Size = new System.Drawing.Size(157, 51);
+            this.signup_btn.Size = new System.Drawing.Size(157, 40);
             this.signup_btn.TabIndex = 18;
             this.signup_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.signup_btn.Click += new System.EventHandler(this.signup_btn_Click);
             // 
-            // appointmetbtn
-            // 
-            this.appointmetbtn.Location = new System.Drawing.Point(82, 385);
-            this.appointmetbtn.Name = "appointmetbtn";
-            this.appointmetbtn.Size = new System.Drawing.Size(75, 23);
-            this.appointmetbtn.TabIndex = 10;
-            this.appointmetbtn.Text = "nextpage";
-            this.appointmetbtn.UseVisualStyleBackColor = true;
-            this.appointmetbtn.Click += new System.EventHandler(this.appointmetbtn_Click);
-            // 
             // Login
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -259,9 +249,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button nextpagebtn;
         private Bunifu.Framework.UI.BunifuThinButton2 login_btn;
         private Bunifu.Framework.UI.BunifuThinButton2 signup_btn;
-        private System.Windows.Forms.Button appointmetbtn;
+        private System.Windows.Forms.Button exit;
     }
 }

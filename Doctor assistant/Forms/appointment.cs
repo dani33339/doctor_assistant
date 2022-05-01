@@ -16,9 +16,13 @@ namespace Doctor_assistant.Forms
 {
     public partial class appointment : Form
     {
+        public static appointment instance;
+        public Label tb1;
         public appointment()
         {
             InitializeComponent();
+            instance = this;
+            tb1 = docname_label;
         }
 
         private void imortfile_btn_Click(object sender, EventArgs e)
@@ -70,6 +74,21 @@ namespace Doctor_assistant.Forms
                 }
             }
             return dtexcel;
+        }
+
+        private void docname_label_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void medicalindices_textbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 

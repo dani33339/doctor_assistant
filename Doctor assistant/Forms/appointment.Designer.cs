@@ -50,6 +50,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.medicalindices_textbox = new System.Windows.Forms.TextBox();
             this.diagnosis_btn = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -143,7 +144,7 @@
             this.imortfile_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
             this.imortfile_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.imortfile_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.imortfile_btn.Location = new System.Drawing.Point(248, 84);
+            this.imortfile_btn.Location = new System.Drawing.Point(223, 84);
             this.imortfile_btn.Margin = new System.Windows.Forms.Padding(6);
             this.imortfile_btn.Name = "imortfile_btn";
             this.imortfile_btn.Size = new System.Drawing.Size(371, 46);
@@ -203,6 +204,7 @@
             this.docname_label.Size = new System.Drawing.Size(199, 33);
             this.docname_label.TabIndex = 9;
             this.docname_label.Text = "שלום דוקטור אנטון";
+            this.docname_label.Click += new System.EventHandler(this.docname_label_Click);
             // 
             // pictureBox1
             // 
@@ -227,6 +229,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel1.Controls.Add(this.exit);
             this.panel1.Controls.Add(this.patient_picturebox);
             this.panel1.Controls.Add(this.docname_label);
             this.panel1.Controls.Add(this.pictureBox5);
@@ -285,6 +288,7 @@
             this.medicalindices_textbox.Name = "medicalindices_textbox";
             this.medicalindices_textbox.Size = new System.Drawing.Size(900, 229);
             this.medicalindices_textbox.TabIndex = 40;
+            this.medicalindices_textbox.TextChanged += new System.EventHandler(this.medicalindices_textbox_TextChanged);
             // 
             // diagnosis_btn
             // 
@@ -310,6 +314,16 @@
             this.diagnosis_btn.Size = new System.Drawing.Size(371, 46);
             this.diagnosis_btn.TabIndex = 41;
             this.diagnosis_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // exit
+            // 
+            this.exit.Location = new System.Drawing.Point(209, 789);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(72, 26);
+            this.exit.TabIndex = 11;
+            this.exit.Text = "יצאה";
+            this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // appointment
             // 
@@ -369,5 +383,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox medicalindices_textbox;
         private Bunifu.Framework.UI.BunifuThinButton2 diagnosis_btn;
+        private System.Windows.Forms.Button exit;
     }
 }

@@ -42,10 +42,20 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.addlabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.exit = new System.Windows.Forms.Button();
             this.name_textbox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView = new System.Windows.Forms.ListView();
             this.search_btn = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.Number_House = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Phone_Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Age = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Gender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Street = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.City = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.First_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Last_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -151,6 +161,7 @@
             this.docname_label.Size = new System.Drawing.Size(199, 33);
             this.docname_label.TabIndex = 9;
             this.docname_label.Text = "שלום דוקטור אנטון";
+            this.docname_label.Click += new System.EventHandler(this.docname_label_Click);
             // 
             // pictureBox1
             // 
@@ -175,6 +186,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel1.Controls.Add(this.exit);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.docname_label);
             this.panel1.Controls.Add(this.pictureBox5);
@@ -190,6 +202,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(293, 875);
             this.panel1.TabIndex = 25;
+            // 
+            // exit
+            // 
+            this.exit.Location = new System.Drawing.Point(210, 826);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(71, 27);
+            this.exit.TabIndex = 27;
+            this.exit.Text = "יצאה";
+            this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // name_textbox
             // 
@@ -211,14 +233,27 @@
             this.label4.TabIndex = 27;
             this.label4.Text = "הזן את שם המטופל";
             // 
-            // listView1
+            // listView
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(46, 166);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(914, 469);
-            this.listView1.TabIndex = 29;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView.BackColor = System.Drawing.Color.LightGray;
+            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Number_House,
+            this.Street,
+            this.City,
+            this.Phone_Number,
+            this.Age,
+            this.Gender,
+            this.Id,
+            this.First_Name,
+            this.Last_Name});
+            this.listView.HideSelection = false;
+            this.listView.Location = new System.Drawing.Point(197, 175);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(774, 495);
+            this.listView.TabIndex = 4;
+            this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.View = System.Windows.Forms.View.Details;
             // 
             // search_btn
             // 
@@ -238,12 +273,66 @@
             this.search_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
             this.search_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.search_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.search_btn.Location = new System.Drawing.Point(600, 85);
+            this.search_btn.Location = new System.Drawing.Point(605, 102);
             this.search_btn.Margin = new System.Windows.Forms.Padding(6);
             this.search_btn.Name = "search_btn";
-            this.search_btn.Size = new System.Drawing.Size(150, 59);
+            this.search_btn.Size = new System.Drawing.Size(142, 47);
             this.search_btn.TabIndex = 42;
             this.search_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
+            // 
+            // Number_House
+            // 
+            this.Number_House.Text = "מספר בית/דירה";
+            this.Number_House.Width = 124;
+            // 
+            // Phone_Number
+            // 
+            this.Phone_Number.Text = "מספר פלאפון";
+            this.Phone_Number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Phone_Number.Width = 115;
+            // 
+            // Age
+            // 
+            this.Age.DisplayIndex = 6;
+            this.Age.Text = "גיל";
+            this.Age.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // Gender
+            // 
+            this.Gender.Text = "מגדר";
+            this.Gender.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // Street
+            // 
+            this.Street.Text = "רחוב";
+            this.Street.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // City
+            // 
+            this.City.Text = "עיר";
+            this.City.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.City.Width = 81;
+            // 
+            // Id
+            // 
+            this.Id.DisplayIndex = 4;
+            this.Id.Text = "תעודת זהות";
+            this.Id.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Id.Width = 101;
+            // 
+            // First_Name
+            // 
+            this.First_Name.DisplayIndex = 8;
+            this.First_Name.Text = "שם";
+            this.First_Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // Last_Name
+            // 
+            this.Last_Name.DisplayIndex = 7;
+            this.Last_Name.Text = "שם משפחה";
+            this.Last_Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Last_Name.Width = 109;
             // 
             // Patients
             // 
@@ -251,14 +340,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 875);
             this.Controls.Add(this.search_btn);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listView);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.name_textbox);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Patients";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Patients";
@@ -293,7 +382,17 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox name_textbox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listView;
         private Bunifu.Framework.UI.BunifuThinButton2 search_btn;
+        private System.Windows.Forms.Button exit;
+        private System.Windows.Forms.ColumnHeader Number_House;
+        private System.Windows.Forms.ColumnHeader Street;
+        private System.Windows.Forms.ColumnHeader City;
+        private System.Windows.Forms.ColumnHeader Phone_Number;
+        private System.Windows.Forms.ColumnHeader Age;
+        private System.Windows.Forms.ColumnHeader Gender;
+        private System.Windows.Forms.ColumnHeader Id;
+        private System.Windows.Forms.ColumnHeader First_Name;
+        private System.Windows.Forms.ColumnHeader Last_Name;
     }
 }
