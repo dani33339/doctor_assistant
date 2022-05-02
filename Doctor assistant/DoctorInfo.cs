@@ -7,13 +7,15 @@ using MongoDB.Bson;
 
 namespace Doctor_assistant
 {
-    class DoctorInfo
+    public class DoctorInfo
     {
         public String Id_unic { get; set; }
         public MongoDB.Bson.ObjectId Id { get; set; }
         public String UserName { get; set; }
         public String FullName { get; set; }
         public String Password { get; set; }
+        //Navigation Properties
+        public List<MongoDB.Bson.ObjectId> Patients { get; set; }
 
     }
 }

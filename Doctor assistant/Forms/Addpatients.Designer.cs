@@ -1,4 +1,6 @@
-﻿namespace Doctor_assistant.Forms
+﻿using System;
+
+namespace Doctor_assistant.Forms
 {
     partial class Addpatients
     {
@@ -32,6 +34,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.AddPatients_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.MyPatients_btn = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.exit = new System.Windows.Forms.Button();
             this.patient_picturebox = new System.Windows.Forms.PictureBox();
             this.docname_label = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -60,8 +63,7 @@
             this.street_textbox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.apartment_textbox = new System.Windows.Forms.TextBox();
-            this.exit = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.AddPatient = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -109,7 +111,7 @@
             this.AddPatients_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
             this.AddPatients_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.AddPatients_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.AddPatients_btn.Location = new System.Drawing.Point(6, 371);
+            this.AddPatients_btn.Location = new System.Drawing.Point(6, 456);
             this.AddPatients_btn.Margin = new System.Windows.Forms.Padding(6);
             this.AddPatients_btn.Name = "AddPatients_btn";
             this.AddPatients_btn.Size = new System.Drawing.Size(189, 44);
@@ -135,7 +137,7 @@
             this.MyPatients_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
             this.MyPatients_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.MyPatients_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.MyPatients_btn.Location = new System.Drawing.Point(26, 275);
+            this.MyPatients_btn.Location = new System.Drawing.Point(26, 360);
             this.MyPatients_btn.Margin = new System.Windows.Forms.Padding(6);
             this.MyPatients_btn.Name = "MyPatients_btn";
             this.MyPatients_btn.Size = new System.Drawing.Size(163, 44);
@@ -143,10 +145,20 @@
             this.MyPatients_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.MyPatients_btn.Click += new System.EventHandler(this.MyPatients_btn_Click);
             // 
+            // exit
+            // 
+            this.exit.Location = new System.Drawing.Point(206, 826);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(75, 23);
+            this.exit.TabIndex = 25;
+            this.exit.Text = "יצאה";
+            this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
+            // 
             // patient_picturebox
             // 
             this.patient_picturebox.Image = ((System.Drawing.Image)(resources.GetObject("patient_picturebox.Image")));
-            this.patient_picturebox.Location = new System.Drawing.Point(203, 275);
+            this.patient_picturebox.Location = new System.Drawing.Point(203, 360);
             this.patient_picturebox.Name = "patient_picturebox";
             this.patient_picturebox.Size = new System.Drawing.Size(100, 50);
             this.patient_picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -167,7 +179,7 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(183, 561);
+            this.pictureBox5.Location = new System.Drawing.Point(183, 671);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(100, 50);
             this.pictureBox5.TabIndex = 8;
@@ -175,7 +187,7 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(183, 467);
+            this.pictureBox4.Location = new System.Drawing.Point(183, 552);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(100, 50);
             this.pictureBox4.TabIndex = 7;
@@ -184,7 +196,7 @@
             // addpatient_picturebox
             // 
             this.addpatient_picturebox.Image = ((System.Drawing.Image)(resources.GetObject("addpatient_picturebox.Image")));
-            this.addpatient_picturebox.Location = new System.Drawing.Point(203, 371);
+            this.addpatient_picturebox.Location = new System.Drawing.Point(203, 456);
             this.addpatient_picturebox.Name = "addpatient_picturebox";
             this.addpatient_picturebox.Size = new System.Drawing.Size(100, 50);
             this.addpatient_picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -195,7 +207,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 561);
+            this.label14.Location = new System.Drawing.Point(3, 646);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(179, 33);
             this.label14.TabIndex = 4;
@@ -205,7 +217,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(5, 467);
+            this.label13.Location = new System.Drawing.Point(5, 552);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(179, 33);
             this.label13.TabIndex = 3;
@@ -251,6 +263,7 @@
             this.name_textbox.Name = "name_textbox";
             this.name_textbox.Size = new System.Drawing.Size(137, 27);
             this.name_textbox.TabIndex = 4;
+            this.name_textbox.TextChanged += new System.EventHandler(this.name_textbox_TextChanged);
             // 
             // label3
             // 
@@ -283,6 +296,7 @@
             this.lastname_textbox.Name = "lastname_textbox";
             this.lastname_textbox.Size = new System.Drawing.Size(137, 27);
             this.lastname_textbox.TabIndex = 6;
+            this.lastname_textbox.TextChanged += new System.EventHandler(this.lastname_textbox_TextChanged);
             // 
             // label5
             // 
@@ -304,6 +318,7 @@
             this.id_textbox.Name = "id_textbox";
             this.id_textbox.Size = new System.Drawing.Size(137, 27);
             this.id_textbox.TabIndex = 8;
+            this.id_textbox.TextChanged += new System.EventHandler(this.id_textbox_TextChanged);
             // 
             // label6
             // 
@@ -325,6 +340,7 @@
             this.age_textbox.Name = "age_textbox";
             this.age_textbox.Size = new System.Drawing.Size(137, 27);
             this.age_textbox.TabIndex = 10;
+            this.age_textbox.TextChanged += new System.EventHandler(this.age_textbox_TextChanged);
             // 
             // label8
             // 
@@ -345,6 +361,7 @@
             this.phone_textbox.Name = "phone_textbox";
             this.phone_textbox.Size = new System.Drawing.Size(137, 27);
             this.phone_textbox.TabIndex = 14;
+            this.phone_textbox.TextChanged += new System.EventHandler(this.phone_textbox_TextChanged);
             // 
             // label9
             // 
@@ -361,10 +378,14 @@
             // 
             this.gender_combobox.BackColor = System.Drawing.Color.SkyBlue;
             this.gender_combobox.FormattingEnabled = true;
+            this.gender_combobox.Items.AddRange(new object[] {
+            "זכר",
+            "נקבה"});
             this.gender_combobox.Location = new System.Drawing.Point(460, 130);
             this.gender_combobox.Name = "gender_combobox";
             this.gender_combobox.Size = new System.Drawing.Size(121, 21);
             this.gender_combobox.TabIndex = 18;
+            this.gender_combobox.SelectedIndexChanged += new System.EventHandler(this.gender_combobox_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -386,6 +407,7 @@
             this.city_textbox.Name = "city_textbox";
             this.city_textbox.Size = new System.Drawing.Size(137, 27);
             this.city_textbox.TabIndex = 19;
+            this.city_textbox.TextChanged += new System.EventHandler(this.city_textbox_TextChanged);
             // 
             // label11
             // 
@@ -406,6 +428,7 @@
             this.street_textbox.Name = "street_textbox";
             this.street_textbox.Size = new System.Drawing.Size(137, 27);
             this.street_textbox.TabIndex = 21;
+            this.street_textbox.TextChanged += new System.EventHandler(this.street_textbox_TextChanged);
             // 
             // label12
             // 
@@ -426,34 +449,25 @@
             this.apartment_textbox.Name = "apartment_textbox";
             this.apartment_textbox.Size = new System.Drawing.Size(137, 27);
             this.apartment_textbox.TabIndex = 23;
+            this.apartment_textbox.TextChanged += new System.EventHandler(this.apartment_textbox_TextChanged);
             // 
-            // exit
+            // AddPatient
             // 
-            this.exit.Location = new System.Drawing.Point(206, 826);
-            this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(75, 23);
-            this.exit.TabIndex = 25;
-            this.exit.Text = "יצאה";
-            this.exit.UseVisualStyleBackColor = true;
-            this.exit.Click += new System.EventHandler(this.exit_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.SkyBlue;
-            this.button1.Location = new System.Drawing.Point(100, 216);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 33);
-            this.button1.TabIndex = 26;
-            this.button1.Text = "הוסף";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.AddPatient.BackColor = System.Drawing.Color.SkyBlue;
+            this.AddPatient.Location = new System.Drawing.Point(100, 216);
+            this.AddPatient.Name = "AddPatient";
+            this.AddPatient.Size = new System.Drawing.Size(124, 33);
+            this.AddPatient.TabIndex = 26;
+            this.AddPatient.Text = "הוסף";
+            this.AddPatient.UseVisualStyleBackColor = false;
+            this.AddPatient.Click += new System.EventHandler(this.AddPatient_Click);
             // 
             // Addpatients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 875);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.AddPatient);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.apartment_textbox);
             this.Controls.Add(this.label11);
@@ -491,6 +505,8 @@
 
         }
 
+        
+
         #endregion
 
         private System.Windows.Forms.Panel panel1;
@@ -525,6 +541,6 @@
         private Bunifu.Framework.UI.BunifuThinButton2 MyPatients_btn;
         private Bunifu.Framework.UI.BunifuThinButton2 AddPatients_btn;
         private System.Windows.Forms.Button exit;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button AddPatient;
     }
 }

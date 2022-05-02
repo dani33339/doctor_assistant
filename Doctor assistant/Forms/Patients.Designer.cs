@@ -45,17 +45,17 @@
             this.exit = new System.Windows.Forms.Button();
             this.name_textbox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.listView = new System.Windows.Forms.ListView();
             this.search_btn = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.Number_House = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Phone_Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listView = new System.Windows.Forms.ListView();
+            this.HouseNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Steet = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.City = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PhoneNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Age = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Gender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Street = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.City = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.First_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Last_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.FirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LastName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -68,7 +68,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(183, 275);
+            this.pictureBox2.Location = new System.Drawing.Point(183, 344);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 50);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -77,7 +77,7 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(183, 561);
+            this.pictureBox5.Location = new System.Drawing.Point(183, 630);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(100, 50);
             this.pictureBox5.TabIndex = 8;
@@ -85,7 +85,7 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(183, 467);
+            this.pictureBox4.Location = new System.Drawing.Point(183, 536);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(100, 50);
             this.pictureBox4.TabIndex = 7;
@@ -94,7 +94,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(183, 371);
+            this.pictureBox3.Location = new System.Drawing.Point(183, 440);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(100, 50);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -105,7 +105,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 561);
+            this.label14.Location = new System.Drawing.Point(3, 630);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(179, 33);
             this.label14.TabIndex = 4;
@@ -115,7 +115,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(5, 467);
+            this.label13.Location = new System.Drawing.Point(5, 536);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(179, 33);
             this.label13.TabIndex = 3;
@@ -125,7 +125,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(15, 275);
+            this.label1.Location = new System.Drawing.Point(15, 344);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(162, 33);
             this.label1.TabIndex = 2;
@@ -177,7 +177,7 @@
             // 
             this.addlabel.AutoSize = true;
             this.addlabel.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addlabel.Location = new System.Drawing.Point(5, 371);
+            this.addlabel.Location = new System.Drawing.Point(5, 440);
             this.addlabel.Name = "addlabel";
             this.addlabel.Size = new System.Drawing.Size(179, 33);
             this.addlabel.TabIndex = 1;
@@ -233,28 +233,6 @@
             this.label4.TabIndex = 27;
             this.label4.Text = "הזן את שם המטופל";
             // 
-            // listView
-            // 
-            this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView.BackColor = System.Drawing.Color.LightGray;
-            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Number_House,
-            this.Street,
-            this.City,
-            this.Phone_Number,
-            this.Age,
-            this.Gender,
-            this.Id,
-            this.First_Name,
-            this.Last_Name});
-            this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(197, 175);
-            this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(774, 495);
-            this.listView.TabIndex = 4;
-            this.listView.UseCompatibleStateImageBehavior = false;
-            this.listView.View = System.Windows.Forms.View.Details;
-            // 
             // search_btn
             // 
             this.search_btn.ActiveBorderThickness = 1;
@@ -281,66 +259,89 @@
             this.search_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.search_btn.Click += new System.EventHandler(this.search_btn_Click);
             // 
-            // Number_House
+            // listView
             // 
-            this.Number_House.Text = "מספר בית/דירה";
-            this.Number_House.Width = 124;
+            this.listView.BackColor = System.Drawing.Color.LightGray;
+            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.HouseNumber,
+            this.Steet,
+            this.City,
+            this.PhoneNumber,
+            this.Age,
+            this.Gender,
+            this.Id,
+            this.FirstName,
+            this.LastName});
+            this.listView.FullRowSelect = true;
+            this.listView.GridLines = true;
+            this.listView.HideSelection = false;
+            this.listView.Location = new System.Drawing.Point(33, 177);
+            this.listView.Name = "listView";
+            this.listView.Size = new System.Drawing.Size(938, 556);
+            this.listView.TabIndex = 9;
+            this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.View = System.Windows.Forms.View.Details;
             // 
-            // Phone_Number
+            // HouseNumber
             // 
-            this.Phone_Number.Text = "מספר פלאפון";
-            this.Phone_Number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Phone_Number.Width = 115;
+            this.HouseNumber.Text = "מס דירה";
+            this.HouseNumber.Width = 113;
             // 
-            // Age
+            // Steet
             // 
-            this.Age.DisplayIndex = 6;
-            this.Age.Text = "גיל";
-            this.Age.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Gender
-            // 
-            this.Gender.Text = "מגדר";
-            this.Gender.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // Street
-            // 
-            this.Street.Text = "רחוב";
-            this.Street.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Steet.Text = "רחוב";
+            this.Steet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Steet.Width = 117;
             // 
             // City
             // 
             this.City.Text = "עיר";
             this.City.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.City.Width = 81;
+            this.City.Width = 114;
+            // 
+            // PhoneNumber
+            // 
+            this.PhoneNumber.Text = "מספר פלאפון";
+            this.PhoneNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.PhoneNumber.Width = 135;
+            // 
+            // Age
+            // 
+            this.Age.Text = "גיל";
+            this.Age.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Age.Width = 72;
+            // 
+            // Gender
+            // 
+            this.Gender.Text = "מגדר";
+            this.Gender.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Gender.Width = 83;
             // 
             // Id
             // 
-            this.Id.DisplayIndex = 4;
             this.Id.Text = "תעודת זהות";
             this.Id.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Id.Width = 101;
+            this.Id.Width = 116;
             // 
-            // First_Name
+            // FirstName
             // 
-            this.First_Name.DisplayIndex = 8;
-            this.First_Name.Text = "שם";
-            this.First_Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.FirstName.Text = "שם";
+            this.FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.FirstName.Width = 72;
             // 
-            // Last_Name
+            // LastName
             // 
-            this.Last_Name.DisplayIndex = 7;
-            this.Last_Name.Text = "שם משפחה";
-            this.Last_Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Last_Name.Width = 109;
+            this.LastName.Text = "שם משפחה";
+            this.LastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.LastName.Width = 114;
             // 
             // Patients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 875);
-            this.Controls.Add(this.search_btn);
             this.Controls.Add(this.listView);
+            this.Controls.Add(this.search_btn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.name_textbox);
             this.Controls.Add(this.panel2);
@@ -382,17 +383,17 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox name_textbox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListView listView;
         private Bunifu.Framework.UI.BunifuThinButton2 search_btn;
         private System.Windows.Forms.Button exit;
-        private System.Windows.Forms.ColumnHeader Number_House;
-        private System.Windows.Forms.ColumnHeader Street;
+        private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.ColumnHeader HouseNumber;
+        private System.Windows.Forms.ColumnHeader Steet;
         private System.Windows.Forms.ColumnHeader City;
-        private System.Windows.Forms.ColumnHeader Phone_Number;
+        private System.Windows.Forms.ColumnHeader PhoneNumber;
         private System.Windows.Forms.ColumnHeader Age;
         private System.Windows.Forms.ColumnHeader Gender;
         private System.Windows.Forms.ColumnHeader Id;
-        private System.Windows.Forms.ColumnHeader First_Name;
-        private System.Windows.Forms.ColumnHeader Last_Name;
+        private System.Windows.Forms.ColumnHeader FirstName;
+        private System.Windows.Forms.ColumnHeader LastName;
     }
 }

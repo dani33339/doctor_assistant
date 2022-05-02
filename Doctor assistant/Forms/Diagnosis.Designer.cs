@@ -42,11 +42,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.addlabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.exit = new System.Windows.Forms.Button();
             this.question_label = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.back_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -61,7 +61,7 @@
             // patient_picturebox
             // 
             this.patient_picturebox.Image = ((System.Drawing.Image)(resources.GetObject("patient_picturebox.Image")));
-            this.patient_picturebox.Location = new System.Drawing.Point(183, 275);
+            this.patient_picturebox.Location = new System.Drawing.Point(183, 337);
             this.patient_picturebox.Name = "patient_picturebox";
             this.patient_picturebox.Size = new System.Drawing.Size(100, 50);
             this.patient_picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -70,7 +70,7 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(183, 561);
+            this.pictureBox5.Location = new System.Drawing.Point(183, 623);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(100, 50);
             this.pictureBox5.TabIndex = 8;
@@ -78,7 +78,7 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(183, 467);
+            this.pictureBox4.Location = new System.Drawing.Point(183, 529);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(100, 50);
             this.pictureBox4.TabIndex = 7;
@@ -87,7 +87,7 @@
             // addpatient_picturebox
             // 
             this.addpatient_picturebox.Image = ((System.Drawing.Image)(resources.GetObject("addpatient_picturebox.Image")));
-            this.addpatient_picturebox.Location = new System.Drawing.Point(183, 371);
+            this.addpatient_picturebox.Location = new System.Drawing.Point(183, 433);
             this.addpatient_picturebox.Name = "addpatient_picturebox";
             this.addpatient_picturebox.Size = new System.Drawing.Size(100, 50);
             this.addpatient_picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -98,7 +98,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 561);
+            this.label14.Location = new System.Drawing.Point(3, 623);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(179, 33);
             this.label14.TabIndex = 4;
@@ -108,7 +108,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(5, 467);
+            this.label13.Location = new System.Drawing.Point(5, 529);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(179, 33);
             this.label13.TabIndex = 3;
@@ -118,7 +118,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(15, 275);
+            this.label1.Location = new System.Drawing.Point(15, 337);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(162, 33);
             this.label1.TabIndex = 2;
@@ -154,6 +154,7 @@
             this.docname_label.Size = new System.Drawing.Size(199, 33);
             this.docname_label.TabIndex = 9;
             this.docname_label.Text = "שלום דוקטור אנטון";
+            this.docname_label.Click += new System.EventHandler(this.docname_label_Click);
             // 
             // pictureBox1
             // 
@@ -169,7 +170,7 @@
             // 
             this.addlabel.AutoSize = true;
             this.addlabel.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addlabel.Location = new System.Drawing.Point(5, 371);
+            this.addlabel.Location = new System.Drawing.Point(5, 433);
             this.addlabel.Name = "addlabel";
             this.addlabel.Size = new System.Drawing.Size(179, 33);
             this.addlabel.TabIndex = 1;
@@ -194,6 +195,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(293, 836);
             this.panel1.TabIndex = 25;
+            // 
+            // exit
+            // 
+            this.exit.Location = new System.Drawing.Point(210, 787);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(71, 27);
+            this.exit.TabIndex = 26;
+            this.exit.Text = "יצאה";
+            this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // question_label
             // 
@@ -251,16 +262,6 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 48;
             this.pictureBox3.TabStop = false;
-            // 
-            // exit
-            // 
-            this.exit.Location = new System.Drawing.Point(210, 787);
-            this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(71, 27);
-            this.exit.TabIndex = 26;
-            this.exit.Text = "יצאה";
-            this.exit.UseVisualStyleBackColor = true;
-            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // Diagnosis
             // 

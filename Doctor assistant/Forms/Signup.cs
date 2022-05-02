@@ -77,12 +77,12 @@ namespace Doctor_assistant.Forms
             NewUser.FullName = name_textbox.Text;
             NewUser.Password = password_textbox.Text;
             NewUser.Id_unic =  id_textbox.Text;
-
+            NewUser.Patients = new List<MongoDB.Bson.ObjectId>();
             m_Collection.InsertOne(NewUser);
 
             MessageBox.Show("User has been successfully saved.");
             Clear();
-            GoToPatients();
+            GoToPatients(NewUser);
         }
 
         public bool Checkid(string id)
@@ -128,9 +128,9 @@ namespace Doctor_assistant.Forms
              repassword_textbox.Clear();
              id_textbox.Clear();
         }
-        private void GoToPatients()
+        private void GoToPatients(DoctorInfo NewUser)
         {
-            Patients newForm = new Patients();
+            Patients newForm = new Patients(NewUser);
             this.Hide();
             newForm.ShowDialog();
             this.Close();

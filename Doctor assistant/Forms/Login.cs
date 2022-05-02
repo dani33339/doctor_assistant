@@ -84,10 +84,7 @@ namespace Doctor_assistant.Forms
 
         private void nextpagebtn_Click(object sender, EventArgs e)
         {
-            Addpatients newForm = new Addpatients();  
-            this.Hide();    
-            newForm.ShowDialog();    
-            this.Close();    
+               
         }
 
         private void login_button_Click_1(object sender, EventArgs e)
@@ -113,10 +110,9 @@ namespace Doctor_assistant.Forms
                 {
                     MessageBox.Show("שלום דוקטור " + enteruser.FullName + "  ", "ניתנה גישה", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    Addpatients newForm = new Addpatients();
-                    //appointment.instance.tb1.Text = enteruser.FullName + "שלום דוקטור";
-                    //Patients.instance.tb1.Text = enteruser.FullName + "שלום דוקטור";
-                    Addpatients.instance.tb1.Text = "hello dr" + " " + enteruser.FullName;
+                    Addpatients newForm = new Addpatients(enteruser);
+                    
+                    
                     this.Hide();
                     newForm.ShowDialog();
                     this.Close();

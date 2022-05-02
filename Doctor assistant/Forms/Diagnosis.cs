@@ -12,9 +12,12 @@ namespace Doctor_assistant.Forms
 {
     public partial class Diagnosis : Form
     {
-        public Diagnosis()
+        public DoctorInfo doctor;
+        public Diagnosis(DoctorInfo obj)
         {
             InitializeComponent();
+            doctor = obj;
+            docname_label.Text = "hello dr \n" + doctor.FullName;
         }
 
         private void search_btn_Click(object sender, EventArgs e)
@@ -25,6 +28,11 @@ namespace Doctor_assistant.Forms
         private void exit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void docname_label_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
