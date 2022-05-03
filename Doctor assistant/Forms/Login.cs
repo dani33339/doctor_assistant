@@ -135,6 +135,7 @@ namespace Doctor_assistant.Forms
             this.Hide();
             newForm.ShowDialog();
             this.Close();
+            //as
         }
 
         
