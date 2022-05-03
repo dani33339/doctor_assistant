@@ -156,11 +156,12 @@
             this.patientname_label.AutoSize = true;
             this.patientname_label.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patientname_label.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.patientname_label.Location = new System.Drawing.Point(828, 113);
+            this.patientname_label.Location = new System.Drawing.Point(848, 113);
             this.patientname_label.Name = "patientname_label";
-            this.patientname_label.Size = new System.Drawing.Size(126, 33);
+            this.patientname_label.Size = new System.Drawing.Size(90, 33);
             this.patientname_label.TabIndex = 39;
-            this.patientname_label.Text = "יונתן גורביץ";
+            this.patientname_label.Text = "יוסי כהן";
+            this.patientname_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // medicalindices_textbox
             // 

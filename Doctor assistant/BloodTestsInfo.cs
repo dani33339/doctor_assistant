@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Doctor_assistant
 {
-    class BloodTestsInfo
+    public class BloodTestsInfo
     {
         public MongoDB.Bson.ObjectId Id { get; set; }
         public int WBC { get; set; }

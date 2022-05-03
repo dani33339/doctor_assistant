@@ -19,7 +19,7 @@ namespace Doctor_assistant.Forms
         MongoClient Pm_Client, Dm_Client;
         IMongoDatabase Pm_Database, Dm_Database;
         IMongoCollection<Patientsinfo> Pm_Collection;
-        IMongoCollection<DoctorInfo> Dm_Collection;
+        IMongoCollection<BloodTestsInfo> Pb_Collection;
 
         public DoctorInfo doctor;
         public Patientsinfo patient;
@@ -32,21 +32,21 @@ namespace Doctor_assistant.Forms
             Pm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
             Pm_Database = Pm_Client.GetDatabase("Patients");
             Pm_Collection = Pm_Database.GetCollection<Patientsinfo>("Data");
+            Pb_Collection = Pm_Database.GetCollection<BloodTestsInfo>("BloodTests");
 
-            Dm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
-            Dm_Database = Dm_Client.GetDatabase("Doctor");
-            Dm_Collection = Dm_Database.GetCollection<DoctorInfo>("Account");
 
             doctor = obj1;
             patient = obj2;
             docname_label.Text = "שלום דוקטור \n" + doctor.FullName;
-            patientname_label.Text = patient.FirstName + patient.LastName;
-            pantientid_label.Text = patient.Id;
+            patientname_label.Text = patient.FirstName +" "+ patient.LastName;
+            pantientid_label.Text = patient.PId;
         }
 
         private void imortfile_btn_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel 97-2003 Workbook|*.xls|Excel Workbook|*.xlsx" })
+            DataTableCollection dataTableCollection;
+            DataTable dt;
+            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx|Excel 97-2003 Workbook|*.xls" })
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -59,6 +59,12 @@ namespace Doctor_assistant.Forms
                                 ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
                             });
                             dataTableCollection = result.Tables;
+
+                            dt = dataTableCollection["גיליון1"];
+                            var columnNames = (from c in dt.Columns.Cast<DataColumn>()
+                                               select c.ColumnName).ToArray();
+                            string columnName = columnNames[1];
+                            var data = dt.DefaultView.ToTable(false, columnName);
                         }
                     }
                 }

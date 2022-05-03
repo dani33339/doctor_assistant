@@ -111,8 +111,6 @@ namespace Doctor_assistant.Forms
                     MessageBox.Show("שלום דוקטור " + enteruser.FullName + "  ", "ניתנה גישה", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Addpatients newForm = new Addpatients(enteruser);
-                    
-                    
                     this.Hide();
                     newForm.ShowDialog();
                     this.Close();

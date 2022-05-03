@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Patients));
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.name_textbox = new System.Windows.Forms.TextBox();
@@ -56,6 +57,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
@@ -136,6 +138,7 @@
             // 
             this.listView.BackColor = System.Drawing.Color.LightGray;
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
             this.HouseNumber,
             this.Steet,
             this.City,
@@ -143,70 +146,74 @@
             this.Age,
             this.Gender,
             this.Id,
-            this.FirstName,
-            this.LastName});
+            this.LastName,
+            this.FirstName});
             this.listView.FullRowSelect = true;
             this.listView.GridLines = true;
             this.listView.HideSelection = false;
+            this.listView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
             this.listView.Location = new System.Drawing.Point(33, 177);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(938, 556);
             this.listView.TabIndex = 9;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.Click += new System.EventHandler(this.listView_Click);
             // 
             // HouseNumber
             // 
             this.HouseNumber.Text = "מס דירה";
-            this.HouseNumber.Width = 113;
+            this.HouseNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.HouseNumber.Width = 70;
             // 
             // Steet
             // 
             this.Steet.Text = "רחוב";
             this.Steet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Steet.Width = 117;
+            this.Steet.Width = 141;
             // 
             // City
             // 
             this.City.Text = "עיר";
             this.City.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.City.Width = 114;
+            this.City.Width = 136;
             // 
             // PhoneNumber
             // 
             this.PhoneNumber.Text = "מספר פלאפון";
             this.PhoneNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.PhoneNumber.Width = 135;
+            this.PhoneNumber.Width = 134;
             // 
             // Age
             // 
             this.Age.Text = "גיל";
             this.Age.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Age.Width = 72;
+            this.Age.Width = 53;
             // 
             // Gender
             // 
             this.Gender.Text = "מגדר";
             this.Gender.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Gender.Width = 83;
+            this.Gender.Width = 54;
             // 
             // Id
             // 
             this.Id.Text = "תעודת זהות";
             this.Id.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Id.Width = 116;
+            this.Id.Width = 118;
             // 
             // FirstName
             // 
             this.FirstName.Text = "שם";
             this.FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.FirstName.Width = 72;
+            this.FirstName.Width = 102;
             // 
             // LastName
             // 
             this.LastName.Text = "שם משפחה";
             this.LastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.LastName.Width = 114;
+            this.LastName.Width = 125;
             // 
             // panel1
             // 
@@ -365,6 +372,10 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 0;
+            // 
             // Patients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -382,6 +393,7 @@
             this.Name = "Patients";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Patients";
+            this.Load += new System.EventHandler(this.Patients_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -424,5 +436,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

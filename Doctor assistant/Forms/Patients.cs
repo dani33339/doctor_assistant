@@ -13,6 +13,7 @@ namespace Doctor_assistant.Forms
 {
     public partial class Patients : Form
     {
+
         MongoClient Pm_Client;
         IMongoDatabase Pm_Database;
         IMongoCollection<Patientsinfo> Pm_Collection;
@@ -29,27 +30,26 @@ namespace Doctor_assistant.Forms
             docname_label.Text = "שלום דוקטור \n" + doctor.FullName;
             List<Patientsinfo> PatientsList = new List<Patientsinfo>();
 
-            foreach (MongoDB.Bson.ObjectId id_unic in doctor.Patients)
+            foreach (MongoDB.Bson.ObjectId Id in doctor.Patients)
             {
-                PatientsList.Add(PatientFinder(id_unic));
+                PatientsList.Add(PatientFinder(Id));
             }
-
-            
-
-            foreach (Patientsinfo Patient in PatientsList)
+            if (Pm_Collection.EstimatedDocumentCount() > 0)
             {
-                ListViewItem item = new ListViewItem();
-                item.SubItems.Add(Patient.HouseNumber);
-                item.SubItems.Add(Patient.Street);
-                item.SubItems.Add(Patient.City);
-                item.SubItems.Add(Convert.ToString(Patient.PhoneNumber));
-                item.SubItems.Add(Patient.Age);                
-                item.SubItems.Add(Patient.Gender);
-                item.SubItems.Add(Patient.Id);             
-                item.SubItems.Add(Patient.FirstName);
-                item.SubItems.Add(Patient.LastName);
-
-                listView.Items.Add(item);
+                foreach (Patientsinfo Patient in PatientsList)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.SubItems.Add(Patient.HouseNumber);
+                    item.SubItems.Add(Patient.Street);
+                    item.SubItems.Add(Patient.City);
+                    item.SubItems.Add(Convert.ToString(Patient.PhoneNumber));
+                    item.SubItems.Add(Patient.Age);
+                    item.SubItems.Add(Patient.Gender);
+                    item.SubItems.Add(Patient.PId);
+                    item.SubItems.Add(Patient.LastName);
+                    item.SubItems.Add(Patient.FirstName);
+                    listView.Items.Add(item);
+                }
             }
         }
 
@@ -69,10 +69,10 @@ namespace Doctor_assistant.Forms
             }
         }
 
-            public Patientsinfo PatientFinder(MongoDB.Bson.ObjectId Id_unic) 
+            public Patientsinfo PatientFinder(MongoDB.Bson.ObjectId Id) 
         {
             var filter = Builders<Patientsinfo>.Filter;
-            var idfilter = filter.Eq(x => x.Id_unic, Id_unic);
+            var idfilter = filter.Eq(x => x.Id, Id);
             var Patient = Pm_Collection.Find<Patientsinfo>(idfilter).FirstOrDefault();
 
             return Patient;
@@ -120,6 +120,27 @@ namespace Doctor_assistant.Forms
         private void AddPatients_btn_Click(object sender, EventArgs e)
         {
             Addpatients newForm = new Addpatients(doctor);
+            this.Hide();
+            newForm.ShowDialog();
+            this.Close();
+        }
+
+        private void Patients_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView_Click(object sender, EventArgs e)
+        {
+            var firstSelectedItem = listView.SelectedItems[0];
+
+            var filter = Builders<Patientsinfo>.Filter;
+
+            var Pid = filter.Eq(x => x.PId, firstSelectedItem.SubItems[7].Text);
+
+            var patient = Pm_Collection.Find<Patientsinfo>(Pid).FirstOrDefault();
+
+            appointment newForm = new appointment(doctor,patient);
             this.Hide();
             newForm.ShowDialog();
             this.Close();
