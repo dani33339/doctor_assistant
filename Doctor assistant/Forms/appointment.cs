@@ -30,6 +30,7 @@ namespace Doctor_assistant.Forms
         public appointment(DoctorInfo obj1, Patientsinfo obj2)
         {
             InitializeComponent();
+            dataGridView.Visible = false;
 
             Pm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
             Pm_Database = Pm_Client.GetDatabase("Patients");
@@ -59,6 +60,7 @@ namespace Doctor_assistant.Forms
                                 ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
                             });
                             dataGridView.DataSource = result.Tables["גיליון1"];
+                            dataGridView.Visible = true;
                             BloodTestsInfo NewBloodTestsInfo = new BloodTestsInfo();
                             NewBloodTestsInfo.WBC = Convert.ToDouble(dataGridView.Columns[1].Name);
                             NewBloodTestsInfo.Neut = Convert.ToDouble(dataGridView.Rows[0].Cells[1].Value.ToString());
@@ -84,43 +86,6 @@ namespace Doctor_assistant.Forms
             }
         }
 
-        //private void cboSheet_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //Select sheet
-        //    dataGridView.DataSource = result.Tables["גיליון1"];
-        //}
-        //    DataTableCollection dataTableCollection;
-        //    DataTable dt;
-        //    using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx|Excel 97-2003 Workbook|*.xls" })
-        //    {
-        //        if (ofd.ShowDialog() == DialogResult.OK)
-        //        {
-        //            using (var stream = File.Open(ofd.FileName, FileMode.Open, FileAccess.Read))
-        //            {
-        //                using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
-        //                {
-        //                    DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
-        //                    {
-        //                        ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
-        //                    });
-        //                    dataTableCollection = result.Tables;
-
-        //                    dt = dataTableCollection["גיליון1"];
-        //                    var columnNames = (from c in dt.Columns.Cast<DataColumn>()
-        //                                       select c.ColumnName).ToArray();
-
-        //                    string columnName = columnNames[1];
-
-
-        //                    var data = dt.DefaultView.ToTable(false, columnName);
-        //                    var b = data.Rows;
-
-        //                }
-        //            }
-        //        }
-        //    }
-        //} 
-
         private void docname_label_Click(object sender, EventArgs e)
         {
             
@@ -144,6 +109,11 @@ namespace Doctor_assistant.Forms
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void MyPatients_btn_Click(object sender, EventArgs e)

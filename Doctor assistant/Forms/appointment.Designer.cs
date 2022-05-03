@@ -37,7 +37,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.Label();
             this.patientname_label = new System.Windows.Forms.Label();
-            this.medicalindices_textbox = new System.Windows.Forms.TextBox();
             this.diagnosis_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.panel1 = new System.Windows.Forms.Panel();
             this.AddPatients_btn = new Bunifu.Framework.UI.BunifuThinButton2();
@@ -52,6 +51,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
@@ -124,6 +124,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.appointment_label);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -164,17 +165,6 @@
             this.patientname_label.TabIndex = 39;
             this.patientname_label.Text = "יוסי כהן";
             this.patientname_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // medicalindices_textbox
-            // 
-            this.medicalindices_textbox.BackColor = System.Drawing.Color.SkyBlue;
-            this.medicalindices_textbox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.medicalindices_textbox.Location = new System.Drawing.Point(70, 224);
-            this.medicalindices_textbox.Multiline = true;
-            this.medicalindices_textbox.Name = "medicalindices_textbox";
-            this.medicalindices_textbox.Size = new System.Drawing.Size(900, 229);
-            this.medicalindices_textbox.TabIndex = 40;
-            this.medicalindices_textbox.TextChanged += new System.EventHandler(this.medicalindices_textbox_TextChanged);
             // 
             // diagnosis_btn
             // 
@@ -359,11 +349,28 @@
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(386, 168);
+            this.dataGridView.Location = new System.Drawing.Point(108, 207);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView.Size = new System.Drawing.Size(373, 291);
             this.dataGridView.TabIndex = 43;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
+            // 
+            // button1
+            // 
+            this.button1.AllowDrop = true;
+            this.button1.AutoEllipsis = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(1234, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 41);
+            this.button1.TabIndex = 44;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // appointment
             // 
@@ -373,7 +380,6 @@
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.diagnosis_btn);
-            this.Controls.Add(this.medicalindices_textbox);
             this.Controls.Add(this.patientname_label);
             this.Controls.Add(this.id);
             this.Controls.Add(this.label2);
@@ -412,7 +418,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label id;
         private System.Windows.Forms.Label patientname_label;
-        private System.Windows.Forms.TextBox medicalindices_textbox;
         private Bunifu.Framework.UI.BunifuThinButton2 diagnosis_btn;
         private System.Windows.Forms.Panel panel1;
         private Bunifu.Framework.UI.BunifuThinButton2 AddPatients_btn;
@@ -427,5 +432,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dataGridView;
+        public System.Windows.Forms.Button button1;
     }
 }

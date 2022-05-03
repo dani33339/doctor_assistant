@@ -145,5 +145,10 @@ namespace Doctor_assistant.Forms
             newForm.ShowDialog();
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

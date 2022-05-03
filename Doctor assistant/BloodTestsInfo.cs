@@ -23,7 +23,6 @@ namespace Doctor_assistant
 
 
         //Navigation Properties
-        public int PatientId { get; set; }
         public Patientsinfo Patient { get; set; }
     }
 }

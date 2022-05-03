@@ -64,6 +64,7 @@ namespace Doctor_assistant.Forms
             this.label12 = new System.Windows.Forms.Label();
             this.apartment_textbox = new System.Windows.Forms.TextBox();
             this.AddPatient = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -76,6 +77,7 @@ namespace Doctor_assistant.Forms
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.AddPatients_btn);
             this.panel1.Controls.Add(this.MyPatients_btn);
             this.panel1.Controls.Add(this.exit);
@@ -462,6 +464,23 @@ namespace Doctor_assistant.Forms
             this.AddPatient.UseVisualStyleBackColor = false;
             this.AddPatient.Click += new System.EventHandler(this.AddPatient_Click);
             // 
+            // button1
+            // 
+            this.button1.AllowDrop = true;
+            this.button1.AutoEllipsis = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(260, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 41);
+            this.button1.TabIndex = 28;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Addpatients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -490,7 +509,6 @@ namespace Doctor_assistant.Forms
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Addpatients";
-            this.Text = "Addpatients";
             this.Load += new System.EventHandler(this.Addpatients_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -543,5 +561,6 @@ namespace Doctor_assistant.Forms
         private Bunifu.Framework.UI.BunifuThinButton2 AddPatients_btn;
         private System.Windows.Forms.Button exit;
         private System.Windows.Forms.Button AddPatient;
+        public System.Windows.Forms.Button button1;
     }
 }

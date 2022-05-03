@@ -41,6 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.login_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.signup_btn = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -48,6 +49,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.exit);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
@@ -210,6 +212,23 @@
             this.signup_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.signup_btn.Click += new System.EventHandler(this.signup_btn_Click);
             // 
+            // button1
+            // 
+            this.button1.AllowDrop = true;
+            this.button1.AutoEllipsis = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(181, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 41);
+            this.button1.TabIndex = 45;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Login
             // 
             this.AllowDrop = true;
@@ -252,5 +271,6 @@
         private Bunifu.Framework.UI.BunifuThinButton2 login_btn;
         private Bunifu.Framework.UI.BunifuThinButton2 signup_btn;
         private System.Windows.Forms.Button exit;
+        public System.Windows.Forms.Button button1;
     }
 }
