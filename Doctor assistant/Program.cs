@@ -17,6 +17,7 @@ namespace Doctor_assistant
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Forms.Login());
+            //Application.Run(new Forms.appointment());
         }
     }
 }

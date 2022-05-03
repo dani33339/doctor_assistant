@@ -491,6 +491,7 @@ namespace Doctor_assistant.Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Addpatients";
             this.Text = "Addpatients";
+            this.Load += new System.EventHandler(this.Addpatients_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).EndInit();
