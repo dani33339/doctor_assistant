@@ -41,7 +41,7 @@ namespace Doctor_assistant.Forms
             patient = obj2;
             docname_label.Text = "שלום דוקטור \n" + doctor.FullName;
             patientname_label.Text = patient.FirstName + patient.LastName;
-            pantientid_label.Text = patient.Id;
+            pantientid_label.Text = patient.Citizenship_Id;
         }
 
         private void imortfile_btn_Click(object sender, EventArgs e)
@@ -80,12 +80,12 @@ namespace Doctor_assistant.Forms
             this.Close();
         }
 
-<<<<<<< HEAD
+
         private void pantientid_label_Click(object sender, EventArgs e)
         {
 
         }
-=======
+
         private void appointment_Load(object sender, EventArgs e)
         {
 
@@ -106,7 +106,7 @@ namespace Doctor_assistant.Forms
             newForm.ShowDialog();
             this.Close();
         }
->>>>>>> Daniel
+
     }
 
 }

@@ -35,7 +35,7 @@ namespace Doctor_assistant.Forms
             }
 
 
-            
+
 
             foreach (Patientsinfo Patient in PatientsList)
             {
@@ -44,22 +44,22 @@ namespace Doctor_assistant.Forms
                 item.SubItems.Add(Patient.Street);
                 item.SubItems.Add(Patient.City);
                 item.SubItems.Add(Convert.ToString(Patient.PhoneNumber));
-                item.SubItems.Add(Patient.Age);                
+                item.SubItems.Add(Patient.Age);
                 item.SubItems.Add(Patient.Gender);
-                item.SubItems.Add(Patient.Id);             
+                item.SubItems.Add(Patient.Citizenship_Id);
                 item.SubItems.Add(Patient.FirstName);
                 item.SubItems.Add(Patient.LastName);
 
                 listView.Items.Add(item);
             }
-<<<<<<< HEAD
 
 
 
 
-            
 
-=======
+
+
+
         }
 
         public void myList_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -76,13 +76,13 @@ namespace Doctor_assistant.Forms
                     MessageBox.Show("Double Clicked on :" + item.Text);
                 }
             }
->>>>>>> Daniel
+
         }
 
-            public Patientsinfo PatientFinder(MongoDB.Bson.ObjectId Id_unic) 
+        public Patientsinfo PatientFinder(MongoDB.Bson.ObjectId Id)
         {
             var filter = Builders<Patientsinfo>.Filter;
-            var idfilter = filter.Eq(x => x.Id_unic, Id_unic);
+            var idfilter = filter.Eq(x => x.Id, Id);
             var Patient = Pm_Collection.Find<Patientsinfo>(idfilter).FirstOrDefault();
 
             return Patient;
@@ -105,7 +105,7 @@ namespace Doctor_assistant.Forms
 
         private void docname_label_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -119,26 +119,27 @@ namespace Doctor_assistant.Forms
             listView.Items.Add(item);
         }
 
-<<<<<<< HEAD
-        private void listView_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
 
-=======
-        private void MyPatients_btn_Click(object sender, EventArgs e)
-        {
-            Patients newForm = new Patients(doctor);
-            this.Hide();
-            newForm.ShowDialog();
-            this.Close();
-        }
+        
 
-        private void AddPatients_btn_Click(object sender, EventArgs e)
-        {
-            Addpatients newForm = new Addpatients(doctor);
-            this.Hide();
-            newForm.ShowDialog();
-            this.Close();
->>>>>>> Daniel
-        }
+
+             void MyPatients_btn_Click(object sender, EventArgs e)
+            {
+                Patients newForm = new Patients(doctor);
+                this.Hide();
+                newForm.ShowDialog();
+                this.Close();
+            }
+
+             void AddPatients_btn_Click(object sender, EventArgs e)
+            {
+                Addpatients newForm = new Addpatients(doctor);
+                this.Hide();
+                newForm.ShowDialog();
+                this.Close();
+
+            }
+        
+
     }
 }

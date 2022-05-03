@@ -474,3 +474,9 @@ D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\bin\Debug\Exc
 D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\bin\Debug\ExcelDataReader.xml
 D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\bin\Debug\ExcelDataReader.DataSet.pdb
 D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\bin\Debug\ExcelDataReader.DataSet.xml
+C:\Users\kilim\OneDrive - ac.sce.ac.il\לימודים\שנה ב\סמסטר ב\בדיקות תוכנה\doctor_assistant\Doctor assistant\bin\Debug\ExcelDataReader.DataSet.dll
+C:\Users\kilim\OneDrive - ac.sce.ac.il\לימודים\שנה ב\סמסטר ב\בדיקות תוכנה\doctor_assistant\Doctor assistant\bin\Debug\ExcelDataReader.dll
+C:\Users\kilim\OneDrive - ac.sce.ac.il\לימודים\שנה ב\סמסטר ב\בדיקות תוכנה\doctor_assistant\Doctor assistant\bin\Debug\ExcelDataReader.pdb
+C:\Users\kilim\OneDrive - ac.sce.ac.il\לימודים\שנה ב\סמסטר ב\בדיקות תוכנה\doctor_assistant\Doctor assistant\bin\Debug\ExcelDataReader.xml
+C:\Users\kilim\OneDrive - ac.sce.ac.il\לימודים\שנה ב\סמסטר ב\בדיקות תוכנה\doctor_assistant\Doctor assistant\bin\Debug\ExcelDataReader.DataSet.pdb
+C:\Users\kilim\OneDrive - ac.sce.ac.il\לימודים\שנה ב\סמסטר ב\בדיקות תוכנה\doctor_assistant\Doctor assistant\bin\Debug\ExcelDataReader.DataSet.xml
