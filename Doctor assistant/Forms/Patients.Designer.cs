@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Patients));
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -35,6 +36,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.search_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.listView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.HouseNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Steet = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.City = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,8 +44,8 @@
             this.Age = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Gender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.FirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LastName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.FirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1 = new System.Windows.Forms.Panel();
             this.AddPatients_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.MyPatients_btn = new Bunifu.Framework.UI.BunifuThinButton2();
@@ -56,6 +58,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
@@ -79,6 +82,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -136,6 +140,7 @@
             // 
             this.listView.BackColor = System.Drawing.Color.LightGray;
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
             this.HouseNumber,
             this.Steet,
             this.City,
@@ -143,70 +148,78 @@
             this.Age,
             this.Gender,
             this.Id,
-            this.FirstName,
-            this.LastName});
+            this.LastName,
+            this.FirstName});
             this.listView.FullRowSelect = true;
             this.listView.GridLines = true;
             this.listView.HideSelection = false;
+            this.listView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
             this.listView.Location = new System.Drawing.Point(33, 177);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(938, 556);
             this.listView.TabIndex = 9;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.Click += new System.EventHandler(this.listView_Click);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 0;
             // 
             // HouseNumber
             // 
             this.HouseNumber.Text = "מס דירה";
-            this.HouseNumber.Width = 113;
+            this.HouseNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.HouseNumber.Width = 70;
             // 
             // Steet
             // 
             this.Steet.Text = "רחוב";
             this.Steet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Steet.Width = 117;
+            this.Steet.Width = 141;
             // 
             // City
             // 
             this.City.Text = "עיר";
             this.City.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.City.Width = 114;
+            this.City.Width = 136;
             // 
             // PhoneNumber
             // 
             this.PhoneNumber.Text = "מספר פלאפון";
             this.PhoneNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.PhoneNumber.Width = 135;
+            this.PhoneNumber.Width = 134;
             // 
             // Age
             // 
             this.Age.Text = "גיל";
             this.Age.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Age.Width = 72;
+            this.Age.Width = 53;
             // 
             // Gender
             // 
             this.Gender.Text = "מגדר";
             this.Gender.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Gender.Width = 83;
+            this.Gender.Width = 54;
             // 
             // Id
             // 
             this.Id.Text = "תעודת זהות";
             this.Id.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Id.Width = 116;
-            // 
-            // FirstName
-            // 
-            this.FirstName.Text = "שם";
-            this.FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.FirstName.Width = 72;
+            this.Id.Width = 118;
             // 
             // LastName
             // 
             this.LastName.Text = "שם משפחה";
             this.LastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.LastName.Width = 114;
+            this.LastName.Width = 125;
+            // 
+            // FirstName
+            // 
+            this.FirstName.Text = "שם";
+            this.FirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.FirstName.Width = 102;
             // 
             // panel1
             // 
@@ -365,6 +378,23 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.AllowDrop = true;
+            this.button1.AutoEllipsis = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(1250, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 41);
+            this.button1.TabIndex = 45;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Patients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -382,6 +412,7 @@
             this.Name = "Patients";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Patients";
+            this.Load += new System.EventHandler(this.Patients_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -424,5 +455,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        public System.Windows.Forms.Button button1;
     }
 }

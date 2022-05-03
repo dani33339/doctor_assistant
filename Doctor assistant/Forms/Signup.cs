@@ -76,7 +76,7 @@ namespace Doctor_assistant.Forms
             NewUser.UserName = username_textbox.Text;
             NewUser.FullName = name_textbox.Text;
             NewUser.Password = password_textbox.Text;
-            NewUser.Id = id_textbox.Text;
+            NewUser.DId = id_textbox.Text;
             NewUser.Patients = new List<MongoDB.Bson.ObjectId>();
             m_Collection.InsertOne(NewUser);
 
@@ -142,6 +142,11 @@ namespace Doctor_assistant.Forms
         }
 
         private void exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
         }

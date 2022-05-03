@@ -125,28 +125,23 @@ namespace Doctor_assistant.Forms
             Patientsinfo NewPatiet = new Patientsinfo();
             NewPatiet.Age = age_textbox.Text;
             NewPatiet.City = city_textbox.Text;
-            NewPatiet.DoctorId = Convert.ToInt32(doctor.Id);
+            NewPatiet.DoctorId = Convert.ToInt32(doctor.DId);
             NewPatiet.FirstName = name_textbox.Text;
             NewPatiet.Gender = gender_combobox.Text;
             NewPatiet.HouseNumber = apartment_textbox.Text;
-            NewPatiet.Id = id_textbox.Text;
+            NewPatiet.PId = id_textbox.Text;
             NewPatiet.LastName = lastname_textbox.Text;
             NewPatiet.Street = street_textbox.Text;
             NewPatiet.Doctor = doctor;
-            NewPatiet.PhoneNumber = Convert.ToInt32(phone_textbox.Text);
+            NewPatiet.PhoneNumber = phone_textbox.Text;
 
             Pm_Collection.InsertOne(NewPatiet);
-            doctor.Patients.Add(NewPatiet.Id_unic);
-
-            
+            doctor.Patients.Add(NewPatiet.Id);
+        
             var updateDfinition = Builders<DoctorInfo>.Update.Set(a => a.Patients, doctor.Patients);
             var filter = Builders<DoctorInfo>.Filter;
-
-            var doctorfilter = filter.Eq(x => x.Id_unic, doctor.Id_unic);
-
-
+            var doctorfilter = filter.Eq(x => x.Id, doctor.Id);
             Dm_Collection.UpdateOne(doctorfilter, updateDfinition); 
-
             MessageBox.Show("Patient has been successfully saved.");
 
             foreach (TextBox tb in this.Controls.OfType<TextBox>())
@@ -194,6 +189,11 @@ namespace Doctor_assistant.Forms
         private void Addpatients_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void gender_combobox_SelectedIndexChanged(object sender, EventArgs e)
