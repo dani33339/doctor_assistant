@@ -34,7 +34,7 @@ namespace Doctor_assistant.Forms
             Dm_Collection = Dm_Database.GetCollection<DoctorInfo>("Account");
 
             doctor = obj;
-            docname_label.Text = "hello dr \n" +  doctor.FullName;
+            docname_label.Text = "שלום דוקטור \n" +  doctor.FullName;
         }
 
         
@@ -125,24 +125,24 @@ namespace Doctor_assistant.Forms
             Patientsinfo NewPatiet = new Patientsinfo();
             NewPatiet.Age = age_textbox.Text;
             NewPatiet.City = city_textbox.Text;
-            NewPatiet.DoctorId = Convert.ToInt32(doctor.Id_unic);
+            NewPatiet.DoctorId = Convert.ToInt32(doctor.Id);
             NewPatiet.FirstName = name_textbox.Text;
             NewPatiet.Gender = gender_combobox.Text;
             NewPatiet.HouseNumber = apartment_textbox.Text;
-            NewPatiet.id_unic = id_textbox.Text;
+            NewPatiet.Id = id_textbox.Text;
             NewPatiet.LastName = lastname_textbox.Text;
             NewPatiet.Street = street_textbox.Text;
             NewPatiet.Doctor = doctor;
             NewPatiet.PhoneNumber = Convert.ToInt32(phone_textbox.Text);
 
             Pm_Collection.InsertOne(NewPatiet);
-            doctor.Patients.Add(NewPatiet.Id);
+            doctor.Patients.Add(NewPatiet.Id_unic);
 
             
             var updateDfinition = Builders<DoctorInfo>.Update.Set(a => a.Patients, doctor.Patients);
             var filter = Builders<DoctorInfo>.Filter;
 
-            var doctorfilter = filter.Eq(x => x.Id, doctor.Id);
+            var doctorfilter = filter.Eq(x => x.Id_unic, doctor.Id_unic);
 
 
             Dm_Collection.UpdateOne(doctorfilter, updateDfinition); 
@@ -187,6 +187,11 @@ namespace Doctor_assistant.Forms
         }
 
         private void phone_textbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Addpatients_Load(object sender, EventArgs e)
         {
 
         }

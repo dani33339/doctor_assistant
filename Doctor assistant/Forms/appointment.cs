@@ -8,73 +8,62 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.OleDb;
-using Excel = Microsoft.Office.Interop.Excel;
+using ExcelDataReader;
+using MongoDB.Driver;
 
 
 namespace Doctor_assistant.Forms
 {
     public partial class appointment : Form
     {
-        public static appointment instance;
-        public Label tb1;
-        public appointment()
+        MongoClient Pm_Client, Dm_Client;
+        IMongoDatabase Pm_Database, Dm_Database;
+        IMongoCollection<Patientsinfo> Pm_Collection;
+        IMongoCollection<DoctorInfo> Dm_Collection;
+
+        public DoctorInfo doctor;
+        public Patientsinfo patient;
+
+        DataTableCollection dataTableCollection;
+        public appointment(DoctorInfo obj1, Patientsinfo obj2)
         {
             InitializeComponent();
-            instance = this;
-            tb1 = docname_label;
+
+            Pm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            Pm_Database = Pm_Client.GetDatabase("Patients");
+            Pm_Collection = Pm_Database.GetCollection<Patientsinfo>("Data");
+
+            Dm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            Dm_Database = Dm_Client.GetDatabase("Doctor");
+            Dm_Collection = Dm_Database.GetCollection<DoctorInfo>("Account");
+
+            doctor = obj1;
+            patient = obj2;
+            docname_label.Text = "שלום דוקטור \n" + doctor.FullName;
+            patientname_label.Text = patient.FirstName + patient.LastName;
+            pantientid_label.Text = patient.Id;
         }
 
         private void imortfile_btn_Click(object sender, EventArgs e)
         {
-            string filePath = string.Empty;
-            string fileExt = string.Empty;
-            OpenFileDialog file = new OpenFileDialog();//open dialog to choose file
-            if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK)//if there is a file choosen by the user
+            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel 97-2003 Workbook|*.xls|Excel Workbook|*.xlsx" })
             {
-                filePath = file.FileName;//get the path of the file
-                fileExt = Path.GetExtension(filePath);//get the file extension
-                if (fileExt.CompareTo(".xls") == 0 || fileExt.CompareTo(".xlsx") == 0)
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    try
+                    using (var stream = File.Open(ofd.FileName, FileMode.Open, FileAccess.Read))
                     {
-                        DataTable dtExcel = new DataTable();
-                        dtExcel = ReadExcel(filePath, fileExt);//read excel file
-
+                        using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
+                        {
+                            DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                            {
+                                ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
+                            });
+                            dataTableCollection = result.Tables;
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message.ToString());
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please choose .xls or .xlsx file only.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);//custom messageBox to show error
                 }
             }
         } 
-        public DataTable ReadExcel(string fileName, string fileExt)
-        {
-            string conn = string.Empty;
-            DataTable dtexcel = new DataTable();
-            if (fileExt.CompareTo(".xls") == 0)//compare the extension of the file
-                conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';";//for below excel 2007
-            else
-                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1';";//for above excel 2007
-            using (OleDbConnection con = new OleDbConnection(conn))
-            {
-                try
-                {
-                    OleDbDataAdapter oleAdpt = new OleDbDataAdapter("select * ", con);//here we read data from sheet1
-                    oleAdpt.Fill(dtexcel);//fill excel data into dataTable
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
-            }
-            return dtexcel;
-        }
 
         private void docname_label_Click(object sender, EventArgs e)
         {
@@ -88,6 +77,27 @@ namespace Doctor_assistant.Forms
 
         private void exit_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void appointment_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MyPatients_btn_Click(object sender, EventArgs e)
+        {
+            Patients newForm = new Patients(doctor);
+            this.Hide();
+            newForm.ShowDialog();
+            this.Close();
+        }
+
+        private void AddPatients_btn_Click(object sender, EventArgs e)
+        {
+            Addpatients newForm = new Addpatients(doctor);
+            this.Hide();
+            newForm.ShowDialog();
             this.Close();
         }
     }
