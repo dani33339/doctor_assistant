@@ -90,6 +90,11 @@ namespace Doctor_assistant.Forms
         {
             this.Close();
         }
+
+        private void pantientid_label_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

@@ -122,6 +122,7 @@ namespace Doctor_assistant.Forms
                     MessageBox.Show("You must fill all the deatails!");
                     return;
                 }
+
             Patientsinfo NewPatiet = new Patientsinfo();
             NewPatiet.Age = age_textbox.Text;
             NewPatiet.City = city_textbox.Text;

@@ -162,6 +162,7 @@
             this.pantientid_label.Size = new System.Drawing.Size(150, 33);
             this.pantientid_label.TabIndex = 32;
             this.pantientid_label.Text = "329997731";
+            this.pantientid_label.Click += new System.EventHandler(this.pantientid_label_Click);
             // 
             // name
             // 

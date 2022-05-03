@@ -34,6 +34,7 @@ namespace Doctor_assistant.Forms
                 PatientsList.Add(PatientFinder(id));
             }
 
+
             
 
             foreach (Patientsinfo Patient in PatientsList)
@@ -52,11 +53,11 @@ namespace Doctor_assistant.Forms
 
                 listView.Items.Add(item);
             }
+
+
+
+
             
-            
-
-
-
 
         }
 
@@ -100,5 +101,9 @@ namespace Doctor_assistant.Forms
             listView.Items.Add(item);
         }
 
+        private void listView_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
