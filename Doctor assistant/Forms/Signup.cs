@@ -141,7 +141,9 @@ namespace Doctor_assistant.Forms
 
         }
 
-        private void exit_Click(object sender, EventArgs e)
+        
+
+        private void exit_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }

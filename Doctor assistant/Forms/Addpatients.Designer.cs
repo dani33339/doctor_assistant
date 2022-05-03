@@ -64,6 +64,7 @@ namespace Doctor_assistant.Forms
             this.label12 = new System.Windows.Forms.Label();
             this.apartment_textbox = new System.Windows.Forms.TextBox();
             this.AddPatient = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -76,6 +77,7 @@ namespace Doctor_assistant.Forms
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.AddPatients_btn);
             this.panel1.Controls.Add(this.MyPatients_btn);
             this.panel1.Controls.Add(this.exit);
@@ -170,7 +172,7 @@ namespace Doctor_assistant.Forms
             // 
             this.docname_label.AutoSize = true;
             this.docname_label.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.docname_label.Location = new System.Drawing.Point(60, 216);
+            this.docname_label.Location = new System.Drawing.Point(60, 265);
             this.docname_label.Name = "docname_label";
             this.docname_label.Size = new System.Drawing.Size(199, 33);
             this.docname_label.TabIndex = 9;
@@ -226,7 +228,7 @@ namespace Doctor_assistant.Forms
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(53, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(53, 52);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(206, 181);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -239,17 +241,19 @@ namespace Doctor_assistant.Forms
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Enabled = false;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(990, 45);
+            this.panel2.Size = new System.Drawing.Size(990, 49);
             this.panel2.TabIndex = 1;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(818, 9);
+            this.label2.Location = new System.Drawing.Point(805, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(179, 33);
             this.label2.TabIndex = 2;
@@ -462,6 +466,22 @@ namespace Doctor_assistant.Forms
             this.AddPatient.UseVisualStyleBackColor = false;
             this.AddPatient.Click += new System.EventHandler(this.AddPatient_Click);
             // 
+            // button1
+            // 
+            this.button1.AllowDrop = true;
+            this.button1.AutoEllipsis = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(263, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 41);
+            this.button1.TabIndex = 27;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // Addpatients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -490,6 +510,7 @@ namespace Doctor_assistant.Forms
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Addpatients";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Addpatients";
             this.Load += new System.EventHandler(this.Addpatients_Load);
             this.panel1.ResumeLayout(false);
@@ -543,5 +564,6 @@ namespace Doctor_assistant.Forms
         private Bunifu.Framework.UI.BunifuThinButton2 AddPatients_btn;
         private System.Windows.Forms.Button exit;
         private System.Windows.Forms.Button AddPatient;
+        public System.Windows.Forms.Button button1;
     }
 }

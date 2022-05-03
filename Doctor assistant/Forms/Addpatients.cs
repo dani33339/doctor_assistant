@@ -197,6 +197,11 @@ namespace Doctor_assistant.Forms
 
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void gender_combobox_SelectedIndexChanged(object sender, EventArgs e)
         {
 

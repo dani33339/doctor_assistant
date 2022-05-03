@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Signup));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.exit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
             this.id_textbox = new System.Windows.Forms.TextBox();
             this.repassword_textbox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.exit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -57,20 +57,10 @@
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(425, 0);
+            this.panel1.Location = new System.Drawing.Point(420, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(224, 527);
+            this.panel1.Size = new System.Drawing.Size(229, 527);
             this.panel1.TabIndex = 9;
-            // 
-            // exit
-            // 
-            this.exit.Location = new System.Drawing.Point(136, 481);
-            this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(76, 31);
-            this.exit.TabIndex = 11;
-            this.exit.Text = "יצאה";
-            this.exit.UseVisualStyleBackColor = true;
-            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // label5
             // 
@@ -90,7 +80,7 @@
             this.label4.BackColor = System.Drawing.Color.DodgerBlue;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label4.Location = new System.Drawing.Point(-4, 61);
+            this.label4.Location = new System.Drawing.Point(1, 61);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(228, 30);
             this.label4.TabIndex = 2;
@@ -246,6 +236,23 @@
             this.label8.TabIndex = 22;
             this.label8.Text = "חזור על הסיסמא";
             // 
+            // exit
+            // 
+            this.exit.AllowDrop = true;
+            this.exit.AutoEllipsis = true;
+            this.exit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.exit.BackColor = System.Drawing.Color.DodgerBlue;
+            this.exit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.exit.Image = ((System.Drawing.Image)(resources.GetObject("exit.Image")));
+            this.exit.Location = new System.Drawing.Point(186, 0);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(43, 41);
+            this.exit.TabIndex = 26;
+            this.exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.exit.UseCompatibleTextRendering = true;
+            this.exit.UseVisualStyleBackColor = false;
+            this.exit.Click += new System.EventHandler(this.exit_Click_1);
+            // 
             // Signup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -299,6 +306,6 @@
         private System.Windows.Forms.TextBox id_textbox;
         private System.Windows.Forms.TextBox repassword_textbox;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button exit;
+        public System.Windows.Forms.Button exit;
     }
 }

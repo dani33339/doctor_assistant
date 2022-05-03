@@ -51,6 +51,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
@@ -78,7 +79,7 @@
             this.imortfile_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
             this.imortfile_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.imortfile_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.imortfile_btn.Location = new System.Drawing.Point(223, 84);
+            this.imortfile_btn.Location = new System.Drawing.Point(163, 79);
             this.imortfile_btn.Margin = new System.Windows.Forms.Padding(6);
             this.imortfile_btn.Name = "imortfile_btn";
             this.imortfile_btn.Size = new System.Drawing.Size(371, 46);
@@ -91,7 +92,7 @@
             this.pantientid_label.AutoSize = true;
             this.pantientid_label.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pantientid_label.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.pantientid_label.Location = new System.Drawing.Point(628, 113);
+            this.pantientid_label.Location = new System.Drawing.Point(617, 113);
             this.pantientid_label.Name = "pantientid_label";
             this.pantientid_label.Size = new System.Drawing.Size(150, 33);
             this.pantientid_label.TabIndex = 32;
@@ -114,15 +115,17 @@
             this.appointment_label.AutoSize = true;
             this.appointment_label.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.appointment_label.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.appointment_label.Location = new System.Drawing.Point(818, 9);
+            this.appointment_label.Location = new System.Drawing.Point(813, 9);
             this.appointment_label.Name = "appointment_label";
             this.appointment_label.Size = new System.Drawing.Size(169, 33);
             this.appointment_label.TabIndex = 2;
             this.appointment_label.Text = "צור ביקור ליונתן";
+            this.appointment_label.Click += new System.EventHandler(this.appointment_label_Click);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.appointment_label);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -162,12 +165,13 @@
             this.patientname_label.Size = new System.Drawing.Size(126, 33);
             this.patientname_label.TabIndex = 39;
             this.patientname_label.Text = "יונתן גורביץ";
+            this.patientname_label.Click += new System.EventHandler(this.patientname_label_Click);
             // 
             // medicalindices_textbox
             // 
             this.medicalindices_textbox.BackColor = System.Drawing.Color.SkyBlue;
             this.medicalindices_textbox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.medicalindices_textbox.Location = new System.Drawing.Point(70, 224);
+            this.medicalindices_textbox.Location = new System.Drawing.Point(61, 224);
             this.medicalindices_textbox.Multiline = true;
             this.medicalindices_textbox.Name = "medicalindices_textbox";
             this.medicalindices_textbox.Size = new System.Drawing.Size(900, 229);
@@ -354,6 +358,23 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.AllowDrop = true;
+            this.button1.AutoEllipsis = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(1237, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 41);
+            this.button1.TabIndex = 43;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // appointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -413,5 +434,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Button button1;
     }
 }

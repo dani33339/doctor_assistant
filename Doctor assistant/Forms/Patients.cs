@@ -139,7 +139,20 @@ namespace Doctor_assistant.Forms
                 this.Close();
 
             }
-        
 
+        private void Star_Appointment_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exit_Paint(object sender, PaintEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -16,11 +16,11 @@ namespace Doctor_assistant.Forms
 {
     public partial class appointment : Form
     {
-        MongoClient Pm_Client, Dm_Client;
-        IMongoDatabase Pm_Database, Dm_Database;
+        MongoClient Pm_Client;
+        IMongoDatabase Pm_Database;
         IMongoCollection<Patientsinfo> Pm_Collection;
-        IMongoCollection<DoctorInfo> Dm_Collection;
-
+        IMongoCollection<BloodTestsInfo> Bm_Collection;
+        
         public DoctorInfo doctor;
         public Patientsinfo patient;
 
@@ -32,16 +32,15 @@ namespace Doctor_assistant.Forms
             Pm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
             Pm_Database = Pm_Client.GetDatabase("Patients");
             Pm_Collection = Pm_Database.GetCollection<Patientsinfo>("Data");
+            Bm_Collection = Pm_Database.GetCollection<BloodTestsInfo>("BloodTests");
 
-            Dm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
-            Dm_Database = Dm_Client.GetDatabase("Doctor");
-            Dm_Collection = Dm_Database.GetCollection<DoctorInfo>("Account");
 
             doctor = obj1;
             patient = obj2;
             docname_label.Text = "שלום דוקטור \n" + doctor.FullName;
             patientname_label.Text = patient.FirstName + patient.LastName;
             pantientid_label.Text = patient.Citizenship_Id;
+            appointment_label.Text = "צור ביקור ל" + obj2.FirstName;
         }
 
         private void imortfile_btn_Click(object sender, EventArgs e)
@@ -59,6 +58,17 @@ namespace Doctor_assistant.Forms
                                 ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
                             });
                             dataTableCollection = result.Tables;
+
+                            BloodTestsInfo bloodTest = new BloodTestsInfo();
+
+                            
+                                
+
+
+
+
+
+
                         }
                     }
                 }
@@ -107,6 +117,20 @@ namespace Doctor_assistant.Forms
             this.Close();
         }
 
+        private void patientname_label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void appointment_label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 
 }
