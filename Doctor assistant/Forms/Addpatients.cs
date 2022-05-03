@@ -137,16 +137,11 @@ namespace Doctor_assistant.Forms
 
             Pm_Collection.InsertOne(NewPatiet);
             doctor.Patients.Add(NewPatiet.Id);
-
-            
+        
             var updateDfinition = Builders<DoctorInfo>.Update.Set(a => a.Patients, doctor.Patients);
             var filter = Builders<DoctorInfo>.Filter;
-
             var doctorfilter = filter.Eq(x => x.Id, doctor.Id);
-
-
             Dm_Collection.UpdateOne(doctorfilter, updateDfinition); 
-
             MessageBox.Show("Patient has been successfully saved.");
 
             foreach (TextBox tb in this.Controls.OfType<TextBox>())

@@ -20,6 +20,8 @@ namespace Doctor_assistant.Forms
         IMongoDatabase Pm_Database, Dm_Database;
         IMongoCollection<Patientsinfo> Pm_Collection;
         IMongoCollection<BloodTestsInfo> Pb_Collection;
+        IMongoCollection<DoctorInfo> Dm_Collection;
+
 
         public DoctorInfo doctor;
         public Patientsinfo patient;
@@ -44,8 +46,6 @@ namespace Doctor_assistant.Forms
 
         private void imortfile_btn_Click(object sender, EventArgs e)
         {
-            DataTableCollection dataTableCollection;
-            DataTable dt;
             using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx|Excel 97-2003 Workbook|*.xls" })
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
@@ -58,18 +58,68 @@ namespace Doctor_assistant.Forms
                             {
                                 ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
                             });
-                            dataTableCollection = result.Tables;
-
-                            dt = dataTableCollection["גיליון1"];
-                            var columnNames = (from c in dt.Columns.Cast<DataColumn>()
-                                               select c.ColumnName).ToArray();
-                            string columnName = columnNames[1];
-                            var data = dt.DefaultView.ToTable(false, columnName);
+                            dataGridView.DataSource = result.Tables["גיליון1"];
+                            BloodTestsInfo NewBloodTestsInfo = new BloodTestsInfo();
+                            NewBloodTestsInfo.WBC = Convert.ToDouble(dataGridView.Columns[1].Name);
+                            NewBloodTestsInfo.Neut = Convert.ToDouble(dataGridView.Rows[0].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.Lymph = Convert.ToDouble(dataGridView.Rows[1].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.RBC = Convert.ToDouble(dataGridView.Rows[2].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.HCT = Convert.ToDouble(dataGridView.Rows[3].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.UREA = Convert.ToDouble(dataGridView.Rows[4].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.Hb = Convert.ToDouble(dataGridView.Rows[5].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.Crtn = Convert.ToDouble(dataGridView.Rows[6].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.iron = Convert.ToDouble(dataGridView.Rows[7].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.HDL = Convert.ToDouble(dataGridView.Rows[8].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.AP = Convert.ToDouble(dataGridView.Rows[9].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.Patient = patient;
+                            Pb_Collection.InsertOne(NewBloodTestsInfo);
+                            doctor.Patients.Add(NewBloodTestsInfo.Id);
+                            var updateDfinition = Builders<DoctorInfo>.Update.Set(a => a.Patients, doctor.Patients);
+                            var filter = Builders<DoctorInfo>.Filter;
+                            var doctorfilter = filter.Eq(x => x.Id, doctor.Id);
+                            MessageBox.Show("BloodTest has been successfully saved.");
                         }
                     }
                 }
             }
-        } 
+        }
+
+        //private void cboSheet_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    //Select sheet
+        //    dataGridView.DataSource = result.Tables["גיליון1"];
+        //}
+        //    DataTableCollection dataTableCollection;
+        //    DataTable dt;
+        //    using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "Excel Workbook|*.xlsx|Excel 97-2003 Workbook|*.xls" })
+        //    {
+        //        if (ofd.ShowDialog() == DialogResult.OK)
+        //        {
+        //            using (var stream = File.Open(ofd.FileName, FileMode.Open, FileAccess.Read))
+        //            {
+        //                using (IExcelDataReader reader = ExcelReaderFactory.CreateReader(stream))
+        //                {
+        //                    DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
+        //                    {
+        //                        ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
+        //                    });
+        //                    dataTableCollection = result.Tables;
+
+        //                    dt = dataTableCollection["גיליון1"];
+        //                    var columnNames = (from c in dt.Columns.Cast<DataColumn>()
+        //                                       select c.ColumnName).ToArray();
+
+        //                    string columnName = columnNames[1];
+
+
+        //                    var data = dt.DefaultView.ToTable(false, columnName);
+        //                    var b = data.Rows;
+
+        //                }
+        //            }
+        //        }
+        //    }
+        //} 
 
         private void docname_label_Click(object sender, EventArgs e)
         {
@@ -87,6 +137,11 @@ namespace Doctor_assistant.Forms
         }
 
         private void appointment_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
