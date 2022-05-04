@@ -125,7 +125,7 @@ namespace Doctor_assistant.Forms
             Patientsinfo NewPatiet = new Patientsinfo();
             NewPatiet.Age = age_textbox.Text;
             NewPatiet.City = city_textbox.Text;
-            NewPatiet.DoctorId = Convert.ToInt32(doctor.DId);
+            NewPatiet.DoctorId = doctor.DId;
             NewPatiet.FirstName = name_textbox.Text;
             NewPatiet.Gender = gender_combobox.Text;
             NewPatiet.HouseNumber = apartment_textbox.Text;

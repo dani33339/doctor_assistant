@@ -30,27 +30,28 @@ namespace Doctor_assistant.Forms
             docname_label.Text = "שלום דוקטור \n" + doctor.FullName;
             List<Patientsinfo> PatientsList = new List<Patientsinfo>();
 
+
             foreach (MongoDB.Bson.ObjectId Id in doctor.Patients)
             {
-                PatientsList.Add(PatientFinder(Id));
+                if (PatientFinder(Id)!=null)
+                    PatientsList.Add(PatientFinder(Id));
             }
-            if (Pm_Collection.EstimatedDocumentCount() > 0)
+
+            foreach (Patientsinfo Patient in PatientsList)
             {
-                foreach (Patientsinfo Patient in PatientsList)
-                {
-                    ListViewItem item = new ListViewItem();
-                    item.SubItems.Add(Patient.HouseNumber);
-                    item.SubItems.Add(Patient.Street);
-                    item.SubItems.Add(Patient.City);
-                    item.SubItems.Add(Convert.ToString(Patient.PhoneNumber));
-                    item.SubItems.Add(Patient.Age);
-                    item.SubItems.Add(Patient.Gender);
-                    item.SubItems.Add(Patient.PId);
-                    item.SubItems.Add(Patient.LastName);
-                    item.SubItems.Add(Patient.FirstName);
-                    listView.Items.Add(item);
-                }
+                ListViewItem item = new ListViewItem();
+                item.SubItems.Add(Patient.HouseNumber);
+                item.SubItems.Add(Patient.Street);
+                item.SubItems.Add(Patient.City);
+                item.SubItems.Add(Patient.PhoneNumber);
+                item.SubItems.Add(Patient.Age);
+                item.SubItems.Add(Patient.Gender);
+                item.SubItems.Add(Patient.PId);
+                item.SubItems.Add(Patient.LastName);
+                item.SubItems.Add(Patient.FirstName);
+                listView.Items.Add(item);
             }
+
         }
 
         public void myList_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -74,7 +75,6 @@ namespace Doctor_assistant.Forms
             var filter = Builders<Patientsinfo>.Filter;
             var idfilter = filter.Eq(x => x.Id, Id);
             var Patient = Pm_Collection.Find<Patientsinfo>(idfilter).FirstOrDefault();
-
             return Patient;
         }
 

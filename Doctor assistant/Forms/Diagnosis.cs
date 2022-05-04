@@ -13,10 +13,12 @@ namespace Doctor_assistant.Forms
     public partial class Diagnosis : Form
     {
         public DoctorInfo doctor;
-        public Diagnosis(DoctorInfo obj)
+        public BloodTestsInfo bloodtest;
+
+        public Diagnosis(DoctorInfo obj1, BloodTestsInfo obj2)
         {
             InitializeComponent();
-            doctor = obj;
+            doctor = obj1;
             docname_label.Text = "hello dr \n" + doctor.FullName;
         }
 
@@ -37,6 +39,22 @@ namespace Doctor_assistant.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void MyPatients_btn_Click(object sender, EventArgs e)
+        {
+            Patients newForm = new Patients(doctor);
+            this.Hide();
+            newForm.ShowDialog();
+            this.Close();
+        }
+
+        private void AddPatients_btn_Click(object sender, EventArgs e)
+        {
+            Addpatients newForm = new Addpatients(doctor);
+            this.Hide();
+            newForm.ShowDialog();
             this.Close();
         }
     }

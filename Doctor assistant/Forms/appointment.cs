@@ -16,17 +16,15 @@ namespace Doctor_assistant.Forms
 {
     public partial class appointment : Form
     {
-        MongoClient Pm_Client, Dm_Client;
-        IMongoDatabase Pm_Database, Dm_Database;
+        MongoClient Pm_Client, Bm_Client;
+        IMongoDatabase Pm_Database,Bm_Database;
         IMongoCollection<Patientsinfo> Pm_Collection;
-        IMongoCollection<BloodTestsInfo> Pb_Collection;
-        IMongoCollection<DoctorInfo> Dm_Collection;
+        IMongoCollection<BloodTestsInfo> Bm_Collection;
 
 
         public DoctorInfo doctor;
         public Patientsinfo patient;
 
-        DataTableCollection dataTableCollection;
         public appointment(DoctorInfo obj1, Patientsinfo obj2)
         {
             InitializeComponent();
@@ -35,7 +33,10 @@ namespace Doctor_assistant.Forms
             Pm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
             Pm_Database = Pm_Client.GetDatabase("Patients");
             Pm_Collection = Pm_Database.GetCollection<Patientsinfo>("Data");
-            Pb_Collection = Pm_Database.GetCollection<BloodTestsInfo>("BloodTests");
+
+            Bm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+            Bm_Database = Bm_Client.GetDatabase("BloodTests");
+            Bm_Collection = Bm_Database.GetCollection<BloodTestsInfo>("Data");
 
 
             doctor = obj1;
@@ -73,12 +74,15 @@ namespace Doctor_assistant.Forms
                             NewBloodTestsInfo.iron = Convert.ToDouble(dataGridView.Rows[7].Cells[1].Value.ToString());
                             NewBloodTestsInfo.HDL = Convert.ToDouble(dataGridView.Rows[8].Cells[1].Value.ToString());
                             NewBloodTestsInfo.AP = Convert.ToDouble(dataGridView.Rows[9].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.PatientId = patient.PId;
                             NewBloodTestsInfo.Patient = patient;
-                            Pb_Collection.InsertOne(NewBloodTestsInfo);
-                            doctor.Patients.Add(NewBloodTestsInfo.Id);
-                            var updateDfinition = Builders<DoctorInfo>.Update.Set(a => a.Patients, doctor.Patients);
-                            var filter = Builders<DoctorInfo>.Filter;
-                            var doctorfilter = filter.Eq(x => x.Id, doctor.Id);
+                            Bm_Collection.InsertOne(NewBloodTestsInfo);
+                            patient.BloodTests.Add(NewBloodTestsInfo.Id);
+
+                            var updateDfinition = Builders<Patientsinfo>.Update.Set(a => a.BloodTests, patient.BloodTests);
+                            var filter = Builders<Patientsinfo>.Filter;
+                            var patientfilter = filter.Eq(x => x.Id, patient.Id);
+                            Pm_Collection.UpdateOne(patientfilter, updateDfinition);
                             MessageBox.Show("BloodTest has been successfully saved.");
                         }
                     }
@@ -116,6 +120,40 @@ namespace Doctor_assistant.Forms
             this.Close();
         }
 
+        private void diagnosis_btn_Click(object sender, EventArgs e)
+        {
+            int numberofDiseases = 26;
+            int[] diagnosis = new int[numberofDiseases];
+            Array.Clear(diagnosis, 0, diagnosis.Length);//set 0 to all values
+            Dictionary<string, double> My_dict2 =new Dictionary<string, double>(){
+             {"anemia", 0},{"diet", 0},{"bleeding", 0},{"bleeding", 0},{"bleeding", 0},{"bleeding", 0},{"bleeding", 0},
+            {"Hyperlipidemia", 0},{"Blood cell disorder", 0},{"Hematological disorder", 0},{"Iron poisoning", 0},
+            {"Dehydration", 0},{"Infection", 0},{"Vitamin deficiency", 0},{"Viral disease", 0},{"Diseases of the biliary tract", 0},{"bleeding", 0},
+            {"Heart disease", 0},
+            {"Blood disease", 0},{"Liver disease", 0},{"Kidney disease", 0},{"Iron deficiency", 0},{"Muscle diseases", 0},
+            {"Smokers", 0},{"Lung disease", 0},{"Overactive thyroid gland", 0},{"Adult Diabetes", 0},{"cancer", 0},
+            {"Increased consumption of meat", 0},{"Use of various medications", 0},{"Malnutrition", 0}};
+
+            String diagnosis="";
+            if ((Convert.ToDouble(dataGridView.Columns[1].Name) > 11000 && Int32.Parse(patient.Age) >= 18) ||
+                (Convert.ToDouble(dataGridView.Columns[1].Name) > 15500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
+                (Convert.ToDouble(dataGridView.Columns[1].Name) > 17500 && Int32.Parse(patient.Age) < 3))
+                diagnosis = diagnosis + ", Infection";
+
+            if ((Convert.ToDouble(dataGridView.Columns[1].Name) < 4500 && Int32.Parse(patient.Age) >= 18) ||
+                (Convert.ToDouble(dataGridView.Columns[1].Name) < 5500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
+                (Convert.ToDouble(dataGridView.Columns[1].Name) < 6000 && Int32.Parse(patient.Age) < 3))
+                diagnosis = diagnosis + "Viral disease";
+
+
+
+            //Diagnosis newForm = new Diagnosis(doctor);
+            //this.Hide();
+            //newForm.ShowDialog();
+            //this.Close();
+        }
+
+        public String  ()
         private void MyPatients_btn_Click(object sender, EventArgs e)
         {
             Patients newForm = new Patients(doctor);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace Doctor_assistant
 {
@@ -23,6 +24,7 @@ namespace Doctor_assistant
 
 
         //Navigation Properties
+        public String PatientId { get; set; }
         public Patientsinfo Patient { get; set; }
     }
 }
