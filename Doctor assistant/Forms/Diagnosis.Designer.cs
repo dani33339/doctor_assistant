@@ -34,7 +34,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.question_label = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.back_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.AddPatients_btn = new Bunifu.Framework.UI.BunifuThinButton2();
@@ -96,13 +95,14 @@
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseCompatibleTextRendering = true;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // question_label
             // 
             this.question_label.AutoSize = true;
             this.question_label.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.question_label.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.question_label.Location = new System.Drawing.Point(403, 114);
+            this.question_label.Location = new System.Drawing.Point(384, 113);
             this.question_label.Name = "question_label";
             this.question_label.Size = new System.Drawing.Size(192, 33);
             this.question_label.TabIndex = 29;
@@ -119,32 +119,6 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // back_btn
-            // 
-            this.back_btn.ActiveBorderThickness = 1;
-            this.back_btn.ActiveCornerRadius = 20;
-            this.back_btn.ActiveFillColor = System.Drawing.Color.SlateGray;
-            this.back_btn.ActiveForecolor = System.Drawing.SystemColors.Window;
-            this.back_btn.ActiveLineColor = System.Drawing.Color.DarkSlateGray;
-            this.back_btn.BackColor = System.Drawing.SystemColors.Control;
-            this.back_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("back_btn.BackgroundImage")));
-            this.back_btn.ButtonText = "חזור אחורה";
-            this.back_btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.back_btn.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.back_btn.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.back_btn.IdleBorderThickness = 1;
-            this.back_btn.IdleCornerRadius = 20;
-            this.back_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
-            this.back_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
-            this.back_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.back_btn.Location = new System.Drawing.Point(786, 561);
-            this.back_btn.Margin = new System.Windows.Forms.Padding(6);
-            this.back_btn.Name = "back_btn";
-            this.back_btn.Size = new System.Drawing.Size(150, 59);
-            this.back_btn.TabIndex = 47;
-            this.back_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.back_btn.Click += new System.EventHandler(this.search_btn_Click);
-            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
@@ -154,6 +128,7 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 48;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
             // panel1
             // 
@@ -319,7 +294,6 @@
             this.ClientSize = new System.Drawing.Size(1280, 836);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.back_btn);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.question_label);
             this.Controls.Add(this.panel2);
@@ -350,7 +324,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label question_label;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private Bunifu.Framework.UI.BunifuThinButton2 back_btn;
         private System.Windows.Forms.PictureBox pictureBox3;
         public System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
