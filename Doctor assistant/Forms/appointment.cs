@@ -152,36 +152,114 @@ namespace Doctor_assistant.Forms
 
         private void diagnosis_btn_Click(object sender, EventArgs e)
         {
-            //Array.Clear(diagnosis, 0, diagnosis.Length);//set 0 to all values
-            //Dictionary<string, string> dic = new Dictionary<string, string>(){
-            //{"Hyperlipidemia", "Two 10 mg pills of B12 on a monthly basis"},{"Blood cell disorder", 0},{"Hematological disorder", 0},{"Iron poisoning", 0},
-            //{"Dehydration", 0},{"Infection", 0},{"Vitamin deficiency", 0},{"Viral disease", 0},{"Diseases of the biliary tract", 0},{"bleeding", 0},
-            //{"Heart disease", 0},
-            //{"Blood disease", 0},{"Liver disease", 0},{"Kidney disease", 0},{"Iron deficiency", 0},{"Muscle diseases", 0},
-            //{"Smokers", 0},{"Lung disease", 0},{"Overactive thyroid gland", 0},{"Adult Diabetes", 0},{"cancer", 0},
-            //{"Increased consumption of meat", 0},{"Use of various medications", 0},{"Malnutrition", 0}};
+            int numberofDiseases = 26;
+                    
+            Dictionary<string, string> Recomendation =new Dictionary<string, string>(){
+            {"anemia","Two 10 mg B12 pills a day for a month"},
+            {"diet","Schedule an appointment with Nutrition"},
+            {"bleeding","To be rushed to the hospital urgently"},
+            {"Hyperlipidemia", "Schedule an appointment with a nutritionist, a 5 mg pill of Simobil daily for a week"},              
+            {"Disruption of blood / blood cell formation", "10 mg pill of B12 a day for a month, 5 mg pill of folic acid a day for a month "},
+            {"Hematological disorder", "An injection of a hormone to encourage red blood cell production"},
+            {"Iron poisoning", "To be evacuated to the hospital"},
+            {"Dehydration", "Complete rest while lying down, returning fluids to drinking"},
+            {"Infection", "Dedicated antibiotics"},
+            {"Vitamin deficiency", "Referral for a blood test to identify the missing vitamins"},
+            {"Viral disease", "Rest at home"},
+            {"Diseases of the biliary tract", "Referral to surgical treatment"},
+            {"Heart disease", "Schedule an appointment with a nutritionist"},
+            {"Blood disease", "A combination of cyclophosphamide and corticosteroids"},
+            {"Liver disease", "Referral to a specific diagnosis for the purpose of determining treatment"},
+            {"Kidney disease", "Balance blood sugar levels"},
+            {"Iron deficiency", "Two 10 mg B12 pills a day for a month"},
+            {"Muscle diseases", "Two 5 mg pills of Altman c3 turmeric a day for a month"},
+            {"Smokers", "to stop smoking"},
+            {"Lung disease", "Stop smoking / Refer to an X-ray of the lungs"},
+            {"Overactive thyroid gland", "Propylthiouracil to reduce thyroid activity"},
+            {"Adult Diabetes", "Insulin adjustment for the patient"},
+            {"cancer", "Antarctinib - Entrectinib"},
+            {"Increased consumption of meat", "Schedule an appointment with a nutritionist"},
+            {"Use of various medications","Referral to a family doctor for a match between medications"},
+            {"Malnutrition", "Schedule an appointment with Nutrition"}
+            };
 
-            //String diagnosis = "";
-            //String treatment = "";
-            //if ((Convert.ToDouble(dataGridView.Columns[1].Name) > 11000 && Int32.Parse(patient.Age) >= 18) ||
-            //    (Convert.ToDouble(dataGridView.Columns[1].Name) > 15500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
-            //    (Convert.ToDouble(dataGridView.Columns[1].Name) > 17500 && Int32.Parse(patient.Age) < 3))
-            //    diagnosis = diagnosis + ", "+ "Hyperlipidemia";
-            //    treatment = treatment + ", " + dic["Hyperlipidemia"];
+            String diagnosis = "";
+            String OutRecomendation = "";
+            if ((Convert.ToDouble(dataGridView.Columns[1].Name) > 11000 && Int32.Parse(patient.Age) >= 18) ||
+                (Convert.ToDouble(dataGridView.Columns[1].Name) > 15500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
+                (Convert.ToDouble(dataGridView.Columns[1].Name) > 17500 && Int32.Parse(patient.Age) < 3))
+            {
+                diagnosis = diagnosis + "Infection";
+                OutRecomendation = OutRecomendation + Recomendation["Infection"];
+            }
 
-            //if ((Convert.ToDouble(dataGridView.Columns[1].Name) < 4500 && Int32.Parse(patient.Age) >= 18) ||
-            //    (Convert.ToDouble(dataGridView.Columns[1].Name) < 5500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
-            //    (Convert.ToDouble(dataGridView.Columns[1].Name) < 6000 && Int32.Parse(patient.Age) < 3))
-            //    diagnosis = diagnosis + "Viral disease";
+            if ((Convert.ToDouble(dataGridView.Columns[1].Name) < 4500 && Int32.Parse(patient.Age) >= 18) ||
+                (Convert.ToDouble(dataGridView.Columns[1].Name) < 5500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
+                (Convert.ToDouble(dataGridView.Columns[1].Name) < 6000 && Int32.Parse(patient.Age) < 3))
+            {
+                diagnosis = diagnosis + "Viral disease";
+                OutRecomendation = OutRecomendation + Recomendation["Viral disease"];
+            }
+
+            if (Convert.ToDouble(dataGridView.Columns[2].Name) > 54)
+            {
+                if (!diagnosis.Contains("Infection"))
+                {
+                    diagnosis = diagnosis + "Infection";
+                    OutRecomendation = OutRecomendation + Recomendation["Infection"];
+                }
+            }
+
+            if (Convert.ToDouble(dataGridView.Columns[2].Name) < 28)
+            {             
+                    diagnosis = diagnosis + "Disruption of blood / blood cell formation";
+                    OutRecomendation = OutRecomendation + Recomendation["Disruption of blood / blood cell formation"];               
+            }
+
+            if (Convert.ToDouble(dataGridView.Columns[3].Name) > 52)
+            {
+                if (!diagnosis.Contains("Infection"))
+                { 
+                    diagnosis = diagnosis + "Infection" ;
+                    OutRecomendation = OutRecomendation + Recomendation["Infection"] + "or" + " ";
+                }
+                if (!diagnosis.Contains("cancer"))
+                {
+                    diagnosis = diagnosis + "cancer";
+                    OutRecomendation = OutRecomendation +  Recomendation["cancer"];
+                }
+            }
+
+            if (Convert.ToDouble(dataGridView.Columns[3].Name) < 36)
+            {
+                if (!diagnosis.Contains("Disruption of blood / blood cell formation"))
+                {
+                    diagnosis = diagnosis + "Disruption of blood / blood cell formation";
+                    OutRecomendation = OutRecomendation + Recomendation["Disruption of blood / blood cell formation"];
+                }
+            }
+
+            if (Convert.ToDouble(dataGridView.Columns[4].Name) > 6)
+            {
+
+            }
 
 
 
-            //Diagnosis newForm = new Diagnosis(doctor);
-            //this.Hide();
-            //newForm.ShowDialog();
-            //this.Close();
-        }
 
+
+
+
+
+
+
+                //Diagnosis newForm = new Diagnosis(doctor);
+                //this.Hide();
+                //newForm.ShowDialog();
+                //this.Close();
+            }
+
+        
         private void MyPatients_btn_Click(object sender, EventArgs e)
         {
             Patients newForm = new Patients(doctor);
