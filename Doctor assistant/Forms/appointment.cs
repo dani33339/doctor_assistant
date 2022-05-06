@@ -38,12 +38,42 @@ namespace Doctor_assistant.Forms
             Bm_Database = Bm_Client.GetDatabase("BloodTests");
             Bm_Collection = Bm_Database.GetCollection<BloodTestsInfo>("Data");
 
-
             doctor = obj1;
             patient = obj2;
             docname_label.Text = "שלום דוקטור \n" + doctor.FullName;
             patientname_label.Text = patient.FirstName +" "+ patient.LastName;
             pantientid_label.Text = patient.PId;
+
+            //if patient have bloodtest in the db
+            MongoDB.Bson.ObjectId mostrecent = patient.BloodTests.Last();
+            if (mostrecent != null)
+            {
+                var bloodtest = BloodTestsInfoFinder(mostrecent);
+                dataGridView.Visible = true;
+                DataGridViewRow row = new DataGridViewRow();
+                DataGridViewColumn column = new DataGridViewColumn();
+
+                dataGridView.Columns.Add(column);
+                dataGridView.Rows.Add(row);
+                dataGridView.Rows.Insert(1000);
+
+            }
+
+
+
+
+
+
+
+        }
+
+
+        public BloodTestsInfo BloodTestsInfoFinder(MongoDB.Bson.ObjectId Id)
+        {
+            var filter = Builders<BloodTestsInfo>.Filter;
+            var idfilter = filter.Eq(x => x.Id, Id);
+            var bloodtest = Bm_Collection.Find<BloodTestsInfo>(idfilter).FirstOrDefault();
+            return bloodtest;
         }
 
         private void imortfile_btn_Click(object sender, EventArgs e)
@@ -122,28 +152,27 @@ namespace Doctor_assistant.Forms
 
         private void diagnosis_btn_Click(object sender, EventArgs e)
         {
-            int numberofDiseases = 26;
-            int[] diagnosis = new int[numberofDiseases];
-            Array.Clear(diagnosis, 0, diagnosis.Length);//set 0 to all values
-            Dictionary<string, double> My_dict2 =new Dictionary<string, double>(){
-             {"anemia", 0},{"diet", 0},{"bleeding", 0},{"bleeding", 0},{"bleeding", 0},{"bleeding", 0},{"bleeding", 0},
-            {"Hyperlipidemia", 0},{"Blood cell disorder", 0},{"Hematological disorder", 0},{"Iron poisoning", 0},
-            {"Dehydration", 0},{"Infection", 0},{"Vitamin deficiency", 0},{"Viral disease", 0},{"Diseases of the biliary tract", 0},{"bleeding", 0},
-            {"Heart disease", 0},
-            {"Blood disease", 0},{"Liver disease", 0},{"Kidney disease", 0},{"Iron deficiency", 0},{"Muscle diseases", 0},
-            {"Smokers", 0},{"Lung disease", 0},{"Overactive thyroid gland", 0},{"Adult Diabetes", 0},{"cancer", 0},
-            {"Increased consumption of meat", 0},{"Use of various medications", 0},{"Malnutrition", 0}};
+            //Array.Clear(diagnosis, 0, diagnosis.Length);//set 0 to all values
+            //Dictionary<string, string> dic = new Dictionary<string, string>(){
+            //{"Hyperlipidemia", "Two 10 mg pills of B12 on a monthly basis"},{"Blood cell disorder", 0},{"Hematological disorder", 0},{"Iron poisoning", 0},
+            //{"Dehydration", 0},{"Infection", 0},{"Vitamin deficiency", 0},{"Viral disease", 0},{"Diseases of the biliary tract", 0},{"bleeding", 0},
+            //{"Heart disease", 0},
+            //{"Blood disease", 0},{"Liver disease", 0},{"Kidney disease", 0},{"Iron deficiency", 0},{"Muscle diseases", 0},
+            //{"Smokers", 0},{"Lung disease", 0},{"Overactive thyroid gland", 0},{"Adult Diabetes", 0},{"cancer", 0},
+            //{"Increased consumption of meat", 0},{"Use of various medications", 0},{"Malnutrition", 0}};
 
-            String diagnosis="";
-            if ((Convert.ToDouble(dataGridView.Columns[1].Name) > 11000 && Int32.Parse(patient.Age) >= 18) ||
-                (Convert.ToDouble(dataGridView.Columns[1].Name) > 15500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
-                (Convert.ToDouble(dataGridView.Columns[1].Name) > 17500 && Int32.Parse(patient.Age) < 3))
-                diagnosis = diagnosis + ", Infection";
+            //String diagnosis = "";
+            //String treatment = "";
+            //if ((Convert.ToDouble(dataGridView.Columns[1].Name) > 11000 && Int32.Parse(patient.Age) >= 18) ||
+            //    (Convert.ToDouble(dataGridView.Columns[1].Name) > 15500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
+            //    (Convert.ToDouble(dataGridView.Columns[1].Name) > 17500 && Int32.Parse(patient.Age) < 3))
+            //    diagnosis = diagnosis + ", "+ "Hyperlipidemia";
+            //    treatment = treatment + ", " + dic["Hyperlipidemia"];
 
-            if ((Convert.ToDouble(dataGridView.Columns[1].Name) < 4500 && Int32.Parse(patient.Age) >= 18) ||
-                (Convert.ToDouble(dataGridView.Columns[1].Name) < 5500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
-                (Convert.ToDouble(dataGridView.Columns[1].Name) < 6000 && Int32.Parse(patient.Age) < 3))
-                diagnosis = diagnosis + "Viral disease";
+            //if ((Convert.ToDouble(dataGridView.Columns[1].Name) < 4500 && Int32.Parse(patient.Age) >= 18) ||
+            //    (Convert.ToDouble(dataGridView.Columns[1].Name) < 5500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
+            //    (Convert.ToDouble(dataGridView.Columns[1].Name) < 6000 && Int32.Parse(patient.Age) < 3))
+            //    diagnosis = diagnosis + "Viral disease";
 
 
 
@@ -153,7 +182,6 @@ namespace Doctor_assistant.Forms
             //this.Close();
         }
 
-        public String  ()
         private void MyPatients_btn_Click(object sender, EventArgs e)
         {
             Patients newForm = new Patients(doctor);

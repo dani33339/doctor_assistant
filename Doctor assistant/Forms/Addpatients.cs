@@ -134,6 +134,8 @@ namespace Doctor_assistant.Forms
             NewPatiet.Street = street_textbox.Text;
             NewPatiet.Doctor = doctor;
             NewPatiet.PhoneNumber = phone_textbox.Text;
+            NewPatiet.BloodTests = new List<MongoDB.Bson.ObjectId>();
+
 
             Pm_Collection.InsertOne(NewPatiet);
             doctor.Patients.Add(NewPatiet.Id);
