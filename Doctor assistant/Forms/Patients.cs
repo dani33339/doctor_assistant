@@ -40,11 +40,11 @@ namespace Doctor_assistant.Forms
             foreach (Patientsinfo Patient in PatientsList)
             {
                 ListViewItem item = new ListViewItem();
-                item.SubItems.Add(Patient.HouseNumber);
+                item.SubItems.Add(Patient.HouseNumber.ToString());
                 item.SubItems.Add(Patient.Street);
                 item.SubItems.Add(Patient.City);
                 item.SubItems.Add(Patient.PhoneNumber);
-                item.SubItems.Add(Patient.Age);
+                item.SubItems.Add(Patient.Age.ToString());
                 item.SubItems.Add(Patient.Gender);
                 item.SubItems.Add(Patient.PId);
                 item.SubItems.Add(Patient.LastName);

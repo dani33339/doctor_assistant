@@ -18,8 +18,8 @@ namespace Doctor_assistant
         public String PId { get; set; }
         public String City { get; set; }
         public String Street { get; set; }
-        public String HouseNumber { get; set; }
-        public String Age { get; set; }
+        public int HouseNumber { get; set; }
+        public int Age { get; set; }
 
        
         //Navigation Properties

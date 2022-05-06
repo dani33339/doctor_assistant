@@ -27,8 +27,11 @@ namespace Doctor_assistant.Forms
 
         public appointment(DoctorInfo obj1, Patientsinfo obj2)
         {
+            doctor = obj1;
+            patient = obj2;
+
             InitializeComponent();
-            dataGridView.Visible = false;
+
 
             Pm_Client = new MongoClient("mongodb+srv://antonvo:0nCdIz2V538QvyD1@cluster0.frcvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
             Pm_Database = Pm_Client.GetDatabase("Patients");
@@ -38,32 +41,47 @@ namespace Doctor_assistant.Forms
             Bm_Database = Bm_Client.GetDatabase("BloodTests");
             Bm_Collection = Bm_Database.GetCollection<BloodTestsInfo>("Data");
 
-            doctor = obj1;
-            patient = obj2;
             docname_label.Text = "שלום דוקטור \n" + doctor.FullName;
-            patientname_label.Text = patient.FirstName +" "+ patient.LastName;
+            patientname_label.Text = patient.FirstName + " " + patient.LastName;
             pantientid_label.Text = patient.PId;
+            dataGridView.Visible = false;
+            testexists_label.Visible = false;
+            appointment_label.Text = "צור ביקור ל" + patient.FirstName;
 
             //if patient have bloodtest in the db
+            if (patient.BloodTests.Count() > 0)
+                FilldataGridView();
+
+        }
+
+        /*import last test from the db*/
+        public void FilldataGridView()
+        {
+
+            imortfile_btn.ButtonText = "ייבא קובץ בדיקות דם חדשות";
+            dataGridView.Visible = true;
+            testexists_label.Visible = true;
             MongoDB.Bson.ObjectId mostrecent = patient.BloodTests.Last();
-            if (mostrecent != null)
-            {
-                var bloodtest = BloodTestsInfoFinder(mostrecent);
-                dataGridView.Visible = true;
-                DataGridViewRow row = new DataGridViewRow();
-                DataGridViewColumn column = new DataGridViewColumn();
+            var bloodtest = BloodTestsInfoFinder(mostrecent);
+            dataGridView.Columns.Add("WBC", "WBC");
+            dataGridView.Columns.Add("Neut", "Neut");
+            dataGridView.Columns.Add("Lymph", "Lymph");
+            dataGridView.Columns.Add("HCT", "HCT");
+            dataGridView.Columns.Add("Urea", "Urea");
+            dataGridView.Columns.Add("Hb", "Hb");
+            dataGridView.Columns.Add("Crtn", "Crtn");
+            dataGridView.Columns.Add("HDL", "HDL");
+            dataGridView.Columns.Add("AP", "AP");
 
-                dataGridView.Columns.Add(column);
-                dataGridView.Rows.Add(row);
-                dataGridView.Rows.Insert(1000);
-
-            }
-
-
-
-
-
-
+            dataGridView[0, 0].Value = bloodtest.WBC;
+            dataGridView[1, 0].Value = bloodtest.Neut;
+            dataGridView[2, 0].Value = bloodtest.Lymph;
+            dataGridView[3, 0].Value = bloodtest.HCT;
+            dataGridView[4, 0].Value = bloodtest.UREA;
+            dataGridView[5, 0].Value = bloodtest.Hb;
+            dataGridView[6, 0].Value = bloodtest.Crtn;
+            dataGridView[7, 0].Value = bloodtest.HDL;
+            dataGridView[8, 0].Value = bloodtest.AP;
 
         }
 
@@ -90,20 +108,28 @@ namespace Doctor_assistant.Forms
                             {
                                 ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
                             });
+
+                            //clear dataGridView from old test
+                            dataGridView.DataSource = null;
+                            dataGridView.Rows.Clear();
+                            dataGridView.Columns.Clear();
+
+                            //import the new data to the dataGridView
                             dataGridView.DataSource = result.Tables["גיליון1"];
                             dataGridView.Visible = true;
+                            testexists_label.Visible = true;
                             BloodTestsInfo NewBloodTestsInfo = new BloodTestsInfo();
-                            NewBloodTestsInfo.WBC = Convert.ToDouble(dataGridView.Columns[1].Name);
-                            NewBloodTestsInfo.Neut = Convert.ToDouble(dataGridView.Rows[0].Cells[1].Value.ToString());
-                            NewBloodTestsInfo.Lymph = Convert.ToDouble(dataGridView.Rows[1].Cells[1].Value.ToString());
-                            NewBloodTestsInfo.RBC = Convert.ToDouble(dataGridView.Rows[2].Cells[1].Value.ToString());
-                            NewBloodTestsInfo.HCT = Convert.ToDouble(dataGridView.Rows[3].Cells[1].Value.ToString());
-                            NewBloodTestsInfo.UREA = Convert.ToDouble(dataGridView.Rows[4].Cells[1].Value.ToString());
-                            NewBloodTestsInfo.Hb = Convert.ToDouble(dataGridView.Rows[5].Cells[1].Value.ToString());
-                            NewBloodTestsInfo.Crtn = Convert.ToDouble(dataGridView.Rows[6].Cells[1].Value.ToString());
-                            NewBloodTestsInfo.iron = Convert.ToDouble(dataGridView.Rows[7].Cells[1].Value.ToString());
-                            NewBloodTestsInfo.HDL = Convert.ToDouble(dataGridView.Rows[8].Cells[1].Value.ToString());
-                            NewBloodTestsInfo.AP = Convert.ToDouble(dataGridView.Rows[9].Cells[1].Value.ToString());
+                            NewBloodTestsInfo.WBC = Convert.ToDouble(dataGridView[0,0].Value);
+                            NewBloodTestsInfo.Neut = Convert.ToDouble(dataGridView[1, 0].Value);
+                            NewBloodTestsInfo.Lymph = Convert.ToDouble(dataGridView[2, 0].Value);
+                            NewBloodTestsInfo.RBC = Convert.ToDouble(dataGridView[3, 0].Value);
+                            NewBloodTestsInfo.HCT = Convert.ToDouble(dataGridView[4, 0].Value);
+                            NewBloodTestsInfo.UREA = Convert.ToDouble(dataGridView[5, 0].Value);
+                            NewBloodTestsInfo.Hb = Convert.ToDouble(dataGridView[6, 0].Value);
+                            NewBloodTestsInfo.Crtn = Convert.ToDouble(dataGridView[7, 0].Value);
+                            NewBloodTestsInfo.iron = Convert.ToDouble(dataGridView[8, 0].Value);
+                            NewBloodTestsInfo.HDL = Convert.ToDouble(dataGridView[9, 0].Value);
+                            NewBloodTestsInfo.AP = Convert.ToDouble(dataGridView[10, 0].Value);
                             NewBloodTestsInfo.PatientId = patient.PId;
                             NewBloodTestsInfo.Patient = patient;
                             Bm_Collection.InsertOne(NewBloodTestsInfo);
@@ -113,7 +139,7 @@ namespace Doctor_assistant.Forms
                             var filter = Builders<Patientsinfo>.Filter;
                             var patientfilter = filter.Eq(x => x.Id, patient.Id);
                             Pm_Collection.UpdateOne(patientfilter, updateDfinition);
-                            MessageBox.Show("BloodTest has been successfully saved.");
+                            MessageBox.Show("בדיקות הדם נשמרו בהצלחה");
                         }
                     }
                 }
@@ -152,115 +178,28 @@ namespace Doctor_assistant.Forms
 
         private void diagnosis_btn_Click(object sender, EventArgs e)
         {
-            int numberofDiseases = 26;
-                    
-            Dictionary<string, string> Recomendation =new Dictionary<string, string>(){
-            {"anemia","Two 10 mg B12 pills a day for a month"},
-            {"diet","Schedule an appointment with Nutrition"},
-            {"bleeding","To be rushed to the hospital urgently"},
-            {"Hyperlipidemia", "Schedule an appointment with a nutritionist, a 5 mg pill of Simobil daily for a week"},              
-            {"Disruption of blood / blood cell formation", "10 mg pill of B12 a day for a month, 5 mg pill of folic acid a day for a month "},
-            {"Hematological disorder", "An injection of a hormone to encourage red blood cell production"},
-            {"Iron poisoning", "To be evacuated to the hospital"},
-            {"Dehydration", "Complete rest while lying down, returning fluids to drinking"},
-            {"Infection", "Dedicated antibiotics"},
-            {"Vitamin deficiency", "Referral for a blood test to identify the missing vitamins"},
-            {"Viral disease", "Rest at home"},
-            {"Diseases of the biliary tract", "Referral to surgical treatment"},
-            {"Heart disease", "Schedule an appointment with a nutritionist"},
-            {"Blood disease", "A combination of cyclophosphamide and corticosteroids"},
-            {"Liver disease", "Referral to a specific diagnosis for the purpose of determining treatment"},
-            {"Kidney disease", "Balance blood sugar levels"},
-            {"Iron deficiency", "Two 10 mg B12 pills a day for a month"},
-            {"Muscle diseases", "Two 5 mg pills of Altman c3 turmeric a day for a month"},
-            {"Smokers", "to stop smoking"},
-            {"Lung disease", "Stop smoking / Refer to an X-ray of the lungs"},
-            {"Overactive thyroid gland", "Propylthiouracil to reduce thyroid activity"},
-            {"Adult Diabetes", "Insulin adjustment for the patient"},
-            {"cancer", "Antarctinib - Entrectinib"},
-            {"Increased consumption of meat", "Schedule an appointment with a nutritionist"},
-            {"Use of various medications","Referral to a family doctor for a match between medications"},
-            {"Malnutrition", "Schedule an appointment with Nutrition"}
-            };
+            MongoDB.Bson.ObjectId mostrecent = patient.BloodTests.Last();
+            var bloodtest = BloodTestsInfoFinder(mostrecent);
+            Diagnosis newForm = new Diagnosis(doctor,patient, bloodtest);
+            this.Hide();
+            newForm.ShowDialog();
+            this.Close();
+        }
 
-            String diagnosis = "";
-            String OutRecomendation = "";
-            if ((Convert.ToDouble(dataGridView.Columns[1].Name) > 11000 && Int32.Parse(patient.Age) >= 18) ||
-                (Convert.ToDouble(dataGridView.Columns[1].Name) > 15500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
-                (Convert.ToDouble(dataGridView.Columns[1].Name) > 17500 && Int32.Parse(patient.Age) < 3))
-            {
-                diagnosis = diagnosis + "Infection";
-                OutRecomendation = OutRecomendation + Recomendation["Infection"];
-            }
+        private void appointment_label_Click(object sender, EventArgs e)
+        {
 
-            if ((Convert.ToDouble(dataGridView.Columns[1].Name) < 4500 && Int32.Parse(patient.Age) >= 18) ||
-                (Convert.ToDouble(dataGridView.Columns[1].Name) < 5500 && Int32.Parse(patient.Age) > 3 && Int32.Parse(patient.Age) < 17) ||
-                (Convert.ToDouble(dataGridView.Columns[1].Name) < 6000 && Int32.Parse(patient.Age) < 3))
-            {
-                diagnosis = diagnosis + "Viral disease";
-                OutRecomendation = OutRecomendation + Recomendation["Viral disease"];
-            }
+        }
 
-            if (Convert.ToDouble(dataGridView.Columns[2].Name) > 54)
-            {
-                if (!diagnosis.Contains("Infection"))
-                {
-                    diagnosis = diagnosis + "Infection";
-                    OutRecomendation = OutRecomendation + Recomendation["Infection"];
-                }
-            }
+        private void AddPatients_btn_Click_1(object sender, EventArgs e)
+        {
+            Addpatients newForm = new Addpatients(doctor);
+            this.Hide();
+            newForm.ShowDialog();
+            this.Close();
+        }
 
-            if (Convert.ToDouble(dataGridView.Columns[2].Name) < 28)
-            {             
-                    diagnosis = diagnosis + "Disruption of blood / blood cell formation";
-                    OutRecomendation = OutRecomendation + Recomendation["Disruption of blood / blood cell formation"];               
-            }
-
-            if (Convert.ToDouble(dataGridView.Columns[3].Name) > 52)
-            {
-                if (!diagnosis.Contains("Infection"))
-                { 
-                    diagnosis = diagnosis + "Infection" ;
-                    OutRecomendation = OutRecomendation + Recomendation["Infection"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("cancer"))
-                {
-                    diagnosis = diagnosis + "cancer";
-                    OutRecomendation = OutRecomendation +  Recomendation["cancer"];
-                }
-            }
-
-            if (Convert.ToDouble(dataGridView.Columns[3].Name) < 36)
-            {
-                if (!diagnosis.Contains("Disruption of blood / blood cell formation"))
-                {
-                    diagnosis = diagnosis + "Disruption of blood / blood cell formation";
-                    OutRecomendation = OutRecomendation + Recomendation["Disruption of blood / blood cell formation"];
-                }
-            }
-
-            if (Convert.ToDouble(dataGridView.Columns[4].Name) > 6)
-            {
-
-            }
-
-
-
-
-
-
-
-
-
-
-                //Diagnosis newForm = new Diagnosis(doctor);
-                //this.Hide();
-                //newForm.ShowDialog();
-                //this.Close();
-            }
-
-        
-        private void MyPatients_btn_Click(object sender, EventArgs e)
+        private void MyPatients_btn_Click_1(object sender, EventArgs e)
         {
             Patients newForm = new Patients(doctor);
             this.Hide();
@@ -268,13 +207,8 @@ namespace Doctor_assistant.Forms
             this.Close();
         }
 
-        private void AddPatients_btn_Click(object sender, EventArgs e)
-        {
-            Addpatients newForm = new Addpatients(doctor);
-            this.Hide();
-            newForm.ShowDialog();
-            this.Close();
-        }
+
+
     }
 
 }

@@ -379,6 +379,7 @@
     <Compile Include="Patientsinfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question.cs" />
     <EmbeddedResource Include="Forms\Addpatients.resx">
       <DependentUpon>Addpatients.cs</DependentUpon>
     </EmbeddedResource>

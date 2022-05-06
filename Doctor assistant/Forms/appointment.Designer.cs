@@ -52,6 +52,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.testexists_label = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
@@ -104,11 +105,11 @@
             this.name.AutoSize = true;
             this.name.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.name.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.name.Location = new System.Drawing.Point(848, 66);
+            this.name.Location = new System.Drawing.Point(824, 66);
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(106, 33);
+            this.name.Size = new System.Drawing.Size(144, 33);
             this.name.TabIndex = 28;
-            this.name.Text = ":שם מלא";
+            this.name.Text = ":שם המטופל";
             // 
             // appointment_label
             // 
@@ -120,6 +121,7 @@
             this.appointment_label.Size = new System.Drawing.Size(169, 33);
             this.appointment_label.TabIndex = 2;
             this.appointment_label.Text = "צור ביקור ליונתן";
+            this.appointment_label.Click += new System.EventHandler(this.appointment_label_Click);
             // 
             // panel2
             // 
@@ -154,7 +156,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(828, 186);
+            this.label2.Location = new System.Drawing.Point(818, 370);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(142, 33);
             this.label2.TabIndex = 37;
@@ -253,6 +255,7 @@
             this.AddPatients_btn.Size = new System.Drawing.Size(189, 44);
             this.AddPatients_btn.TabIndex = 26;
             this.AddPatients_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.AddPatients_btn.Click += new System.EventHandler(this.AddPatients_btn_Click_1);
             // 
             // MyPatients_btn
             // 
@@ -278,6 +281,7 @@
             this.MyPatients_btn.Size = new System.Drawing.Size(163, 44);
             this.MyPatients_btn.TabIndex = 25;
             this.MyPatients_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MyPatients_btn.Click += new System.EventHandler(this.MyPatients_btn_Click_1);
             // 
             // exit
             // 
@@ -367,17 +371,27 @@
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(108, 207);
+            this.dataGridView.Location = new System.Drawing.Point(26, 261);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(373, 291);
+            this.dataGridView.Size = new System.Drawing.Size(934, 72);
             this.dataGridView.TabIndex = 43;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
+            // 
+            // testexists_label
+            // 
+            this.testexists_label.AutoSize = true;
+            this.testexists_label.Location = new System.Drawing.Point(704, 217);
+            this.testexists_label.Name = "testexists_label";
+            this.testexists_label.Size = new System.Drawing.Size(256, 21);
+            this.testexists_label.TabIndex = 44;
+            this.testexists_label.Text = ":קיימים למטופל בדיקות דם במערכת";
             // 
             // appointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1280, 836);
+            this.Controls.Add(this.testexists_label);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.diagnosis_btn);
@@ -434,5 +448,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dataGridView;
         public System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label testexists_label;
     }
 }

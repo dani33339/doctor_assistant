@@ -123,12 +123,12 @@ namespace Doctor_assistant.Forms
                     return;
                 }
             Patientsinfo NewPatiet = new Patientsinfo();
-            NewPatiet.Age = age_textbox.Text;
+            NewPatiet.Age = Int32.Parse(age_textbox.Text);
             NewPatiet.City = city_textbox.Text;
             NewPatiet.DoctorId = doctor.DId;
             NewPatiet.FirstName = name_textbox.Text;
             NewPatiet.Gender = gender_combobox.Text;
-            NewPatiet.HouseNumber = apartment_textbox.Text;
+            NewPatiet.HouseNumber = Int32.Parse(apartment_textbox.Text);
             NewPatiet.PId = id_textbox.Text;
             NewPatiet.LastName = lastname_textbox.Text;
             NewPatiet.Street = street_textbox.Text;
@@ -144,7 +144,7 @@ namespace Doctor_assistant.Forms
             var filter = Builders<DoctorInfo>.Filter;
             var doctorfilter = filter.Eq(x => x.Id, doctor.Id);
             Dm_Collection.UpdateOne(doctorfilter, updateDfinition); 
-            MessageBox.Show("Patient has been successfully saved.");
+            MessageBox.Show("מטופל נשמר בהצלחה");
 
             foreach (TextBox tb in this.Controls.OfType<TextBox>())
             {
