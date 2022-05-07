@@ -10,12 +10,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ExcelDataReader;
 using MongoDB.Driver;
-
+using OfficeOpenXml;
+using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace Doctor_assistant.Forms
 {
+    
     public partial class appointment : Form
     {
+        
         MongoClient Pm_Client, Bm_Client;
         IMongoDatabase Pm_Database,Bm_Database;
         IMongoCollection<Patientsinfo> Pm_Collection;
@@ -51,7 +54,7 @@ namespace Doctor_assistant.Forms
             //if patient have bloodtest in the db
             if (patient.BloodTests.Count() > 0)
                 FilldataGridView();
-
+            
         }
 
         /*import last test from the db*/
@@ -200,8 +203,16 @@ namespace Doctor_assistant.Forms
 
         }
 
-        public void MakeDiagnosis(BloodTestsInfo bloodtest, Question[] Questions)
+        public async Task MakeDiagnosis(BloodTestsInfo bloodtest, Question[] Questions)
         {
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            String filename = "D:\\" + patient.FirstName + ".xlsx";
+            var file = new FileInfo(filename);
+
+            var Out = GetSetupData(bloodtest, diagnosis, OutRecomendation);
+            await SaveExcelFile(Out, file);
+
             Dictionary<string, string> Recomendation = new Dictionary<string, string>(){
             {"anemia","Two 10 mg B12 pills a day for a month"},
             {"diet","Schedule an appointment with Nutrition"},
@@ -586,7 +597,71 @@ namespace Doctor_assistant.Forms
                     OutRecomendation = OutRecomendation + "," + Recomendation["Vitamin deficiency"];
                 }
             }
-            MessageBox.Show(diagnosis);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            String filename = "D:\\" +  patient.FirstName + ".xlsx";
+            var file = new FileInfo(filename);
+
+            var Out = GetSetupData(bloodtest, diagnosis, OutRecomendation);
+            await SaveExcelFile(Out, file);
+
+
+        }
+
+        private static async Task SaveExcelFile(List<OutPut> Out, FileInfo file)
+        {
+            DeleteIfExists(file);
+
+            using var package = new ExcelPackage(file) ;
+
+            var ws = package.Workbook.Worksheets.Add("MainReport");
+
+
+            var range = ws.Cells["A1"].LoadFromCollection(Out, true);
+            range.AutoFitColumns();
+
+            await package.SaveAsync();
+
+        }
+
+        private static void DeleteIfExists(FileInfo file)
+        {
+            if(file.Exists)
+            {
+                file.Delete();
+            }
+        }
+
+        private List<OutPut> GetSetupData(BloodTestsInfo bloodTests ,String Outdiagnosis, String OutRecomendation)
+        {
+            List<OutPut> output = new()
+            {
+                new()
+                {
+                    FirstName = patient.FirstName,
+                    LastName = patient.LastName,
+                    PhoneNumber = patient.PhoneNumber,
+                    Gender = patient.Gender,
+                    PId = patient.PId,
+                    City = patient.City,
+                    Street = patient.Street,
+                    HouseNumber = patient.HouseNumber,
+                    Age = patient.Age,
+                    WBC = bloodTests.WBC,
+                    Neut = bloodTests.Neut,
+                    Lymph = bloodTests.Lymph,
+                    RBC = bloodTests.RBC,
+                    HCT = bloodTests.HCT,
+                    UREA = bloodTests.UREA,
+                    Hb = bloodTests.Hb,
+                    Crtn = bloodTests.Crtn,
+                    iron = bloodTests.iron,
+                    HDL = bloodTests.HDL,
+                    AP = bloodTests.AP,
+                    diagnosis = Outdiagnosis,
+                    recommendation = OutRecomendation
+                }
+            };
+            return output;
         }
 
         private void appointment_label_Click(object sender, EventArgs e)
