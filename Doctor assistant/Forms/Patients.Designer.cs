@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Patients));
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.name_textbox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.search_btn = new Bunifu.Framework.UI.BunifuThinButton2();
@@ -49,21 +50,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.AddPatients_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.MyPatients_btn = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.exit = new System.Windows.Forms.Button();
             this.patient_picturebox = new System.Windows.Forms.PictureBox();
             this.docname_label = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.addpatient_picturebox = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.stopfilter = new Bunifu.Framework.UI.BunifuThinButton2();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addpatient_picturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -89,6 +83,24 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1296, 45);
             this.panel2.TabIndex = 26;
+            // 
+            // button1
+            // 
+            this.button1.AllowDrop = true;
+            this.button1.AutoEllipsis = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(1250, 1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(43, 41);
+            this.button1.TabIndex = 45;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // name_textbox
             // 
@@ -128,7 +140,7 @@
             this.search_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
             this.search_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.search_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.search_btn.Location = new System.Drawing.Point(605, 102);
+            this.search_btn.Location = new System.Drawing.Point(576, 102);
             this.search_btn.Margin = new System.Windows.Forms.Padding(6);
             this.search_btn.Name = "search_btn";
             this.search_btn.Size = new System.Drawing.Size(142, 47);
@@ -226,14 +238,9 @@
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
             this.panel1.Controls.Add(this.AddPatients_btn);
             this.panel1.Controls.Add(this.MyPatients_btn);
-            this.panel1.Controls.Add(this.exit);
             this.panel1.Controls.Add(this.patient_picturebox);
             this.panel1.Controls.Add(this.docname_label);
-            this.panel1.Controls.Add(this.pictureBox5);
-            this.panel1.Controls.Add(this.pictureBox4);
             this.panel1.Controls.Add(this.addpatient_picturebox);
-            this.panel1.Controls.Add(this.label14);
-            this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(990, 45);
@@ -293,15 +300,6 @@
             this.MyPatients_btn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.MyPatients_btn.Click += new System.EventHandler(this.MyPatients_btn_Click);
             // 
-            // exit
-            // 
-            this.exit.Location = new System.Drawing.Point(206, 826);
-            this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(75, 23);
-            this.exit.TabIndex = 25;
-            this.exit.Text = "יצאה";
-            this.exit.UseVisualStyleBackColor = true;
-            // 
             // patient_picturebox
             // 
             this.patient_picturebox.Image = ((System.Drawing.Image)(resources.GetObject("patient_picturebox.Image")));
@@ -322,22 +320,6 @@
             this.docname_label.TabIndex = 9;
             this.docname_label.Text = "שלום דוקטור אנטון";
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Location = new System.Drawing.Point(183, 671);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox5.TabIndex = 8;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Location = new System.Drawing.Point(183, 552);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox4.TabIndex = 7;
-            this.pictureBox4.TabStop = false;
-            // 
             // addpatient_picturebox
             // 
             this.addpatient_picturebox.Image = ((System.Drawing.Image)(resources.GetObject("addpatient_picturebox.Image")));
@@ -347,26 +329,6 @@
             this.addpatient_picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.addpatient_picturebox.TabIndex = 6;
             this.addpatient_picturebox.TabStop = false;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 646);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(179, 33);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "הוספת מטופלים";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(5, 552);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(179, 33);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "הוספת מטופלים";
             // 
             // pictureBox1
             // 
@@ -378,28 +340,37 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
+            // stopfilter
             // 
-            this.button1.AllowDrop = true;
-            this.button1.AutoEllipsis = true;
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(1250, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 41);
-            this.button1.TabIndex = 45;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseCompatibleTextRendering = true;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.stopfilter.ActiveBorderThickness = 1;
+            this.stopfilter.ActiveCornerRadius = 20;
+            this.stopfilter.ActiveFillColor = System.Drawing.Color.SlateGray;
+            this.stopfilter.ActiveForecolor = System.Drawing.SystemColors.Window;
+            this.stopfilter.ActiveLineColor = System.Drawing.Color.DarkSlateGray;
+            this.stopfilter.BackColor = System.Drawing.SystemColors.Control;
+            this.stopfilter.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("stopfilter.BackgroundImage")));
+            this.stopfilter.ButtonText = "בטל חיפוש";
+            this.stopfilter.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.stopfilter.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stopfilter.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.stopfilter.IdleBorderThickness = 1;
+            this.stopfilter.IdleCornerRadius = 20;
+            this.stopfilter.IdleFillColor = System.Drawing.Color.LightSkyBlue;
+            this.stopfilter.IdleForecolor = System.Drawing.Color.DarkSlateGray;
+            this.stopfilter.IdleLineColor = System.Drawing.Color.LightSlateGray;
+            this.stopfilter.Location = new System.Drawing.Point(730, 114);
+            this.stopfilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.stopfilter.Name = "stopfilter";
+            this.stopfilter.Size = new System.Drawing.Size(97, 30);
+            this.stopfilter.TabIndex = 44;
+            this.stopfilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Patients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 875);
+            this.Controls.Add(this.stopfilter);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.search_btn);
@@ -418,8 +389,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addpatient_picturebox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -446,16 +415,12 @@
         private System.Windows.Forms.Panel panel1;
         private Bunifu.Framework.UI.BunifuThinButton2 AddPatients_btn;
         private Bunifu.Framework.UI.BunifuThinButton2 MyPatients_btn;
-        private System.Windows.Forms.Button exit;
         private System.Windows.Forms.PictureBox patient_picturebox;
         private System.Windows.Forms.Label docname_label;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox addpatient_picturebox;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         public System.Windows.Forms.Button button1;
+        private Bunifu.Framework.UI.BunifuThinButton2 stopfilter;
     }
 }

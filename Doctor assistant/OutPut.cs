@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Doctor_assistant
 {
-     public class OutPut
+    public class OutPut
     {
         public String FirstName { get; set; }
         public String LastName { get; set; }
@@ -18,6 +18,9 @@ namespace Doctor_assistant
         public int HouseNumber { get; set; }
         public int Age { get; set; }
 
+        public int heat { get; set; }
+        public String bloodpressure { get; set; }
+        public int pulse { get; set; }
 
         public double WBC { get; set; }
         public double Neut { get; set; }
@@ -30,6 +33,10 @@ namespace Doctor_assistant
         public double iron { get; set; }
         public double HDL { get; set; }
         public double AP { get; set; }
+
+
+       
+            
 
         public String diagnosis { get; set; }
         public String recommendation { get; set; }

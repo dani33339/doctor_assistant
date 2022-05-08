@@ -186,7 +186,7 @@ namespace Doctor_assistant.Forms
             //create qustions
             Question[] Questions = { new Question { name = "?האם המטופל מעשן", status=false },
             new Question { name = "?האם המטופל יוצא עדות המזרח", status=false },
-            new Question { name = "?האם המטופל אתיופי", status=false }};
+            new Question { name = "?האם המטופל ממוצא אתיופי", status=false }};
             if (patient.Gender == "נקבה")
                 Questions.Append(new Question { name = "?האם המטופלת בהריון", status = false });
 
@@ -206,12 +206,7 @@ namespace Doctor_assistant.Forms
         public async Task MakeDiagnosis(BloodTestsInfo bloodtest, Question[] Questions)
         {
 
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            String filename = "D:\\" + patient.FirstName + ".xlsx";
-            var file = new FileInfo(filename);
-
-            var Out = GetSetupData(bloodtest, diagnosis, OutRecomendation);
-            await SaveExcelFile(Out, file);
+            
 
             Dictionary<string, string> Recomendation = new Dictionary<string, string>(){
             {"anemia","Two 10 mg B12 pills a day for a month"},
@@ -598,11 +593,18 @@ namespace Doctor_assistant.Forms
                 }
             }
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            String filename = "D:\\" +  patient.FirstName + ".xlsx";
-            var file = new FileInfo(filename);
-
-            var Out = GetSetupData(bloodtest, diagnosis, OutRecomendation);
-            await SaveExcelFile(Out, file);
+            //String filename = "D:\\" +  patient.FirstName + ".xlsx";
+            //var file = new FileInfo(filename);
+            SaveFileDialog save = new SaveFileDialog();
+            save.Title = "where to save";
+            save.FileName = patient.FirstName + ".xlsx";
+            if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                var file = new FileInfo(save.FileName);
+                var Out = GetSetupData(bloodtest, diagnosis, OutRecomendation);
+                await SaveExcelFile(Out, file);
+            }
+            
 
 
         }
@@ -645,6 +647,9 @@ namespace Doctor_assistant.Forms
                     City = patient.City,
                     Street = patient.Street,
                     HouseNumber = patient.HouseNumber,
+                    heat = Convert.ToInt32(heat_textbox.Text),
+                    bloodpressure = bloodpressure_textBox.Text,
+                    pulse = Convert.ToInt32(pulse_textBox.Text),
                     Age = patient.Age,
                     WBC = bloodTests.WBC,
                     Neut = bloodTests.Neut,
@@ -658,13 +663,35 @@ namespace Doctor_assistant.Forms
                     HDL = bloodTests.HDL,
                     AP = bloodTests.AP,
                     diagnosis = Outdiagnosis,
-                    recommendation = OutRecomendation
+                    recommendation = OutRecomendation,
+                    
+
                 }
             };
             return output;
         }
 
         private void appointment_label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void heat_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void name_heat_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pulse_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bloodpressure_textBox_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -45,19 +45,19 @@
             this.exit = new System.Windows.Forms.Button();
             this.patient_picturebox = new System.Windows.Forms.PictureBox();
             this.docname_label = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.addpatient_picturebox = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.testexists_label = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.heat_textbox = new System.Windows.Forms.TextBox();
+            this.pulse = new System.Windows.Forms.Label();
+            this.pulse_textBox = new System.Windows.Forms.TextBox();
+            this.bloodpressure = new System.Windows.Forms.Label();
+            this.bloodpressure_textBox = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addpatient_picturebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -139,8 +139,9 @@
             this.button1.AllowDrop = true;
             this.button1.AutoEllipsis = true;
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.Location = new System.Drawing.Point(1234, 1);
             this.button1.Name = "button1";
@@ -203,7 +204,7 @@
             this.diagnosis_btn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
             this.diagnosis_btn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.diagnosis_btn.IdleLineColor = System.Drawing.Color.LightSlateGray;
-            this.diagnosis_btn.Location = new System.Drawing.Point(336, 528);
+            this.diagnosis_btn.Location = new System.Drawing.Point(336, 592);
             this.diagnosis_btn.Margin = new System.Windows.Forms.Padding(6);
             this.diagnosis_btn.Name = "diagnosis_btn";
             this.diagnosis_btn.Size = new System.Drawing.Size(371, 46);
@@ -219,11 +220,7 @@
             this.panel1.Controls.Add(this.exit);
             this.panel1.Controls.Add(this.patient_picturebox);
             this.panel1.Controls.Add(this.docname_label);
-            this.panel1.Controls.Add(this.pictureBox5);
-            this.panel1.Controls.Add(this.pictureBox4);
             this.panel1.Controls.Add(this.addpatient_picturebox);
-            this.panel1.Controls.Add(this.label14);
-            this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(974, 45);
@@ -312,22 +309,6 @@
             this.docname_label.TabIndex = 9;
             this.docname_label.Text = "שלום דוקטור אנטון";
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Location = new System.Drawing.Point(183, 671);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox5.TabIndex = 8;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Location = new System.Drawing.Point(183, 552);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox4.TabIndex = 7;
-            this.pictureBox4.TabStop = false;
-            // 
             // addpatient_picturebox
             // 
             this.addpatient_picturebox.Image = ((System.Drawing.Image)(resources.GetObject("addpatient_picturebox.Image")));
@@ -337,26 +318,6 @@
             this.addpatient_picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.addpatient_picturebox.TabIndex = 6;
             this.addpatient_picturebox.TabStop = false;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 646);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(179, 33);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "הוספת מטופלים";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(5, 552);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(179, 33);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "הוספת מטופלים";
             // 
             // pictureBox1
             // 
@@ -386,11 +347,81 @@
             this.testexists_label.TabIndex = 44;
             this.testexists_label.Text = ":קיימים למטופל בדיקות דם במערכת";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label3.Location = new System.Drawing.Point(907, 422);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 33);
+            this.label3.TabIndex = 46;
+            this.label3.Text = "חום";
+            this.label3.Click += new System.EventHandler(this.heat_Click);
+            // 
+            // heat_textbox
+            // 
+            this.heat_textbox.BackColor = System.Drawing.Color.SkyBlue;
+            this.heat_textbox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.heat_textbox.Location = new System.Drawing.Point(823, 467);
+            this.heat_textbox.Name = "heat_textbox";
+            this.heat_textbox.Size = new System.Drawing.Size(137, 27);
+            this.heat_textbox.TabIndex = 45;
+            this.heat_textbox.TextChanged += new System.EventHandler(this.name_heat_TextChanged);
+            // 
+            // pulse
+            // 
+            this.pulse.AutoSize = true;
+            this.pulse.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pulse.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.pulse.Location = new System.Drawing.Point(701, 422);
+            this.pulse.Name = "pulse";
+            this.pulse.Size = new System.Drawing.Size(62, 33);
+            this.pulse.TabIndex = 48;
+            this.pulse.Text = "דופק";
+            // 
+            // pulse_textBox
+            // 
+            this.pulse_textBox.BackColor = System.Drawing.Color.SkyBlue;
+            this.pulse_textBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pulse_textBox.Location = new System.Drawing.Point(626, 467);
+            this.pulse_textBox.Name = "pulse_textBox";
+            this.pulse_textBox.Size = new System.Drawing.Size(137, 27);
+            this.pulse_textBox.TabIndex = 47;
+            this.pulse_textBox.TextChanged += new System.EventHandler(this.pulse_textBox_TextChanged);
+            // 
+            // bloodpressure
+            // 
+            this.bloodpressure.AutoSize = true;
+            this.bloodpressure.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bloodpressure.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.bloodpressure.Location = new System.Drawing.Point(477, 422);
+            this.bloodpressure.Name = "bloodpressure";
+            this.bloodpressure.Size = new System.Drawing.Size(88, 33);
+            this.bloodpressure.TabIndex = 50;
+            this.bloodpressure.Text = "לחץ דם";
+            // 
+            // bloodpressure_textBox
+            // 
+            this.bloodpressure_textBox.BackColor = System.Drawing.Color.SkyBlue;
+            this.bloodpressure_textBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bloodpressure_textBox.Location = new System.Drawing.Point(428, 467);
+            this.bloodpressure_textBox.Name = "bloodpressure_textBox";
+            this.bloodpressure_textBox.Size = new System.Drawing.Size(137, 27);
+            this.bloodpressure_textBox.TabIndex = 49;
+            this.bloodpressure_textBox.TextChanged += new System.EventHandler(this.bloodpressure_textBox_TextChanged);
+            // 
             // appointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1280, 836);
+            this.Controls.Add(this.bloodpressure);
+            this.Controls.Add(this.bloodpressure_textBox);
+            this.Controls.Add(this.pulse);
+            this.Controls.Add(this.pulse_textBox);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.heat_textbox);
             this.Controls.Add(this.testexists_label);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.panel1);
@@ -414,8 +445,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addpatient_picturebox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -440,14 +469,16 @@
         private System.Windows.Forms.Button exit;
         private System.Windows.Forms.PictureBox patient_picturebox;
         private System.Windows.Forms.Label docname_label;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox addpatient_picturebox;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dataGridView;
         public System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label testexists_label;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox heat_textbox;
+        private System.Windows.Forms.Label pulse;
+        private System.Windows.Forms.TextBox pulse_textBox;
+        private System.Windows.Forms.Label bloodpressure;
+        private System.Windows.Forms.TextBox bloodpressure_textBox;
     }
 }
