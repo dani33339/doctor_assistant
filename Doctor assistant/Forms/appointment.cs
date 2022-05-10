@@ -16,7 +16,7 @@ using LicenseContext = OfficeOpenXml.LicenseContext;
 namespace Doctor_assistant.Forms
 {
     
-    public partial class appointment : Form
+    public partial class Appointment : Form
     {
         
         MongoClient Pm_Client, Bm_Client;
@@ -28,7 +28,7 @@ namespace Doctor_assistant.Forms
         public DoctorInfo doctor;
         public Patientsinfo patient;
 
-        public appointment(DoctorInfo obj1, Patientsinfo obj2)
+        public Appointment(DoctorInfo obj1, Patientsinfo obj2)
         {
             doctor = obj1;
             patient = obj2;
@@ -69,22 +69,26 @@ namespace Doctor_assistant.Forms
             dataGridView.Columns.Add("WBC", "WBC");
             dataGridView.Columns.Add("Neut", "Neut");
             dataGridView.Columns.Add("Lymph", "Lymph");
+            dataGridView.Columns.Add("RBC", "RBC");
             dataGridView.Columns.Add("HCT", "HCT");
             dataGridView.Columns.Add("Urea", "Urea");
             dataGridView.Columns.Add("Hb", "Hb");
             dataGridView.Columns.Add("Crtn", "Crtn");
+            dataGridView.Columns.Add("Iron", "Iron");
             dataGridView.Columns.Add("HDL", "HDL");
             dataGridView.Columns.Add("AP", "AP");
 
             dataGridView[0, 0].Value = bloodtest.WBC;
             dataGridView[1, 0].Value = bloodtest.Neut;
             dataGridView[2, 0].Value = bloodtest.Lymph;
-            dataGridView[3, 0].Value = bloodtest.HCT;
-            dataGridView[4, 0].Value = bloodtest.UREA;
-            dataGridView[5, 0].Value = bloodtest.Hb;
-            dataGridView[6, 0].Value = bloodtest.Crtn;
-            dataGridView[7, 0].Value = bloodtest.HDL;
-            dataGridView[8, 0].Value = bloodtest.AP;
+            dataGridView[3, 0].Value = bloodtest.RBC;
+            dataGridView[4, 0].Value = bloodtest.HCT;
+            dataGridView[5, 0].Value = bloodtest.UREA;
+            dataGridView[6, 0].Value = bloodtest.Hb;
+            dataGridView[7, 0].Value = bloodtest.Crtn;
+            dataGridView[8, 0].Value = bloodtest.iron;
+            dataGridView[9, 0].Value = bloodtest.HDL;
+            dataGridView[10, 0].Value = bloodtest.AP;
 
         }
 
@@ -604,8 +608,6 @@ namespace Doctor_assistant.Forms
                 var Out = GetSetupData(bloodtest, diagnosis, OutRecomendation);
                 await SaveExcelFile(Out, file);
             }
-            
-
 
         }
 
@@ -694,6 +696,43 @@ namespace Doctor_assistant.Forms
         private void bloodpressure_textBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void inset_btn_Click(object sender, EventArgs e)
+        {
+
+            if ((String.IsNullOrEmpty(WBC_textBox.Text)|| String.IsNullOrEmpty(Neut_textBox.Text)|| String.IsNullOrEmpty(Lymph_textBox.Text)||
+                String.IsNullOrEmpty(RBC_textBox.Text)|| String.IsNullOrEmpty(HCT_textBox.Text)|| String.IsNullOrEmpty(Urea_textBox.Text)||
+                String.IsNullOrEmpty(Hb_textBox.Text)|| String.IsNullOrEmpty(Crtn_textBox.Text)|| String.IsNullOrEmpty(Iron_textBox.Text)||
+                String.IsNullOrEmpty(HDL_textBox.Text)|| String.IsNullOrEmpty(AP_textBox.Text)))
+            {
+                MessageBox.Show("עליך למלא את כל הערכים");
+                return ;
+            }                
+
+            BloodTestsInfo NewBloodTestsInfo = new BloodTestsInfo();
+            NewBloodTestsInfo.WBC = Convert.ToDouble(WBC_textBox.Text);
+            NewBloodTestsInfo.Neut = Convert.ToDouble(Neut_textBox.Text);
+            NewBloodTestsInfo.Lymph = Convert.ToDouble(Lymph_textBox.Text);
+            NewBloodTestsInfo.RBC = Convert.ToDouble(RBC_textBox.Text);
+            NewBloodTestsInfo.HCT = Convert.ToDouble(HCT_textBox.Text);
+            NewBloodTestsInfo.UREA = Convert.ToDouble(Urea_textBox.Text);
+            NewBloodTestsInfo.Hb = Convert.ToDouble(Hb_textBox.Text);
+            NewBloodTestsInfo.Crtn = Convert.ToDouble(Crtn_textBox.Text);
+            NewBloodTestsInfo.iron = Convert.ToDouble(Iron_textBox.Text);
+            NewBloodTestsInfo.HDL = Convert.ToDouble(HDL_textBox.Text);
+            NewBloodTestsInfo.AP = Convert.ToDouble(AP_textBox.Text);
+            NewBloodTestsInfo.PatientId = patient.PId;
+            NewBloodTestsInfo.Patient = patient;
+            Bm_Collection.InsertOne(NewBloodTestsInfo);
+            patient.BloodTests.Add(NewBloodTestsInfo.Id);
+
+            var updateDfinition = Builders<Patientsinfo>.Update.Set(a => a.BloodTests, patient.BloodTests);
+            var filter = Builders<Patientsinfo>.Filter;
+            var patientfilter = filter.Eq(x => x.Id, patient.Id);
+            Pm_Collection.UpdateOne(patientfilter, updateDfinition);
+            MessageBox.Show("בדיקות הדם נשמרו בהצלחה");
+            FilldataGridView();
         }
 
         private void AddPatients_btn_Click_1(object sender, EventArgs e)
