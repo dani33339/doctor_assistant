@@ -182,7 +182,13 @@ namespace Doctor_assistant.Forms
         private void diagnosis_btn_Click(object sender, EventArgs e)
         {
             MongoDB.Bson.ObjectId mostrecent = patient.BloodTests.Last();
-            var bloodtest = BloodTestsInfoFinder(mostrecent);
+            var bloodtest = BloodTestsInfoFinder(mostrecent); 
+            if (String.IsNullOrEmpty(heat_textbox.Text) || String.IsNullOrEmpty(pulse_textBox.Text) || String.IsNullOrEmpty(bloodpressure_textBox.Text))
+            {
+                MessageBox.Show("הכנס את כל המדדים");
+                return;
+
+            }
             //create qustions
             Question[] Questions = { new Question { name = "?האם המטופל מעשן", status=false },
             new Question { name = "?האם המטופל יוצא עדות המזרח", status=false },
@@ -193,12 +199,13 @@ namespace Doctor_assistant.Forms
             //send and get answers for the qustions
             foreach (Question q in Questions)
             {
-                Diagnosis newForm = new Diagnosis(doctor , q);
+                Diagnosis newForm = new Diagnosis(doctor, q);
                 this.Hide();
                 newForm.ShowDialog();
             }
 
             this.Show();
+
             MakeDiagnosis(bloodtest, Questions);
 
         }
@@ -692,6 +699,152 @@ namespace Doctor_assistant.Forms
         }
 
         private void bloodpressure_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void inset_btn_Click(object sender, EventArgs e)
+        {
+            if ((String.IsNullOrEmpty(WBC_textBox.Text) || String.IsNullOrEmpty(Neut_textBox.Text) || String.IsNullOrEmpty(Lymph_textBox.Text) ||
+               String.IsNullOrEmpty(RBC_textBox.Text) || String.IsNullOrEmpty(HCT_textBox.Text) || String.IsNullOrEmpty(Urea_textBox.Text) ||
+               String.IsNullOrEmpty(Hb_textBox.Text) || String.IsNullOrEmpty(Crtn_textBox.Text) || String.IsNullOrEmpty(Iron_textBox.Text) ||
+               String.IsNullOrEmpty(HDL_textBox.Text) || String.IsNullOrEmpty(AP_textBox.Text)))
+            {
+                MessageBox.Show("עליך למלא את כל הערכים");
+                return;
+            }
+
+            BloodTestsInfo NewBloodTestsInfo = new BloodTestsInfo();
+            NewBloodTestsInfo.WBC = Convert.ToDouble(WBC_textBox.Text);
+            NewBloodTestsInfo.Neut = Convert.ToDouble(Neut_textBox.Text);
+            NewBloodTestsInfo.Lymph = Convert.ToDouble(Lymph_textBox.Text);
+            NewBloodTestsInfo.RBC = Convert.ToDouble(RBC_textBox.Text);
+            NewBloodTestsInfo.HCT = Convert.ToDouble(HCT_textBox.Text);
+            NewBloodTestsInfo.UREA = Convert.ToDouble(Urea_textBox.Text);
+            NewBloodTestsInfo.Hb = Convert.ToDouble(Hb_textBox.Text);
+            NewBloodTestsInfo.Crtn = Convert.ToDouble(Crtn_textBox.Text);
+            NewBloodTestsInfo.iron = Convert.ToDouble(Iron_textBox.Text);
+            NewBloodTestsInfo.HDL = Convert.ToDouble(HDL_textBox.Text);
+            NewBloodTestsInfo.AP = Convert.ToDouble(AP_textBox.Text);
+            NewBloodTestsInfo.PatientId = patient.PId;
+            NewBloodTestsInfo.Patient = patient;
+            Bm_Collection.InsertOne(NewBloodTestsInfo);
+            patient.BloodTests.Add(NewBloodTestsInfo.Id);
+
+            var updateDfinition = Builders<Patientsinfo>.Update.Set(a => a.BloodTests, patient.BloodTests);
+            var filter = Builders<Patientsinfo>.Filter;
+            var patientfilter = filter.Eq(x => x.Id, patient.Id);
+            Pm_Collection.UpdateOne(patientfilter, updateDfinition);
+            MessageBox.Show("בדיקות הדם נשמרו בהצלחה");
+            FilldataGridView();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AP_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WBC_label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Iron_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Crtn_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Urea_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HCT_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RBC_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lymph_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Neut_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WBC_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Hb_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HDL_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WBC_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
