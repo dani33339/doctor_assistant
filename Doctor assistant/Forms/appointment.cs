@@ -12,7 +12,7 @@ using ExcelDataReader;
 using MongoDB.Driver;
 using OfficeOpenXml;
 using LicenseContext = OfficeOpenXml.LicenseContext;
-
+using Excel = Microsoft.Office.Interop.Excel;
 namespace Doctor_assistant.Forms
 {
     
@@ -179,8 +179,13 @@ namespace Doctor_assistant.Forms
             this.Close();
         }
 
-        private void diagnosis_btn_Click(object sender, EventArgs e)
+        private  void diagnosis_btn_Click(object sender, EventArgs e)
         {
+
+
+
+
+
             MongoDB.Bson.ObjectId mostrecent = patient.BloodTests.Last();
             var bloodtest = BloodTestsInfoFinder(mostrecent);
             //create qustions
@@ -206,7 +211,32 @@ namespace Doctor_assistant.Forms
         public async Task MakeDiagnosis(BloodTestsInfo bloodtest, Question[] Questions)
         {
 
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            //String filename = "D:\\" +  patient.FirstName + ".xlsx";
+            //var file = new FileInfo(filename);
+            SaveFileDialog save = new SaveFileDialog();
+            save.Title = "where to save";
+            save.FileName = patient.FirstName + ".xlsx";
+            if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                var file = new FileInfo(save.FileName);
+                var Out = GetSetupData(bloodtest, patient);
+                await SaveExcelFile(Out, file);
+            }
+            int column_diagnosis = 24;
+            int column_Recomendation = 25;
+            int row = 2;
             
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+
+
+            xlApp = new Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Open(save.FileName);
+            xlWorkSheet = xlWorkBook.Worksheets["MainReport"];
+
+            String box = xlWorkSheet.Cells[1,"A1"].value;
 
             Dictionary<string, string> Recomendation = new Dictionary<string, string>(){
             {"anemia","Two 10 mg B12 pills a day for a month"},
@@ -237,378 +267,392 @@ namespace Doctor_assistant.Forms
             {"Malnutrition", "Schedule an appointment with Nutrition"}
             };
 
-            String diagnosis = "";
-            String OutRecomendation = "";
-            if (Questions[0].status==true)
-                diagnosis = diagnosis + "Smokers" + ",";
-                OutRecomendation = OutRecomendation + "," + Recomendation["Smokers"];
 
+            if (Questions[0].status == true)
+            {
+
+                xlWorkSheet.Cells[row, column_diagnosis].value = "Smokers";
+                xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Smokers"];
+                row++;
+            }
             //WBC
             if ((Convert.ToDouble(bloodtest.WBC) > 11000 && patient.Age >= 18) ||
                 (Convert.ToDouble(bloodtest.WBC) > 15500 && patient.Age > 3 && patient.Age < 17) ||
                 (Convert.ToDouble(bloodtest.WBC) > 17500 && patient.Age < 3))
             {
-                diagnosis = diagnosis + "Infection" + ",";
-                OutRecomendation = OutRecomendation + "," + Recomendation["Infection"];
+                xlWorkSheet.Cells[row, column_diagnosis].value = "Infection";
+                xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Infection"];
+                row++;
             }
             if ((bloodtest.WBC < 4500 && patient.Age >= 18) ||
                 (bloodtest.WBC < 5500 && patient.Age > 3 && patient.Age < 17) ||
                 (bloodtest.WBC < 6000 && patient.Age < 3))
             {
-                diagnosis = diagnosis + "Viral disease" + ",";
-                OutRecomendation = OutRecomendation + "," + Recomendation["Viral disease"];
+                xlWorkSheet.Cells[row, column_diagnosis].value = "Viral disease" ;
+                xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Viral disease"];
+                row++;
             }
 
             //Neut
             if (bloodtest.Neut > 54)
             {
-                if (!diagnosis.Contains("Infection"))
+                if (!SearchInDiagnosis("Infection", xlWorkSheet))
                 {
-                    diagnosis = diagnosis + "Infection";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Infection"];
+                    xlWorkSheet.Cells[row, column_diagnosis].value = "Infection";
+                    xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Infection"];
+                    row++;
                 }
             }
             if (bloodtest.Neut < 28)
             {
-                diagnosis = diagnosis + "Disruption of blood / blood cell formation";
-                OutRecomendation = OutRecomendation + "," + Recomendation["Disruption of blood / blood cell formation"];
+                xlWorkSheet.Cells[row, column_diagnosis].value = "Disruption of blood / blood cell formation";
+                xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Disruption of blood / blood cell formation"];
+                row++;
             }
 
             //Lymph
             if (bloodtest.Lymph > 52)
             {
-                if (!diagnosis.Contains("Infection"))
+                if (!SearchInDiagnosis("Infection", xlWorkSheet))
                 {
-                    diagnosis = diagnosis + "Infection";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Infection"] + "or" + " ";
+                    xlWorkSheet.Cells[row, column_diagnosis].value = "Infection";
+                    xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Infection"] + "or" + " ";
+                    row++;
                 }
-                if (!diagnosis.Contains("cancer"))
+                if (!SearchInDiagnosis("cancer", xlWorkSheet))
                 {
-                    diagnosis = diagnosis + "cancer";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["cancer"];
+                    xlWorkSheet.Cells[row, column_diagnosis].value = "cancer";
+                    xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["cancer"];
+                    row++;
                 }
             }
             if (bloodtest.Lymph < 36)
             {
-                if (!diagnosis.Contains("Disruption of blood / blood cell formation"))
+                if (!SearchInDiagnosis("Disruption of blood / blood cell formation", xlWorkSheet))
                 {
-                    diagnosis = diagnosis + "Disruption of blood / blood cell formation";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Disruption of blood / blood cell formation"];
+                    xlWorkSheet.Cells[row, column_diagnosis].value = "Disruption of blood / blood cell formation";
+                    xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Disruption of blood / blood cell formation"];
+                    row++;
                 }
             }
 
             //RBC
             if (bloodtest.RBC > 6)
             {
-                if (!diagnosis.Contains("Disruption of blood / blood cell formation"))
+                if (!SearchInDiagnosis("Disruption of blood / blood cell formation", xlWorkSheet))
                 {
-                    diagnosis = diagnosis + "Disruption of blood / blood cell formation";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Infection"] + "or" + " ";
+                    xlWorkSheet.Cells[row, column_diagnosis].value = "Disruption of blood / blood cell formation";
+                    xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Infection"] ;
+                    row++;
+                    
                 }
-                if (!diagnosis.Contains("Smokers"))
+                if (!SearchInDiagnosis("Smokers", xlWorkSheet))
                 {
-                    diagnosis = diagnosis + "Smokers";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Smokers"] + "or" + " ";
+                    xlWorkSheet.Cells[row, column_diagnosis].value = "Smokers";
+                    xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Smokers"] ;
+                    row++;
                 }
-                if (!diagnosis.Contains("Lung disease"))
+                if (!SearchInDiagnosis("Lung disease", xlWorkSheet))
                 {
-                    diagnosis = diagnosis + "Lung disease";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Lung disease"] + ",";
-                }
-            }
-            if (bloodtest.RBC < 4.5)
-            {
-                if (!diagnosis.Contains("anemia"))
-                {
-                    diagnosis = diagnosis + "anemia";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["anemia"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("bleeding"))
-                {
-                    diagnosis = diagnosis + "bleeding";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
+                    xlWorkSheet.Cells[row, column_diagnosis].value = "Lung disease";
+                    xlWorkSheet.Cells[row, column_Recomendation].value = Recomendation["Lung disease"];
+                    row++;
                 }
             }
+            //if (bloodtest.RBC < 4.5)
+            //{
+            //    if (!diagnosis.Contains("anemia"))
+            //    {
+            //        diagnosis = diagnosis + "anemia";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["anemia"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("bleeding"))
+            //    {
+            //        diagnosis = diagnosis + "bleeding";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
+            //    }
+            //}
 
-            //HCT
-            double Mmaxhct = 54;
-            double Fmaxhct = 47;
-            double Mminhct = 37;
-            double Fminhct = 33;
+            ////HCT
+            //double Mmaxhct = 54;
+            //double Fmaxhct = 47;
+            //double Mminhct = 37;
+            //double Fminhct = 33;
 
-            if (Questions[1].status == true)
-            {
-                Mmaxhct = Mmaxhct + Mmaxhct * 0.1;
-                Fmaxhct = Fmaxhct + Fmaxhct * 0.1;
-                Mminhct = Mminhct + Mminhct * 0.1;
-                Fminhct = Fminhct + Fminhct * 0.1;
-            }
+            //if (Questions[1].status == true)
+            //{
+            //    Mmaxhct = Mmaxhct + Mmaxhct * 0.1;
+            //    Fmaxhct = Fmaxhct + Fmaxhct * 0.1;
+            //    Mminhct = Mminhct + Mminhct * 0.1;
+            //    Fminhct = Fminhct + Fminhct * 0.1;
+            //}
 
-            if ((bloodtest.HCT > Mmaxhct && patient.Gender == "זכר") ||
-                (bloodtest.HCT > Fmaxhct && patient.Gender == "נקבה"))
-            {
-                if (!diagnosis.Contains("Smokers"))
-                {
-                    diagnosis = diagnosis + "Smokers";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Smokers"];
-                }
-            }
+            //if ((bloodtest.HCT > Mmaxhct && patient.Gender == "זכר") ||
+            //    (bloodtest.HCT > Fmaxhct && patient.Gender == "נקבה"))
+            //{
+            //    if (!diagnosis.Contains("Smokers"))
+            //    {
+            //        diagnosis = diagnosis + "Smokers";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Smokers"];
+            //    }
+            //}
 
-            if ((bloodtest.HCT < Mminhct && patient.Gender == "זכר") ||
-                (bloodtest.HCT < Fminhct && patient.Gender == "נקבה"))
-            {
-                if (!diagnosis.Contains("anemia"))
-                {
-                    diagnosis = diagnosis + "anemia";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["anemia"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("bleeding"))
-                {
-                    diagnosis = diagnosis + "bleeding";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
-                }
-            }
+            //if ((bloodtest.HCT < Mminhct && patient.Gender == "זכר") ||
+            //    (bloodtest.HCT < Fminhct && patient.Gender == "נקבה"))
+            //{
+            //    if (!diagnosis.Contains("anemia"))
+            //    {
+            //        diagnosis = diagnosis + "anemia";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["anemia"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("bleeding"))
+            //    {
+            //        diagnosis = diagnosis + "bleeding";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
+            //    }
+            //}
 
-            //Urea
-            if (bloodtest.UREA > 43)
-            {
-                if (!diagnosis.Contains("Kidney disease"))
-                {
-                    diagnosis = diagnosis + "Kidney disease";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Kidney disease"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Dehydration"))
-                {
-                    diagnosis = diagnosis + "Dehydration";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Dehydration"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("diet"))
-                {
-                    diagnosis = diagnosis + "diet";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
-                }
-            }
+            ////Urea
+            //if (bloodtest.UREA > 43)
+            //{
+            //    if (!diagnosis.Contains("Kidney disease"))
+            //    {
+            //        diagnosis = diagnosis + "Kidney disease";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Kidney disease"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Dehydration"))
+            //    {
+            //        diagnosis = diagnosis + "Dehydration";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Dehydration"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("diet"))
+            //    {
+            //        diagnosis = diagnosis + "diet";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
+            //    }
+            //}
 
-            if (bloodtest.UREA < 17)
-            {            
-                if (Questions.Length > 4)
-                {
-                    if (Questions[4].status == true)
-                    {
-                        diagnosis = diagnosis + "low Urea is normal for pregnant woman";
-                    }
-                }
-                if (!diagnosis.Contains("Malnutrition"))
-                {
-                    diagnosis = diagnosis + "Malnutrition";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Malnutrition"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("diet"))
-                {
-                    diagnosis = diagnosis + "diet";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["diet"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Liver disease"))
-                {
-                    diagnosis = diagnosis + "Liver disease";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Liver disease"];
-                }
-            }
+            //if (bloodtest.UREA < 17)
+            //{            
+            //    if (Questions.Length > 4)
+            //    {
+            //        if (Questions[4].status == true)
+            //        {
+            //            diagnosis = diagnosis + "low Urea is normal for pregnant woman";
+            //        }
+            //    }
+            //    if (!diagnosis.Contains("Malnutrition"))
+            //    {
+            //        diagnosis = diagnosis + "Malnutrition";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Malnutrition"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("diet"))
+            //    {
+            //        diagnosis = diagnosis + "diet";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["diet"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Liver disease"))
+            //    {
+            //        diagnosis = diagnosis + "Liver disease";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Liver disease"];
+            //    }
+            //}
 
-            //Hb
-            if ((bloodtest.Hb < 12 && patient.Age >= 18) ||
-                (bloodtest.Hb < 11.5 && patient.Age < 18))
-            {
-                if (!diagnosis.Contains("anemia"))
-                {
-                    diagnosis = diagnosis + "anemia";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["anemia"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Hematological disorder"))
-                {
-                    diagnosis = diagnosis + "diet";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Hematological disorder"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Iron deficiency"))
-                {
-                    diagnosis = diagnosis + "Iron deficiency";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Iron deficiency"];
-                }
-                if (!diagnosis.Contains("bleeding"))
-                {
-                    diagnosis = diagnosis + "bleeding";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
-                }
-            }
+            ////Hb
+            //if ((bloodtest.Hb < 12 && patient.Age >= 18) ||
+            //    (bloodtest.Hb < 11.5 && patient.Age < 18))
+            //{
+            //    if (!diagnosis.Contains("anemia"))
+            //    {
+            //        diagnosis = diagnosis + "anemia";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["anemia"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Hematological disorder"))
+            //    {
+            //        diagnosis = diagnosis + "diet";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Hematological disorder"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Iron deficiency"))
+            //    {
+            //        diagnosis = diagnosis + "Iron deficiency";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Iron deficiency"];
+            //    }
+            //    if (!diagnosis.Contains("bleeding"))
+            //    {
+            //        diagnosis = diagnosis + "bleeding";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
+            //    }
+            //}
 
-            //Crtn
-            if ((bloodtest.Crtn > 1 && patient.Age >= 3 && patient.Age <= 59) ||
-                (bloodtest.Crtn < 1.2 && patient.Age >= 60) ||
-                (bloodtest.Crtn < 0.5 && patient.Age < 3))
-            {
-                if (!diagnosis.Contains("Kidney disease"))
-                {
-                    diagnosis = diagnosis + "Kidney disease";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Kidney disease"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Muscle diseases"))
-                {
-                    diagnosis = diagnosis + "Muscle diseases";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Muscle diseases"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Increased consumption of meat"))
-                {
-                    diagnosis = diagnosis + "Increased consumption of meat";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Increased consumption of meat"];
-                }
-            }
+            ////Crtn
+            //if ((bloodtest.Crtn > 1 && patient.Age >= 3 && patient.Age <= 59) ||
+            //    (bloodtest.Crtn < 1.2 && patient.Age >= 60) ||
+            //    (bloodtest.Crtn < 0.5 && patient.Age < 3))
+            //{
+            //    if (!diagnosis.Contains("Kidney disease"))
+            //    {
+            //        diagnosis = diagnosis + "Kidney disease";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Kidney disease"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Muscle diseases"))
+            //    {
+            //        diagnosis = diagnosis + "Muscle diseases";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Muscle diseases"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Increased consumption of meat"))
+            //    {
+            //        diagnosis = diagnosis + "Increased consumption of meat";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Increased consumption of meat"];
+            //    }
+            //}
 
-            if ((bloodtest.Crtn < 0.6 && patient.Age >= 18) ||
-                (bloodtest.Crtn < 0.5 && patient.Age >= 3 && patient.Age >= 17) ||
-                (bloodtest.Crtn < 0.2 && patient.Age < 3))
-            {
-                if (!diagnosis.Contains("Muscle diseases"))
-                {
-                    diagnosis = diagnosis + "Muscle diseases";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Muscle diseases"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Malnutrition"))
-                {
-                    diagnosis = diagnosis + "Muscle diseases";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Malnutrition"];
-                }
-            }
+            //if ((bloodtest.Crtn < 0.6 && patient.Age >= 18) ||
+            //    (bloodtest.Crtn < 0.5 && patient.Age >= 3 && patient.Age >= 17) ||
+            //    (bloodtest.Crtn < 0.2 && patient.Age < 3))
+            //{
+            //    if (!diagnosis.Contains("Muscle diseases"))
+            //    {
+            //        diagnosis = diagnosis + "Muscle diseases";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Muscle diseases"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Malnutrition"))
+            //    {
+            //        diagnosis = diagnosis + "Muscle diseases";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Malnutrition"];
+            //    }
+            //}
 
-            //Iron
-            if ((bloodtest.iron > 160 && patient.Gender == "זכר") ||
-                (bloodtest.iron > 160 - 160 * 0.2 && patient.Gender == "נקבה"))
-            {
-                if (!diagnosis.Contains("Iron poisoning"))
-                {
-                    diagnosis = diagnosis + "Iron poisoning";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Iron poisoning"];
-                }
-            }
+            ////Iron
+            //if ((bloodtest.iron > 160 && patient.Gender == "זכר") ||
+            //    (bloodtest.iron > 160 - 160 * 0.2 && patient.Gender == "נקבה"))
+            //{
+            //    if (!diagnosis.Contains("Iron poisoning"))
+            //    {
+            //        diagnosis = diagnosis + "Iron poisoning";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Iron poisoning"];
+            //    }
+            //}
 
-            if ((bloodtest.iron < 60 && patient.Gender == "זכר") ||
-                (bloodtest.iron < 60 - 60 * 0.2 && patient.Gender == "נקבה"))
-            {
-                if (!diagnosis.Contains("Malnutrition"))
-                {
-                    diagnosis = diagnosis + "Malnutrition";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Malnutrition"] + "or" + " ";
-                }
-                if (Questions.Length > 4)
-                {
-                    if (Questions[3].status == true)
-                    {
-                        if (!diagnosis.Contains("Iron deficiency"))
-                        {
-                            diagnosis = diagnosis + "Iron deficiency";
-                            OutRecomendation = OutRecomendation + "," + Recomendation["Iron deficiency"] + "or" + " ";
-                        }
-                    }
-                }
-                if (!diagnosis.Contains("bleeding"))
-                {
-                    diagnosis = diagnosis + "bleeding";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
-                }
-            }
+            //if ((bloodtest.iron < 60 && patient.Gender == "זכר") ||
+            //    (bloodtest.iron < 60 - 60 * 0.2 && patient.Gender == "נקבה"))
+            //{
+            //    if (!diagnosis.Contains("Malnutrition"))
+            //    {
+            //        diagnosis = diagnosis + "Malnutrition";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Malnutrition"] + "or" + " ";
+            //    }
+            //    if (Questions.Length > 4)
+            //    {
+            //        if (Questions[3].status == true)
+            //        {
+            //            if (!diagnosis.Contains("Iron deficiency"))
+            //            {
+            //                diagnosis = diagnosis + "Iron deficiency";
+            //                OutRecomendation = OutRecomendation + "," + Recomendation["Iron deficiency"] + "or" + " ";
+            //            }
+            //        }
+            //    }
+            //    if (!diagnosis.Contains("bleeding"))
+            //    {
+            //        diagnosis = diagnosis + "bleeding";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["bleeding"];
+            //    }
+            //}
 
-            //HDL
-            double MminHDL = 29;
-            double FminHDL = 34;
-            if (Questions[2].status == true)
-            {
-                MminHDL = MminHDL + MminHDL * 0.2;
-                FminHDL = FminHDL + FminHDL * 0.2;
-            }
+            ////HDL
+            //double MminHDL = 29;
+            //double FminHDL = 34;
+            //if (Questions[2].status == true)
+            //{
+            //    MminHDL = MminHDL + MminHDL * 0.2;
+            //    FminHDL = FminHDL + FminHDL * 0.2;
+            //}
 
-            if ((bloodtest.HDL < MminHDL && patient.Gender == "זכר") ||
-               (bloodtest.HDL < FminHDL && patient.Gender == "נקבה"))
-            {
-                if (!diagnosis.Contains("Heart disease"))
-                {
-                    diagnosis = diagnosis + "Heart disease";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Heart disease"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Hyperlipidemia"))
-                {
-                    diagnosis = diagnosis + "Hyperlipidemia";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Hyperlipidemia"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Adult diabetes"))
-                {
-                    diagnosis = diagnosis + "Adult diabetes";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Adult diabetes"];
-                }
-            }
+            //if ((bloodtest.HDL < MminHDL && patient.Gender == "זכר") ||
+            //   (bloodtest.HDL < FminHDL && patient.Gender == "נקבה"))
+            //{
+            //    if (!diagnosis.Contains("Heart disease"))
+            //    {
+            //        diagnosis = diagnosis + "Heart disease";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Heart disease"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Hyperlipidemia"))
+            //    {
+            //        diagnosis = diagnosis + "Hyperlipidemia";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Hyperlipidemia"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Adult diabetes"))
+            //    {
+            //        diagnosis = diagnosis + "Adult diabetes";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Adult diabetes"];
+            //    }
+            //}
 
-            //AP
-            double minAP = 30;
-            double maxAP = 90;
-            if (Questions[1].status == true)
-            {
-                minAP = 60;
-                maxAP = 120;
-            }
+            ////AP
+            //double minAP = 30;
+            //double maxAP = 90;
+            //if (Questions[1].status == true)
+            //{
+            //    minAP = 60;
+            //    maxAP = 120;
+            //}
 
 
-            if (bloodtest.AP > maxAP)
-            {
-                if (!diagnosis.Contains("Liver disease"))
-                {
-                    diagnosis = diagnosis + "Heart disease";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Heart disease"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Diseases of the biliary tract"))
-                {
-                    diagnosis = diagnosis + "Diseases of the biliary tract";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Diseases of the biliary tract"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Overactive thyroid gland"))
-                {
-                    diagnosis = diagnosis + "Overactive thyroid gland";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Overactive thyroid gland"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Use of various medications"))
-                {
-                    diagnosis = diagnosis + "Use of various medications";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Use of various medications"] + "or" + " ";
-                }
-            }
+            //if (bloodtest.AP > maxAP)
+            //{
+            //    if (!diagnosis.Contains("Liver disease"))
+            //    {
+            //        diagnosis = diagnosis + "Heart disease";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Heart disease"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Diseases of the biliary tract"))
+            //    {
+            //        diagnosis = diagnosis + "Diseases of the biliary tract";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Diseases of the biliary tract"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Overactive thyroid gland"))
+            //    {
+            //        diagnosis = diagnosis + "Overactive thyroid gland";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Overactive thyroid gland"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Use of various medications"))
+            //    {
+            //        diagnosis = diagnosis + "Use of various medications";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Use of various medications"] + "or" + " ";
+            //    }
+            //}
 
-            if (bloodtest.AP < minAP)
-            {
-                if (!diagnosis.Contains("Malnutrition"))
-                {
-                    diagnosis = diagnosis + "Malnutrition";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Malnutrition"] + "or" + " ";
-                }
-                if (!diagnosis.Contains("Vitamin deficiency"))
-                {
-                    diagnosis = diagnosis + "Vitamin deficiency";
-                    OutRecomendation = OutRecomendation + "," + Recomendation["Vitamin deficiency"];
-                }
-            }
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            //String filename = "D:\\" +  patient.FirstName + ".xlsx";
-            //var file = new FileInfo(filename);
-            SaveFileDialog save = new SaveFileDialog();
-            save.Title = "where to save";
-            save.FileName = patient.FirstName + ".xlsx";
-            if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                var file = new FileInfo(save.FileName);
-                var Out = GetSetupData(bloodtest, diagnosis, OutRecomendation);
-                await SaveExcelFile(Out, file);
-            }
-            
+            //if (bloodtest.AP < minAP)
+            //{
+            //    if (!diagnosis.Contains("Malnutrition"))
+            //    {
+            //        diagnosis = diagnosis + "Malnutrition";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Malnutrition"] + "or" + " ";
+            //    }
+            //    if (!diagnosis.Contains("Vitamin deficiency"))
+            //    {
+            //        diagnosis = diagnosis + "Vitamin deficiency";
+            //        OutRecomendation = OutRecomendation + "," + Recomendation["Vitamin deficiency"];
+            //    }
+            //}
+
+            xlWorkBook.Close();
+            xlApp.Quit();
 
 
         }
-
+        public bool SearchInDiagnosis(String diagnosis, Microsoft.Office.Interop.Excel.Worksheet x) 
+        {
+            int column_diagnosis = 24;
+            int row = 1;
+            while (x.Cells[row, column_diagnosis].value != "")
+            {
+                if (x.Cells[row, column_diagnosis].value = diagnosis)
+                    return true;
+                row++;
+            }
+            return false;
+        }
         private static async Task SaveExcelFile(List<OutPut> Out, FileInfo file)
         {
             DeleteIfExists(file);
@@ -623,6 +667,7 @@ namespace Doctor_assistant.Forms
 
             await package.SaveAsync();
 
+            
         }
 
         private static void DeleteIfExists(FileInfo file)
@@ -633,7 +678,7 @@ namespace Doctor_assistant.Forms
             }
         }
 
-        private List<OutPut> GetSetupData(BloodTestsInfo bloodTests ,String Outdiagnosis, String OutRecomendation)
+        private List<OutPut> GetSetupData(BloodTestsInfo bloodTests , Patientsinfo patient)
         {
             List<OutPut> output = new()
             {
@@ -662,9 +707,8 @@ namespace Doctor_assistant.Forms
                     iron = bloodTests.iron,
                     HDL = bloodTests.HDL,
                     AP = bloodTests.AP,
-                    diagnosis = Outdiagnosis,
-                    recommendation = OutRecomendation,
-                    
+
+
 
                 }
             };
