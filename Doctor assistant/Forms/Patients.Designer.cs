@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Patients));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.name_textbox = new System.Windows.Forms.TextBox();
+            this.searchBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.search_btn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.listView = new System.Windows.Forms.ListView();
@@ -102,14 +102,14 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // name_textbox
+            // searchBox
             // 
-            this.name_textbox.BackColor = System.Drawing.Color.SkyBlue;
-            this.name_textbox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.name_textbox.Location = new System.Drawing.Point(834, 117);
-            this.name_textbox.Name = "name_textbox";
-            this.name_textbox.Size = new System.Drawing.Size(137, 27);
-            this.name_textbox.TabIndex = 6;
+            this.searchBox.BackColor = System.Drawing.Color.SkyBlue;
+            this.searchBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBox.Location = new System.Drawing.Point(834, 117);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(137, 27);
+            this.searchBox.TabIndex = 6;
             // 
             // label4
             // 
@@ -166,7 +166,7 @@
             this.listView.GridLines = true;
             this.listView.HideSelection = false;
             this.listView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.listView.Location = new System.Drawing.Point(33, 177);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(938, 556);
@@ -359,11 +359,12 @@
             this.stopfilter.IdleForecolor = System.Drawing.Color.DarkSlateGray;
             this.stopfilter.IdleLineColor = System.Drawing.Color.LightSlateGray;
             this.stopfilter.Location = new System.Drawing.Point(730, 114);
-            this.stopfilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.stopfilter.Margin = new System.Windows.Forms.Padding(4);
             this.stopfilter.Name = "stopfilter";
             this.stopfilter.Size = new System.Drawing.Size(97, 30);
             this.stopfilter.TabIndex = 44;
             this.stopfilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.stopfilter.Click += new System.EventHandler(this.stopfilter_Click);
             // 
             // Patients
             // 
@@ -375,7 +376,7 @@
             this.Controls.Add(this.listView);
             this.Controls.Add(this.search_btn);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.name_textbox);
+            this.Controls.Add(this.searchBox);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -399,7 +400,7 @@
         #endregion
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox name_textbox;
+        private System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.Label label4;
         private Bunifu.Framework.UI.BunifuThinButton2 search_btn;
         private System.Windows.Forms.ListView listView;

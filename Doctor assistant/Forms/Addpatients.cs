@@ -117,9 +117,9 @@ namespace Doctor_assistant.Forms
         private void AddPatient_Click(object sender, EventArgs e)
         {
             foreach (TextBox tb in this.Controls.OfType<TextBox>())
-                if ((string.IsNullOrEmpty(tb.Text)))
+                if ((string.IsNullOrEmpty(tb.Text))|| gender_combobox.SelectedIndex == -1)
                 {
-                    MessageBox.Show("You must fill all the deatails!");
+                    MessageBox.Show("עליך למלא את כל הפרטים!");
                     return;
                 }
             Patientsinfo NewPatiet = new Patientsinfo();

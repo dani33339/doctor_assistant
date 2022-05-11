@@ -54,21 +54,18 @@ namespace Doctor_assistant.Forms
 
         }
 
-        public void myList_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (listView.SelectedItems.Count >= 1)
-            {
-                ListViewItem item = listView.SelectedItems[0];
+        //public void myList_MouseDoubleClick(object sender, MouseEventArgs e)
+        //{
+        //    if (listView.SelectedItems.Count >= 1)
+        //    {
+        //        ListViewItem item = listView.SelectedItems[0];
 
-                //here i check for the Mouse pointer location on click if its contained 
-                // in the actual selected item's bounds or not .
-                // cuz i ran into a problem with the ui once because of that ..
-                if (item.Bounds.Contains(e.Location))
-                {
-                    MessageBox.Show("Double Clicked on :" + item.Text);
-                }
-            }
-        }
+        //        if (item.Bounds.Contains(e.Location))
+        //        {
+        //            MessageBox.Show("Double Clicked on :" + item.Text);
+        //        }
+        //    }
+        //}
 
             public Patientsinfo PatientFinder(MongoDB.Bson.ObjectId Id) 
         {
@@ -85,8 +82,18 @@ namespace Doctor_assistant.Forms
 
         private void search_btn_Click(object sender, EventArgs e)
         {
+            var list = listView.Items
+                                .Cast<ListViewItem>()
+                                .Where(
+                                    x => x.SubItems
+                                          .Cast<ListViewItem.ListViewSubItem>()
+                                          .Any(y => y.Text.Contains(searchBox.Text)))
+                                .ToArray();
+            listView.Items.Clear();
+            listView.Items.AddRange(list);
 
         }
+
 
         private void exit_Click(object sender, EventArgs e)
         {
@@ -148,6 +155,14 @@ namespace Doctor_assistant.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void stopfilter_Click(object sender, EventArgs e)
+        {
+            Patients newForm = new Patients(doctor);
+            this.Hide();
+            newForm.ShowDialog();
             this.Close();
         }
     }
