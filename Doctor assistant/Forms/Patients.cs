@@ -54,19 +54,6 @@ namespace Doctor_assistant.Forms
 
         }
 
-        //public void myList_MouseDoubleClick(object sender, MouseEventArgs e)
-        //{
-        //    if (listView.SelectedItems.Count >= 1)
-        //    {
-        //        ListViewItem item = listView.SelectedItems[0];
-
-        //        if (item.Bounds.Contains(e.Location))
-        //        {
-        //            MessageBox.Show("Double Clicked on :" + item.Text);
-        //        }
-        //    }
-        //}
-
             public Patientsinfo PatientFinder(MongoDB.Bson.ObjectId Id) 
         {
             var filter = Builders<Patientsinfo>.Filter;
