@@ -122,6 +122,17 @@ namespace Doctor_assistant.Forms
                     MessageBox.Show("עליך למלא את כל הפרטים!");
                     return;
                 }
+
+            if(Int32.Parse(age_textbox.Text) < 0)
+            {
+                MessageBox.Show("הגיל אינו תקין!");
+                return;
+            }
+
+            
+
+           
+
             Patientsinfo NewPatiet = new Patientsinfo();
             NewPatiet.Age = Int32.Parse(age_textbox.Text);
             NewPatiet.City = city_textbox.Text;
@@ -150,6 +161,7 @@ namespace Doctor_assistant.Forms
             {
                 tb.Clear();
             }
+            gender_combobox.ResetText();
             GoToappointment();
         }
 
@@ -170,7 +182,7 @@ namespace Doctor_assistant.Forms
 
         private void id_textbox_TextChanged(object sender, EventArgs e)
         {
-
+            id_textbox.MaxLength = 9;
         }
 
         private void lastname_textbox_TextChanged(object sender, EventArgs e)
@@ -185,7 +197,7 @@ namespace Doctor_assistant.Forms
 
         private void phone_textbox_TextChanged(object sender, EventArgs e)
         {
-
+            phone_textbox.MaxLength = 10;
         }
 
         private void Addpatients_Load(object sender, EventArgs e)

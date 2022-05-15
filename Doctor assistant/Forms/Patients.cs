@@ -152,5 +152,15 @@ namespace Doctor_assistant.Forms
             newForm.ShowDialog();
             this.Close();
         }
+
+        private void listView_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

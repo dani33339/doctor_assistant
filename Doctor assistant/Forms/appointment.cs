@@ -271,6 +271,7 @@ namespace Doctor_assistant.Forms
             {"Malnutrition", "Schedule an appointment with Nutrition"}
             };
 
+            Dictionary<string, string> Conclusion_Window = new Dictionary<string, string>();
 
             if (Questions[0].status == true)
             {
@@ -278,6 +279,7 @@ namespace Doctor_assistant.Forms
                 xlWorkSheet.Cells[row, column_diagnosis].Value = "Smokers";
                 xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Smokers"];
                 row++;
+                Conclusion_Window.Add("Smokers", Recomendation["Smokers"]);
             }
             //WBC
             if ((Convert.ToDouble(bloodtest.WBC) > 11000 && patient.Age >= 18) ||
@@ -287,6 +289,7 @@ namespace Doctor_assistant.Forms
                 xlWorkSheet.Cells[row, column_diagnosis].Value = "Infection";
                 xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Infection"];
                 row++;
+                Conclusion_Window.Add("Infection", Recomendation["Infection"]);
             }
             if ((bloodtest.WBC < 4500 && patient.Age >= 18) ||
                 (bloodtest.WBC < 5500 && patient.Age > 3 && patient.Age < 17) ||
@@ -295,6 +298,7 @@ namespace Doctor_assistant.Forms
                 xlWorkSheet.Cells[row, column_diagnosis].Value = "Viral disease";
                 xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Viral disease"];
                 row++;
+                Conclusion_Window.Add("Viral disease", Recomendation["Viral disease"]);
             }
 
             //Neut
@@ -305,6 +309,7 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Infection";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Infection"];
                     row++;
+                    Conclusion_Window.Add("Infection", Recomendation["Infection"]);
                 }
             }
             if (bloodtest.Neut < 28)
@@ -312,6 +317,7 @@ namespace Doctor_assistant.Forms
                 xlWorkSheet.Cells[row, column_diagnosis].Value = "Disruption of blood / blood cell formation";
                 xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Disruption of blood / blood cell formation"];
                 row++;
+                Conclusion_Window.Add("Disruption of blood / blood cell formation", Recomendation["Disruption of blood / blood cell formation"]);
             }
 
             //Lymph
@@ -320,14 +326,16 @@ namespace Doctor_assistant.Forms
                 if (!SearchInDiagnosis("Infection", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Infection";
-                    xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Infection"] + "or" + " ";
+                    xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Infection"];
                     row++;
+                    Conclusion_Window.Add("Infection", Recomendation["Infection"]);
                 }
                 if (!SearchInDiagnosis("cancer", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "cancer";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["cancer"];
                     row++;
+                    Conclusion_Window.Add("cancer", Recomendation["cancer"]);
                 }
             }
             if (bloodtest.Lymph < 36)
@@ -337,6 +345,7 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Disruption of blood / blood cell formation";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Disruption of blood / blood cell formation"];
                     row++;
+                    Conclusion_Window.Add("Disruption of blood / blood cell formation", Recomendation["Disruption of blood / blood cell formation"]);
                 }
             }
 
@@ -348,19 +357,21 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Disruption of blood / blood cell formation";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Infection"];
                     row++;
-
+                    Conclusion_Window.Add("Disruption of blood / blood cell formation", Recomendation["Disruption of blood / blood cell formation"]);
                 }
                 if (!SearchInDiagnosis("Smokers", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Smokers";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Smokers"];
                     row++;
+                    Conclusion_Window.Add("Smokers", Recomendation["Smokers"]);
                 }
                 if (!SearchInDiagnosis("Lung disease", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Lung disease";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Lung disease"];
                     row++;
+                    Conclusion_Window.Add("Lung disease", Recomendation["Lung disease"]);
                 }
             }
             if (bloodtest.RBC < 4.5)
@@ -370,12 +381,14 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "anemia";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["anemia"];
                     row++;
+                    Conclusion_Window.Add("anemia", Recomendation["anemia"]);
                 }
                 if (!SearchInDiagnosis("bleeding", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "bleeding";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["bleeding"];
                     row++;
+                    Conclusion_Window.Add("bleeding", Recomendation["bleeding"]);
                 }
             }
 
@@ -401,6 +414,7 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Smokers";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Smokers"];
                     row++;
+                    Conclusion_Window.Add("Smokers", Recomendation["Smokers"]);
                 }
             }
 
@@ -412,12 +426,14 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "anemia";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["anemia"];
                     row++;
+                    Conclusion_Window.Add("anemia", Recomendation["anemia"]);
                 }
                 if (!SearchInDiagnosis("bleeding", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "bleeding";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["bleeding"];
                     row++;
+                    Conclusion_Window.Add("bleeding", Recomendation["bleeding"]);
                 }
             }
 
@@ -429,18 +445,21 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Kidney disease";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Kidney disease"];
                     row++;
+                    Conclusion_Window.Add("Kidney disease", Recomendation["Kidney disease"]);
                 }
                 if (!SearchInDiagnosis("Dehydration", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Dehydration";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Dehydration"];
                     row++;
+                    Conclusion_Window.Add("Dehydration", Recomendation["Dehydration"]);
                 }
                 if (!SearchInDiagnosis("diet", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "diet";
-                    xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["bleeding"];
+                    xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["diet"];
                     row++;
+                    Conclusion_Window.Add("diet", Recomendation["diet"]);
                 }
             }
 
@@ -451,6 +470,7 @@ namespace Doctor_assistant.Forms
                     if (Questions[4].status == true)
                     {
                         xlWorkSheet.Cells[row, column_diagnosis].Value = "low Urea is normal for pregnant woman";
+                        
                     }
                 }
                 if (!SearchInDiagnosis("Malnutrition", xlWorkSheet))
@@ -464,12 +484,14 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "diet";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["diet"];
                     row++;
+                    Conclusion_Window.Add("diet", Recomendation["diet"]);
                 }
                 if (!SearchInDiagnosis("Liver disease", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Liver disease";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Liver disease"];
                     row++;
+                    Conclusion_Window.Add("Liver disease", Recomendation["Liver disease"]);
                 }
             }
 
@@ -482,24 +504,28 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "anemia";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["anemia"];
                     row++;
+                    Conclusion_Window.Add("anemia", Recomendation["anemia"]);
                 }
                 if (!SearchInDiagnosis("Hematological disorder", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "diet";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Hematological disorder"];
                     row++;
+                    Conclusion_Window.Add("Hematological disorder", Recomendation["Hematological disorder"]);
                 }
                 if (!SearchInDiagnosis("Iron deficiency", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Iron deficiency";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Iron deficiency"];
                     row++;
+                    Conclusion_Window.Add("Iron deficiency", Recomendation["Iron deficiency"]);
                 }
                 if (!SearchInDiagnosis("bleeding", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "bleeding";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["bleeding"];
                     row++;
+                    Conclusion_Window.Add("bleeding", Recomendation["bleeding"]);
                 }
             }
 
@@ -513,18 +539,21 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Kidney disease";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Kidney disease"];
                     row++;
+                    Conclusion_Window.Add("Kidney disease", Recomendation["Kidney disease"]);
                 }
                 if (!SearchInDiagnosis("Muscle diseases", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Muscle diseases";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Muscle diseases"];
                     row++;
+                    Conclusion_Window.Add("Muscle diseases", Recomendation["Muscle diseases"]);
                 }
                 if (!SearchInDiagnosis("Increased consumption of meat", xlWorkSheet))
                 {
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Increased consumption of meat";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Increased consumption of meat"];
                     row++;
+                    Conclusion_Window.Add("Increased consumption of meat", Recomendation["Increased consumption of meat"]);
                 }
             }
 
@@ -537,12 +566,14 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Muscle diseases";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Muscle diseases"];
                     row++;
+                    Conclusion_Window.Add("Muscle diseases", Recomendation["Muscle diseases"]);
                 }
                 if (!SearchInDiagnosis("Malnutrition", xlWorkSheet))
                 {
-                    xlWorkSheet.Cells[row, column_diagnosis].Value = "Muscle diseases";
+                    xlWorkSheet.Cells[row, column_diagnosis].Value = "Malnutrition";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Malnutrition"];
                     row++;
+                    Conclusion_Window.Add("Malnutrition", Recomendation["Malnutrition"]);
                 }
             }
 
@@ -555,6 +586,7 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Iron poisoning";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Iron poisoning"];
                     row++;
+                    Conclusion_Window.Add("Iron poisoning", Recomendation["Iron poisoning"]);
                 }
             }
 
@@ -566,6 +598,7 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Malnutrition";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Malnutrition"];
                     row++;
+                    Conclusion_Window.Add("Malnutrition", Recomendation["Malnutrition"]);
                 }
                 if (Questions.Length > 4)
                 {
@@ -576,6 +609,7 @@ namespace Doctor_assistant.Forms
                             xlWorkSheet.Cells[row, column_diagnosis].Value = "Iron deficiency";
                             xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Iron deficiency"];
                             row++;
+                            Conclusion_Window.Add("Iron deficiency", Recomendation["Iron deficiency"]);
                         }
                     }
                 }
@@ -584,6 +618,7 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "bleeding";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["bleeding"];
                     row++;
+                    Conclusion_Window.Add("bleeding", Recomendation["bleeding"]);
                 }
             }
 
@@ -604,17 +639,20 @@ namespace Doctor_assistant.Forms
                     xlWorkSheet.Cells[row, column_diagnosis].Value = "Heart disease";
                     xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Heart disease"];
                     row++;
+                    Conclusion_Window.Add("Heart disease", Recomendation["Heart disease"]);
                     if (!SearchInDiagnosis("Hyperlipidemia", xlWorkSheet))
                     {
                         xlWorkSheet.Cells[row, column_diagnosis].Value = "Hyperlipidemia";
                         xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Hyperlipidemia"];
                         row++;
+                        Conclusion_Window.Add("Hyperlipidemia", Recomendation["Hyperlipidemia"]);
                     }
                     if (!SearchInDiagnosis("Adult Diabetes", xlWorkSheet))
                     {
                         xlWorkSheet.Cells[row, column_diagnosis].Value = "Adult Diabetes";
                         xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Adult Diabetes"];
                         row++;
+                        Conclusion_Window.Add("Adult Diabetes", Recomendation["Adult Diabetes"]);
                     }
                 }
             }
@@ -632,27 +670,31 @@ namespace Doctor_assistant.Forms
                 {
                     if (!SearchInDiagnosis("Liver disease", xlWorkSheet))
                     {
-                        xlWorkSheet.Cells[row, column_diagnosis].Value = "Heart disease";
-                        xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Heart disease"];
+                        xlWorkSheet.Cells[row, column_diagnosis].Value = "Liver disease";
+                        xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Liver disease"];
                         row++;
+                        Conclusion_Window.Add("Liver disease", Recomendation["Liver disease"]);
                     }
                     if (!SearchInDiagnosis("Diseases of the biliary tract", xlWorkSheet))
                     {
                         xlWorkSheet.Cells[row, column_diagnosis].Value = "Diseases of the biliary tract";
                         xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Diseases of the biliary tract"];
                         row++;
+                        Conclusion_Window.Add("Diseases of the biliary tract", Recomendation["Diseases of the biliary tract"]);
                     }
                     if (!SearchInDiagnosis("Overactive thyroid gland", xlWorkSheet))
                     {
                         xlWorkSheet.Cells[row, column_diagnosis].Value = "Overactive thyroid gland";
                         xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Overactive thyroid gland"];
                         row++;
+                        Conclusion_Window.Add("Overactive thyroid gland", Recomendation["Overactive thyroid gland"]);
                     }
                     if (!SearchInDiagnosis("Use of various medications", xlWorkSheet))
                     {
                         xlWorkSheet.Cells[row, column_diagnosis].Value = "Use of various medications";
                         xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Use of various medications"];
                         row++;
+                        Conclusion_Window.Add("Use of various medications", Recomendation["Use of various medications"]);
                     }
                 }
 
@@ -663,16 +705,28 @@ namespace Doctor_assistant.Forms
                         xlWorkSheet.Cells[row, column_diagnosis].Value = "Malnutrition";
                         xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Malnutrition"];
                         row++;
+                        Conclusion_Window.Add("Malnutrition", Recomendation["Malnutrition"]);
                     }
                     if (!SearchInDiagnosis("Vitamin deficiency", xlWorkSheet))
                     {
                         xlWorkSheet.Cells[row, column_diagnosis].Value = "Vitamin deficiency";
                         xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Vitamin deficiency"];
                         row++;
+                        Conclusion_Window.Add("Vitamin deficiency", Recomendation["Vitamin deficiency"]);
                     }
                 }
+            package.Save();
+            String[] Indices = { heat_textbox.Text, pulse_textBox.Text, bloodpressure_textBox.Text };
+            foreach (TextBox tb in this.Controls.OfType<TextBox>())
+            {
+                tb.Clear();
+            }
             
-                package.Save();       
+            
+            Diagnosis_Recomendation newForm = new Diagnosis_Recomendation(Conclusion_Window , patient , bloodtest , Indices);
+            newForm.ShowDialog();
+
+            
         }
         public bool SearchInDiagnosis(String diagnosis, ExcelWorksheet x) 
         {
