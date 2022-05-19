@@ -123,15 +123,35 @@ namespace Doctor_assistant.Forms
                     return;
                 }
 
-            if(Int32.Parse(age_textbox.Text) < 0)
+           
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(id_textbox.Text, "[^0-9]"))
             {
-                MessageBox.Show("הגיל אינו תקין!");
+                MessageBox.Show("תעודת זהות אינה תקינה");
+                id_textbox.Text = id_textbox.Text.Remove(id_textbox.Text.Length - 1);
                 return;
             }
 
-            
+            if (System.Text.RegularExpressions.Regex.IsMatch(phone_textbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("מספר פלאפון אינו תקין");
+                phone_textbox.Text = phone_textbox.Text.Remove(phone_textbox.Text.Length - 1);
+                return;
+            }
 
-           
+            if (System.Text.RegularExpressions.Regex.IsMatch(apartment_textbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("מספר בית אינו תקין");
+                apartment_textbox.Text = apartment_textbox.Text.Remove(apartment_textbox.Text.Length - 1);
+                return;
+            }
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(age_textbox.Text, "[^0-9]") || (Int32.Parse(age_textbox.Text) < 0 || Int32.Parse(age_textbox.Text) > 120))
+            {
+                MessageBox.Show("הגיל אינו תקין");
+                age_textbox.Text = age_textbox.Text.Remove(age_textbox.Text.Length - 1);
+                return;
+            }
 
             Patientsinfo NewPatiet = new Patientsinfo();
             NewPatiet.Age = Int32.Parse(age_textbox.Text);
@@ -165,6 +185,7 @@ namespace Doctor_assistant.Forms
             GoToappointment();
         }
 
+        
         private void name_textbox_TextChanged(object sender, EventArgs e)
         {
 

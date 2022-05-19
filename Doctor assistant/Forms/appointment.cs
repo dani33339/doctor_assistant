@@ -182,6 +182,25 @@ namespace Doctor_assistant.Forms
         {
             this.Close();
         }
+        
+        public bool HeatTest()
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(heat_textbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("החום אינו תקין");
+                heat_textbox.Text = heat_textbox.Text.Remove(heat_textbox.Text.Length - 1);
+                return true;
+            }
+
+            if (Int32.Parse(heat_textbox.Text) > 45 && Int32.Parse(heat_textbox.Text) < 36)
+            {
+                MessageBox.Show("החום אינו תקין");
+                heat_textbox.Text = heat_textbox.Text.Remove(heat_textbox.Text.Length - 1);
+                return true;
+            }
+            return false;
+
+        }
 
         private  void diagnosis_btn_Click(object sender, EventArgs e)
         {
@@ -190,6 +209,13 @@ namespace Doctor_assistant.Forms
                 MessageBox.Show("הכנס את כל המדדים");
                 return;
             }
+
+             
+            if (HeatTest())
+                return;
+            
+            
+
 
             MongoDB.Bson.ObjectId mostrecent = patient.BloodTests.Last();
             var bloodtest = BloodTestsInfoFinder(mostrecent);
