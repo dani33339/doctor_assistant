@@ -192,7 +192,7 @@ namespace Doctor_assistant.Forms
                 return true;
             }
 
-            if (Int32.Parse(heat_textbox.Text) > 45 && Int32.Parse(heat_textbox.Text) < 36)
+            if (Int32.Parse(heat_textbox.Text) > 45 && Int32.Parse(heat_textbox.Text) < 33)
             {
                 MessageBox.Show("החום אינו תקין");
                 heat_textbox.Text = heat_textbox.Text.Remove(heat_textbox.Text.Length - 1);
@@ -201,6 +201,25 @@ namespace Doctor_assistant.Forms
             return false;
 
         }
+        public bool PulseTest()
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(pulse_textBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("החום אינו תקין");
+                pulse_textBox.Text = pulse_textBox.Text.Remove(pulse_textBox.Text.Length - 1);
+                return true;
+            }
+
+            if (Int32.Parse(pulse_textBox.Text) >= 240 && Int32.Parse(pulse_textBox.Text) <= 24)
+            {
+                MessageBox.Show("החום אינו תקין");
+                pulse_textBox.Text = pulse_textBox.Text.Remove(pulse_textBox.Text.Length - 1);
+                return true;
+            }
+            return false;
+
+        }
+
 
         private  void diagnosis_btn_Click(object sender, EventArgs e)
         {
@@ -209,14 +228,10 @@ namespace Doctor_assistant.Forms
                 MessageBox.Show("הכנס את כל המדדים");
                 return;
             }
-
              
             if (HeatTest())
                 return;
             
-            
-
-
             MongoDB.Bson.ObjectId mostrecent = patient.BloodTests.Last();
             var bloodtest = BloodTestsInfoFinder(mostrecent);
             //create qustions

@@ -139,14 +139,14 @@ namespace Doctor_assistant.Forms
                 return;
             }
 
-            if (System.Text.RegularExpressions.Regex.IsMatch(apartment_textbox.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(apartment_textbox.Text, "[^0-9]") || (Int32.Parse(apartment_textbox.Text) < 0 || Int32.Parse(apartment_textbox.Text) > 1000))
             {
                 MessageBox.Show("מספר בית אינו תקין");
                 apartment_textbox.Text = apartment_textbox.Text.Remove(apartment_textbox.Text.Length - 1);
                 return;
             }
 
-            if (System.Text.RegularExpressions.Regex.IsMatch(age_textbox.Text, "[^0-9]") || (Int32.Parse(age_textbox.Text) < 0 || Int32.Parse(age_textbox.Text) > 120))
+            if (System.Text.RegularExpressions.Regex.IsMatch(age_textbox.Text, "[^0-9]") || (Int32.Parse(age_textbox.Text) < 0 || Int32.Parse(age_textbox.Text) >= 120))
             {
                 MessageBox.Show("הגיל אינו תקין");
                 age_textbox.Text = age_textbox.Text.Remove(age_textbox.Text.Length - 1);

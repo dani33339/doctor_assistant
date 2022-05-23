@@ -99,9 +99,9 @@ namespace Doctor_assistant.Forms
             if (user.Length < 6 || user.Length > 8)
                 return false;
             string digits = new String(user.Where(Char.IsDigit).ToArray());
-            string letters = new String(user.Where(Char.IsLetter).ToArray());
             if (digits.Length > 2)
                 return false;
+            string letters = new String(user.Where(Char.IsLetter).ToArray());
             if (letters.Length + digits.Length != user.Length)
                 return false;
             return true;
