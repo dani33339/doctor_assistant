@@ -17,7 +17,7 @@ namespace Doctor_assistant.Forms
         {
             InitializeComponent();
 
-            result_label.Text = patient.FirstName + "תוצאה עבור מטופל";
+            result_label.Text = " תוצאה עבור מטופל  "+ patient.FirstName;
             foreach (var Conclusion in Conclusion_Window)
             {
                 String[] rowa= { Conclusion.Key, Conclusion.Value };

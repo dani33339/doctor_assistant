@@ -71,7 +71,7 @@
             this.result_label.AutoSize = true;
             this.result_label.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.result_label.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.result_label.Location = new System.Drawing.Point(1169, 18);
+            this.result_label.Location = new System.Drawing.Point(518, 18);
             this.result_label.Name = "result_label";
             this.result_label.Size = new System.Drawing.Size(206, 33);
             this.result_label.TabIndex = 3;
@@ -255,11 +255,12 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.BackColor = System.Drawing.Color.White;
+            this.label16.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label16.Location = new System.Drawing.Point(646, 99);
+            this.label16.Location = new System.Drawing.Point(674, 138);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(136, 33);
+            this.label16.Size = new System.Drawing.Size(81, 21);
             this.label16.TabIndex = 44;
             this.label16.Text = "diagnosis";
             this.label16.Click += new System.EventHandler(this.label16_Click);
@@ -267,11 +268,12 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.BackColor = System.Drawing.Color.White;
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label17.Location = new System.Drawing.Point(811, 99);
+            this.label17.Location = new System.Drawing.Point(800, 138);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(249, 33);
+            this.label17.Size = new System.Drawing.Size(147, 21);
             this.label17.TabIndex = 45;
             this.label17.Text = "recommendation";
             // 

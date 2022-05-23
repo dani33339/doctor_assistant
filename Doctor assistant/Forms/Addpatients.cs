@@ -77,10 +77,10 @@ namespace Doctor_assistant.Forms
 
         private void label1_Click(object sender, EventArgs e)
         {
-            GoToappointment();
+            GoToMypatients();
         }
 
-        private void GoToappointment()
+        private void GoToMypatients()
         {
             Patients newForm = new Patients(doctor);
             this.Hide();
@@ -91,7 +91,7 @@ namespace Doctor_assistant.Forms
 
         private void patient_picturebox_Click(object sender, EventArgs e)
         {
-            GoToappointment();
+            GoToMypatients();
         }
 
         public void docname_label_Click(object sender, EventArgs e)
@@ -106,7 +106,7 @@ namespace Doctor_assistant.Forms
 
         private void MyPatients_btn_Click(object sender, EventArgs e)
         {
-            GoToappointment();
+            GoToMypatients();
         }
 
         private void AddPatients_btn_Click(object sender, EventArgs e)
@@ -121,35 +121,29 @@ namespace Doctor_assistant.Forms
                 {
                     MessageBox.Show("עליך למלא את כל הפרטים!");
                     return;
-                }
+                }   
 
-           
-
-            if (System.Text.RegularExpressions.Regex.IsMatch(id_textbox.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(id_textbox.Text, "[^0-9]")|| !Checkid(id_textbox.Text))
             {
                 MessageBox.Show("תעודת זהות אינה תקינה");
-                id_textbox.Text = id_textbox.Text.Remove(id_textbox.Text.Length - 1);
                 return;
             }
 
-            if (System.Text.RegularExpressions.Regex.IsMatch(phone_textbox.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(phone_textbox.Text, "[^0-9]")|| !CheckPhone(phone_textbox.Text))
             {
                 MessageBox.Show("מספר פלאפון אינו תקין");
-                phone_textbox.Text = phone_textbox.Text.Remove(phone_textbox.Text.Length - 1);
                 return;
             }
 
             if (System.Text.RegularExpressions.Regex.IsMatch(apartment_textbox.Text, "[^0-9]") || (Int32.Parse(apartment_textbox.Text) < 0 || Int32.Parse(apartment_textbox.Text) > 1000))
             {
                 MessageBox.Show("מספר בית אינו תקין");
-                apartment_textbox.Text = apartment_textbox.Text.Remove(apartment_textbox.Text.Length - 1);
                 return;
             }
 
             if (System.Text.RegularExpressions.Regex.IsMatch(age_textbox.Text, "[^0-9]") || (Int32.Parse(age_textbox.Text) < 0 || Int32.Parse(age_textbox.Text) >= 120))
             {
                 MessageBox.Show("הגיל אינו תקין");
-                age_textbox.Text = age_textbox.Text.Remove(age_textbox.Text.Length - 1);
                 return;
             }
 
@@ -182,7 +176,7 @@ namespace Doctor_assistant.Forms
                 tb.Clear();
             }
             gender_combobox.ResetText();
-            GoToappointment();
+            GoToMypatients();
         }
 
         
@@ -204,6 +198,22 @@ namespace Doctor_assistant.Forms
         private void id_textbox_TextChanged(object sender, EventArgs e)
         {
             id_textbox.MaxLength = 9;
+        }
+
+        public bool Checkid(string id)
+        {
+            string digits = new String(id.Where(Char.IsDigit).ToArray());
+            if (digits.Length != 9)
+                return false;
+            return true;
+        }
+
+        public bool CheckPhone(string phone)
+        {
+            string digits = new String(phone.Where(Char.IsDigit).ToArray());
+            if (digits.Length != 10)
+                return false;
+            return true;
         }
 
         private void lastname_textbox_TextChanged(object sender, EventArgs e)

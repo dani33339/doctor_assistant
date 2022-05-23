@@ -54,7 +54,8 @@ namespace Doctor_assistant.Forms
 
         }
 
-            public Patientsinfo PatientFinder(MongoDB.Bson.ObjectId Id) 
+        /*find patient in the db*/
+        public Patientsinfo PatientFinder(MongoDB.Bson.ObjectId Id) 
         {
             var filter = Builders<Patientsinfo>.Filter;
             var idfilter = filter.Eq(x => x.Id, Id);
@@ -69,16 +70,10 @@ namespace Doctor_assistant.Forms
 
         private void search_btn_Click(object sender, EventArgs e)
         {
-            var list = listView.Items
-                                .Cast<ListViewItem>()
-                                .Where(
-                                    x => x.SubItems
-                                          .Cast<ListViewItem.ListViewSubItem>()
-                                          .Any(y => y.Text.Contains(searchBox.Text)))
-                                .ToArray();
+            var list = listView.Items.Cast<ListViewItem>().Where( x => x.SubItems.Cast<ListViewItem.ListViewSubItem>()
+            .Any(y => y.Text.Contains(searchBox.Text))).ToArray();
             listView.Items.Clear();
             listView.Items.AddRange(list);
-
         }
 
 

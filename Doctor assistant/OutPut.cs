@@ -19,7 +19,9 @@ namespace Doctor_assistant
         public int Age { get; set; }
 
         public int heat { get; set; }
-        public String bloodpressure { get; set; }
+        public int bloodpressure { get; set; }
+        public int bloodpressure2 { get; set; }
+
         public int pulse { get; set; }
 
         public double WBC { get; set; }

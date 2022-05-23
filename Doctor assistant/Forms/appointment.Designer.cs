@@ -78,6 +78,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.on_label = new System.Windows.Forms.Label();
+            this.bloodpressure2_textBox = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patient_picturebox)).BeginInit();
@@ -418,7 +420,7 @@
             this.bloodpressure.AutoSize = true;
             this.bloodpressure.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bloodpressure.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.bloodpressure.Location = new System.Drawing.Point(477, 518);
+            this.bloodpressure.Location = new System.Drawing.Point(506, 512);
             this.bloodpressure.Name = "bloodpressure";
             this.bloodpressure.Size = new System.Drawing.Size(88, 33);
             this.bloodpressure.TabIndex = 50;
@@ -428,7 +430,7 @@
             // 
             this.bloodpressure_textBox.BackColor = System.Drawing.Color.SkyBlue;
             this.bloodpressure_textBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bloodpressure_textBox.Location = new System.Drawing.Point(428, 556);
+            this.bloodpressure_textBox.Location = new System.Drawing.Point(457, 556);
             this.bloodpressure_textBox.Name = "bloodpressure_textBox";
             this.bloodpressure_textBox.Size = new System.Drawing.Size(137, 27);
             this.bloodpressure_textBox.TabIndex = 49;
@@ -680,11 +682,33 @@
             this.label1.TabIndex = 118;
             this.label1.Text = "HDL";
             // 
+            // on_label
+            // 
+            this.on_label.AutoSize = true;
+            this.on_label.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.on_label.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.on_label.Location = new System.Drawing.Point(367, 512);
+            this.on_label.Name = "on_label";
+            this.on_label.Size = new System.Drawing.Size(42, 33);
+            this.on_label.TabIndex = 141;
+            this.on_label.Text = "על";
+            // 
+            // bloodpressure2_textBox
+            // 
+            this.bloodpressure2_textBox.BackColor = System.Drawing.Color.SkyBlue;
+            this.bloodpressure2_textBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bloodpressure2_textBox.Location = new System.Drawing.Point(272, 556);
+            this.bloodpressure2_textBox.Name = "bloodpressure2_textBox";
+            this.bloodpressure2_textBox.Size = new System.Drawing.Size(137, 27);
+            this.bloodpressure2_textBox.TabIndex = 142;
+            // 
             // appointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1280, 836);
+            this.Controls.Add(this.bloodpressure2_textBox);
+            this.Controls.Add(this.on_label);
             this.Controls.Add(this.inset_btn);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.AP_textBox);
@@ -795,5 +819,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label on_label;
+        private System.Windows.Forms.TextBox bloodpressure2_textBox;
     }
 }

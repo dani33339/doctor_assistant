@@ -493,3 +493,4 @@ D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\bin\Debug\Mic
 D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\bin\Debug\EPPlus.xml
 D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
 C:\Users\kilim\OneDrive - ac.sce.ac.il\לימודים\שנה ב\סמסטר ב\בדיקות תוכנה\doctor_assistant\Doctor assistant\obj\Debug\Doctor_assistant.Forms.Diagnosis_Recomendation.resources
+D:\projects\C#\doctor_assistance\doctor_assistant\Doctor assistant\obj\Debug\Doctor_assistant.Forms.Diagnosis_Recomendation.resources

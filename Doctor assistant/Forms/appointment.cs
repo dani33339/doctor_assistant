@@ -92,7 +92,7 @@ namespace Doctor_assistant.Forms
 
         }
 
-
+        /*find bloodtest in db*/
         public BloodTestsInfo BloodTestsInfoFinder(MongoDB.Bson.ObjectId Id)
         {
             var filter = Builders<BloodTestsInfo>.Filter;
@@ -116,7 +116,6 @@ namespace Doctor_assistant.Forms
                                 ConfigureDataTable = (_) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
                             });
 
-                            //clear dataGridView from old test
                             dataGridView.DataSource = null;
                             dataGridView.Rows.Clear();
                             dataGridView.Columns.Clear();
@@ -185,17 +184,10 @@ namespace Doctor_assistant.Forms
         
         public bool HeatTest()
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(heat_textbox.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(heat_textbox.Text, "[^0-9]")||
+                Double.Parse(heat_textbox.Text) > 45 || Double.Parse(heat_textbox.Text) < 33)
             {
                 MessageBox.Show("החום אינו תקין");
-                heat_textbox.Text = heat_textbox.Text.Remove(heat_textbox.Text.Length - 1);
-                return true;
-            }
-
-            if (Int32.Parse(heat_textbox.Text) > 45 && Int32.Parse(heat_textbox.Text) < 33)
-            {
-                MessageBox.Show("החום אינו תקין");
-                heat_textbox.Text = heat_textbox.Text.Remove(heat_textbox.Text.Length - 1);
                 return true;
             }
             return false;
@@ -203,35 +195,47 @@ namespace Doctor_assistant.Forms
         }
         public bool PulseTest()
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(pulse_textBox.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(pulse_textBox.Text, "[^0-9]")||
+                Int32.Parse(pulse_textBox.Text) > 240 || Int32.Parse(pulse_textBox.Text) < 24)
             {
-                MessageBox.Show("החום אינו תקין");
-                pulse_textBox.Text = pulse_textBox.Text.Remove(pulse_textBox.Text.Length - 1);
-                return true;
-            }
-
-            if (Int32.Parse(pulse_textBox.Text) >= 240 && Int32.Parse(pulse_textBox.Text) <= 24)
-            {
-                MessageBox.Show("החום אינו תקין");
-                pulse_textBox.Text = pulse_textBox.Text.Remove(pulse_textBox.Text.Length - 1);
+                MessageBox.Show("הדופק לא תקין");     
                 return true;
             }
             return false;
+        }
 
+        public bool BloodPressureTest()
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(bloodpressure_textBox.Text, "[^0-9]") ||
+                System.Text.RegularExpressions.Regex.IsMatch(bloodpressure2_textBox.Text, "[^0-9]") || 
+                (Int32.Parse(bloodpressure_textBox.Text) > 300 || Int32.Parse(bloodpressure_textBox.Text) < 80) &&
+                (Int32.Parse(bloodpressure2_textBox.Text) > 200 || Int32.Parse(bloodpressure2_textBox.Text) < 30))
+            {
+                MessageBox.Show("לחץ דם לא תקין");
+                return true;
+            }
+            return false;
         }
 
 
-        private  void diagnosis_btn_Click(object sender, EventArgs e)
+        private void diagnosis_btn_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(heat_textbox.Text) || String.IsNullOrEmpty(pulse_textBox.Text) || String.IsNullOrEmpty(bloodpressure_textBox.Text))
             {
                 MessageBox.Show("הכנס את כל המדדים");
                 return;
             }
-             
+
             if (HeatTest())
                 return;
-            
+
+            if (PulseTest())
+                return;
+
+            if (BloodPressureTest())
+                return;
+
+
             MongoDB.Bson.ObjectId mostrecent = patient.BloodTests.Last();
             var bloodtest = BloodTestsInfoFinder(mostrecent);
             //create qustions
@@ -254,12 +258,11 @@ namespace Doctor_assistant.Forms
 
         }
 
+        /*make the output file and the diagnosis*/
         public async Task MakeDiagnosis(BloodTestsInfo bloodtest, Question[] Questions)
         {
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            //String filename = "D:\\" +  patient.FirstName + ".xlsx";
-            //var file = new FileInfo(filename);
             SaveFileDialog save = new SaveFileDialog();
             save.Title = "where to save";
             save.FileName = patient.FirstName + ".xlsx";
@@ -274,14 +277,10 @@ namespace Doctor_assistant.Forms
             int row = 2;
 
 
-
-
             FileInfo fileInfo = new FileInfo(save.FileName);
 
             ExcelPackage package = new ExcelPackage(fileInfo);
             ExcelWorksheet xlWorkSheet = package.Workbook.Worksheets.FirstOrDefault();
-
-
 
             Dictionary<string, string> Recomendation = new Dictionary<string, string>(){
             {"anemia","Two 10 mg B12 pills a day for a month"},
@@ -309,11 +308,70 @@ namespace Doctor_assistant.Forms
             {"cancer", "Antarctinib - Entrectinib"},
             {"Increased consumption of meat", "Schedule an appointment with a nutritionist"},
             {"Use of various medications","Referral to a family doctor for a match between medications"},
-            {"Malnutrition", "Schedule an appointment with Nutrition"}
+            {"Malnutrition", "Schedule an appointment with Nutrition"},
+            {"Fever","Paracetamol or Nurofen" },
+            {"High Pulse","rest" },
+            {"Low Pulse","Eat suger" },
+            {"High Blood Pressure","DASH diet" },
+            {"Low Blood Pressure","rest" },
             };
 
             Dictionary<string, string> Conclusion_Window = new Dictionary<string, string>();
 
+            // check heat
+            if (Double.Parse(heat_textbox.Text) > 37.5 || Double.Parse(heat_textbox.Text) < 33)
+            {
+
+                xlWorkSheet.Cells[row, column_diagnosis].Value = "Fever";
+                xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Fever"];
+                row++;
+                Conclusion_Window.Add("Fever", Recomendation["Fever"]);
+            }
+
+
+            // check high pulse
+            if (Int32.Parse(pulse_textBox.Text) > 100)
+            {
+
+                xlWorkSheet.Cells[row, column_diagnosis].Value = "High Pulse";
+                xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["High Pulse"];
+                row++;
+                Conclusion_Window.Add("High Pulse", Recomendation["High Pulse"]);
+            }
+
+            // check low pulse
+
+            if (Int32.Parse(pulse_textBox.Text) < 60)
+            {
+
+                xlWorkSheet.Cells[row, column_diagnosis].Value = "Low Pulse";
+                xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Low Pulse"];
+                row++;
+                Conclusion_Window.Add("Low Pulse", Recomendation["Low Pulse"]);
+            }
+
+
+            // check high Bloodpresuer
+            if (Int32.Parse(bloodpressure_textBox.Text) > 140 && Int32.Parse(bloodpressure2_textBox.Text) > 90)
+            {
+
+                xlWorkSheet.Cells[row, column_diagnosis].Value = "High Blood Pressure";
+                xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["High Blood Pressure"];
+                row++;
+                Conclusion_Window.Add("High Blood Pressure", Recomendation["High Blood Pressure"]);
+            }
+
+            // check low Bloodpresuer
+            if (Int32.Parse(bloodpressure_textBox.Text) < 90 && Int32.Parse(bloodpressure2_textBox.Text) < 60)
+            {
+
+                xlWorkSheet.Cells[row, column_diagnosis].Value = "Low Blood Pressure";
+                xlWorkSheet.Cells[row, column_Recomendation].Value = Recomendation["Low Blood Pressure"];
+                row++;
+                Conclusion_Window.Add("Low Blood Pressure", Recomendation["Low Blood Pressure"]);
+            }
+
+            //check if smoker
             if (Questions[0].status == true)
             {
 
@@ -757,7 +815,7 @@ namespace Doctor_assistant.Forms
                     }
                 }
             package.Save();
-            String[] Indices = { heat_textbox.Text, pulse_textBox.Text, bloodpressure_textBox.Text };
+            String[] Indices = { heat_textbox.Text, pulse_textBox.Text, bloodpressure_textBox.Text, bloodpressure2_textBox.Text };
             foreach (TextBox tb in this.Controls.OfType<TextBox>())
             {
                 tb.Clear();
@@ -769,6 +827,8 @@ namespace Doctor_assistant.Forms
 
             
         }
+
+        /*check if diagnosis alrady exist in the output file*/
         public bool SearchInDiagnosis(String diagnosis, ExcelWorksheet x) 
         {
             int column_diagnosis = 24;
@@ -781,6 +841,8 @@ namespace Doctor_assistant.Forms
             }
             return false;
         }
+
+        /*save the output file*/
         private static async Task SaveExcelFile(List<OutPut> Out, FileInfo file)
         {
             DeleteIfExists(file);
@@ -798,6 +860,7 @@ namespace Doctor_assistant.Forms
             
         }
 
+        /*delete old file with this name if exits*/
         private static void DeleteIfExists(FileInfo file)
         {
             if(file.Exists)
@@ -806,6 +869,7 @@ namespace Doctor_assistant.Forms
             }
         }
 
+        /*update the output data*/
         private List<OutPut> GetSetupData(BloodTestsInfo bloodTests , Patientsinfo patient)
         {
             List<OutPut> output = new()
@@ -821,7 +885,8 @@ namespace Doctor_assistant.Forms
                     Street = patient.Street,
                     HouseNumber = patient.HouseNumber,
                     heat = Convert.ToInt32(heat_textbox.Text),
-                    bloodpressure = bloodpressure_textBox.Text,
+                    bloodpressure = Convert.ToInt32(bloodpressure_textBox.Text),
+                    bloodpressure2 = Convert.ToInt32(bloodpressure2_textBox.Text),
                     pulse = Convert.ToInt32(pulse_textBox.Text),
                     Age = patient.Age,
                     WBC = bloodTests.WBC,
@@ -980,6 +1045,7 @@ namespace Doctor_assistant.Forms
 
         }
 
+        /*add blood test manualy*/
         private void inset_btn_Click_1(object sender, EventArgs e)
         {
             if ((String.IsNullOrEmpty(WBC_textBox.Text) || String.IsNullOrEmpty(Neut_textBox.Text) || String.IsNullOrEmpty(Lymph_textBox.Text) ||

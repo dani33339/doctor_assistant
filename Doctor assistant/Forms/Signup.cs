@@ -79,7 +79,7 @@ namespace Doctor_assistant.Forms
             NewUser.Patients = new List<MongoDB.Bson.ObjectId>();
             m_Collection.InsertOne(NewUser);
 
-            MessageBox.Show("User has been successfully saved.");
+            MessageBox.Show("המשתמש נוסף בהצלחה");
             Clear();
             GoToPatients(NewUser);
         }
