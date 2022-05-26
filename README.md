@@ -1,1 +1,2 @@
-# doctor_assistant
+doctor_assistant
+author: Anton Volkov , Daniel Markov

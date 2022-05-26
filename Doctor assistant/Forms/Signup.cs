@@ -154,6 +154,14 @@ namespace Doctor_assistant.Forms
         {
 
         }
+
+        private void returnBtn_Click(object sender, EventArgs e)
+        {
+            Login newForm = new Login();
+            this.Hide();
+            newForm.ShowDialog();
+            this.Close();
+        }
     }
 
   }

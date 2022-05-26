@@ -46,6 +46,7 @@
             this.id_textbox = new System.Windows.Forms.TextBox();
             this.repassword_textbox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.returnBtn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -53,6 +54,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel1.Controls.Add(this.returnBtn);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
@@ -255,6 +257,32 @@
             this.label8.TabIndex = 22;
             this.label8.Text = "חזור על הסיסמא";
             // 
+            // returnBtn
+            // 
+            this.returnBtn.ActiveBorderThickness = 1;
+            this.returnBtn.ActiveCornerRadius = 20;
+            this.returnBtn.ActiveFillColor = System.Drawing.Color.SlateGray;
+            this.returnBtn.ActiveForecolor = System.Drawing.Color.White;
+            this.returnBtn.ActiveLineColor = System.Drawing.Color.DarkSlateGray;
+            this.returnBtn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.returnBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("returnBtn.BackgroundImage")));
+            this.returnBtn.ButtonText = "חזרה";
+            this.returnBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.returnBtn.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.returnBtn.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.returnBtn.IdleBorderThickness = 1;
+            this.returnBtn.IdleCornerRadius = 20;
+            this.returnBtn.IdleFillColor = System.Drawing.Color.LightSkyBlue;
+            this.returnBtn.IdleForecolor = System.Drawing.Color.DarkSlateGray;
+            this.returnBtn.IdleLineColor = System.Drawing.Color.LightSlateGray;
+            this.returnBtn.Location = new System.Drawing.Point(149, 470);
+            this.returnBtn.Margin = new System.Windows.Forms.Padding(6);
+            this.returnBtn.Name = "returnBtn";
+            this.returnBtn.Size = new System.Drawing.Size(72, 42);
+            this.returnBtn.TabIndex = 46;
+            this.returnBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.returnBtn.Click += new System.EventHandler(this.returnBtn_Click);
+            // 
             // Signup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -309,5 +337,6 @@
         private System.Windows.Forms.TextBox repassword_textbox;
         private System.Windows.Forms.Label label8;
         public System.Windows.Forms.Button button1;
+        private Bunifu.Framework.UI.BunifuThinButton2 returnBtn;
     }
 }
